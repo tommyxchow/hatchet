@@ -7,9 +7,8 @@ module.exports = {
   ],
   theme: {
     extend: {
-      container: {
-        center: true,
-        padding: '1rem',
+      colors: {
+        hn: '#ff6600',
       },
     },
   },

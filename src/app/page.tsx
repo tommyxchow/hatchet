@@ -1,7 +1,3 @@
-export default function Home() {
-  return (
-    <main>
-      <h1>Hello, world!</h1>
-    </main>
-  );
-}
+import Stories from './[slug]/page';
+
+export default Stories;
