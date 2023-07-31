@@ -1,6 +1,4 @@
-import { HNItem } from './types';
-
-export type HNFeedType = 'top' | 'new' | 'best' | 'ask' | 'show' | 'job';
+import { HNFeedType, HNItem } from './types';
 
 export class HNClient {
   private async get<T>(path: string): Promise<T> {

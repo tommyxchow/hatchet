@@ -23,3 +23,13 @@ export const HNItem = z.object({
   descendants: z.number().optional(),
 });
 export type HNItem = z.infer<typeof HNItem>;
+
+export const HNFeedTypes = [
+  'top',
+  'new',
+  'best',
+  'ask',
+  'show',
+  'job',
+] as const;
+export type HNFeedType = (typeof HNFeedTypes)[number];

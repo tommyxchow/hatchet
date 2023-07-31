@@ -1,5 +1,6 @@
-import { HNClient, HNFeedType } from '@/lib/hnClient';
-import { RouteParams } from '@/lib/types';
+import { HNClient } from '@/lib/hnClient';
+import { HNFeedType, HNFeedTypes, RouteParams } from '@/lib/types';
+import Link from 'next/link';
 
 const hnClient = new HNClient();
 
@@ -10,22 +11,28 @@ export default async function Stories({ params, searchParams }: RouteParams) {
 
   return (
     <article>
-      <div className='py-28'>
+      <div className='py-16'>
         <h1 className='text-2xl font-bold'>
           Hatchet <span className='text-hn'>News</span>
         </h1>
       </div>
 
-      <section className='flex flex-col gap-12'>
-        {/* <nav>
+      <section className='flex flex-col gap-8'>
+        <nav>
           <ul className='flex gap-4 text-lg font-semibold'>
-            <h2>Top</h2>
-            <h2>Best</h2>
-            <h2>New</h2>
+            {HNFeedTypes.map((type) => (
+              <li key={type}>
+                <Link href={`/${type}`}>
+                  <h2 className={type === feedType ? '' : 'text-neutral-400'}>
+                    {type}
+                  </h2>
+                </Link>
+              </li>
+            ))}
           </ul>
-        </nav> */}
+        </nav>
 
-        <ol className='flex flex-col gap-12'>
+        <ol className='flex flex-col gap-8'>
           {stories.map((story) => (
             <li key={story.id}>
               <article className='flex flex-col gap-2'>
