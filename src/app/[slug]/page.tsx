@@ -12,9 +12,11 @@ export default async function Stories({ params, searchParams }: RouteParams) {
   return (
     <article>
       <div className='py-16'>
-        <h1 className='text-2xl font-bold'>
-          Hatchet <span className='text-hn'>News</span>
-        </h1>
+        <Link href='/'>
+          <h1 className='text-2xl font-bold'>
+            Hatchet <span className='text-hn'>News</span>
+          </h1>
+        </Link>
       </div>
 
       <section className='flex flex-col gap-8'>
@@ -46,6 +48,22 @@ export default async function Stories({ params, searchParams }: RouteParams) {
             </li>
           ))}
         </ol>
+
+        <nav className='grid grid-cols-2 font-semibold'>
+          {pageNumber > 1 && (
+            <Link className='' href={`/${feedType}?p=${pageNumber - 1}`}>
+              Previous
+            </Link>
+          )}
+          {stories.length == 30 && (
+            <Link
+              className='col-start-2 justify-self-end'
+              href={`/${feedType}?p=${pageNumber + 1}`}
+            >
+              Next
+            </Link>
+          )}
+        </nav>
       </section>
     </article>
   );
