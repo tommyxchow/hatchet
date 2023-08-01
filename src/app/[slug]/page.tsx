@@ -1,5 +1,6 @@
 import { HNClient } from '@/lib/hnClient';
 import { HNFeedType, HNFeedTypes, RouteParams } from '@/lib/types';
+import { getTimeAgo } from '@/lib/utils';
 import Link from 'next/link';
 
 const hnClient = new HNClient();
@@ -42,6 +43,7 @@ export default async function Stories({ params, searchParams }: RouteParams) {
                 <div className='flex gap-4 text-sm font-medium text-neutral-400'>
                   <p>{story.score} points</p>
                   <p> {story.descendants} comments</p>
+                  <p>{story.time ? getTimeAgo(story.time) : '? ago'}</p>
                   <p>by {story.by}</p>
                 </div>
               </article>
