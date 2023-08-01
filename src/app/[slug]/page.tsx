@@ -1,6 +1,6 @@
+import StoryTile from '@/components/ui/StoryTile';
 import { HNClient } from '@/lib/hnClient';
 import { HNFeedType, HNFeedTypes, RouteParams } from '@/lib/types';
-import { getDisplayURL, getTimeAgo } from '@/lib/utils';
 import Link from 'next/link';
 
 const hnClient = new HNClient();
@@ -38,30 +38,7 @@ export default async function Stories({ params, searchParams }: RouteParams) {
         <ol className='flex flex-col gap-8'>
           {stories.map((story) => (
             <li key={story.id}>
-              <article className='flex flex-col gap-2'>
-                <h3 className='font-semibold'>
-                  {story.title}{' '}
-                  {story.url && (
-                    <span className='font-medium text-neutral-400'>
-                      (
-                      <a
-                        className='hover:underline'
-                        href={story.url}
-                        target='_blank'
-                      >
-                        {getDisplayURL(story.url)}
-                      </a>
-                      )
-                    </span>
-                  )}
-                </h3>
-                <div className='flex gap-4 text-sm font-medium text-neutral-400'>
-                  <p>{story.score} points</p>
-                  <p> {story.descendants} comments</p>
-                  <p>{story.time ? getTimeAgo(story.time) : '? ago'}</p>
-                  <p>by {story.by}</p>
-                </div>
-              </article>
+              <StoryTile story={story} />
             </li>
           ))}
         </ol>
