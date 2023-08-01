@@ -23,3 +23,14 @@ export function getTimeAgo(timestamp: number) {
     return `${seconds} seconds ago`;
   }
 }
+
+export function getDisplayURL(url: string): string {
+  const parsedURL = new URL(url);
+  let host = parsedURL.hostname;
+
+  if (host.startsWith('www.')) {
+    host = host.substring(4);
+  }
+
+  return host;
+}
