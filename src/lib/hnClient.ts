@@ -12,7 +12,7 @@ export class HNClient {
     return await response.json();
   }
 
-  private async fetchItem(id: number): Promise<HNItem> {
+  async fetchItem(id: number): Promise<HNItem> {
     const itemDataResponse = await this.get<HNItem>(`item/${id}`);
     const itemObject = HNItem.parse(itemDataResponse);
 
@@ -31,5 +31,13 @@ export class HNClient {
     const storyObjects = await Promise.all(storyPromises);
 
     return storyObjects;
+  }
+
+  async fetchComments(id: number): Promise<HNItem[]> {
+    const item = await this.fetchItem(id);
+    const commentPromises = item.kids?.map((id) => this.fetchItem(id)) ?? [];
+    const commentObjects = await Promise.all(commentPromises);
+
+    return commentObjects;
   }
 }

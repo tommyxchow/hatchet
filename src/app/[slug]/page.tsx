@@ -12,14 +12,6 @@ export default async function Stories({ params, searchParams }: RouteParams) {
 
   return (
     <article>
-      <div className='py-16'>
-        <Link href='/'>
-          <h1 className='text-2xl font-bold'>
-            Hatchet <span className='text-hn'>News</span>
-          </h1>
-        </Link>
-      </div>
-
       <section className='flex flex-col gap-8'>
         <nav>
           <ul className='flex gap-4 text-lg font-semibold'>
