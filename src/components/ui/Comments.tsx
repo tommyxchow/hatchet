@@ -1,7 +1,4 @@
-'use client';
-
 import { HNComment } from '@/lib/types';
-import { useState } from 'react';
 import CommentTile from './CommentTile';
 
 type CommentsProps = {
@@ -43,11 +40,11 @@ type CommentsProps = {
 // }
 
 export default function Comments({ comments }: CommentsProps) {
-  const [renderedComments, setRenderedComments] = useState(comments);
+  // const [renderedComments, setRenderedComments] = useState(comments);
 
   return (
     <ul className='flex flex-col'>
-      {renderedComments
+      {comments
         .filter((c) => !c.hidden)
         .map((comment) => (
           <li key={comment.id}>

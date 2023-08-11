@@ -68,7 +68,7 @@ export class HNClient {
       const commentAuthor = comment.querySelector('.hnuser')?.innerHTML ?? '';
       const commentTime =
         comment.querySelector('.age')?.getAttribute('title') ?? '';
-      const commentTimestamp = new Date(commentTime).getTime() / 1000;
+      const commentTimestamp = new Date(commentTime + 'Z').getTime() / 1000;
 
       const parsedComment: HNComment = {
         id: commentId,
