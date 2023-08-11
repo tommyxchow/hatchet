@@ -1,3 +1,4 @@
+import Comments from '@/components/ui/Comments';
 import StoryTile from '@/components/ui/StoryTile';
 import { HNClient } from '@/lib/hnClient';
 import { RouteParams } from '@/lib/types';
@@ -8,7 +9,7 @@ export default async function ItemPage({ params, searchParams }: RouteParams) {
   const itemId = parseInt(params.slug);
 
   const story = await hnClient.fetchItem(itemId);
-  const comments = await hnClient.fetchComments(itemId);
+  const comments = await hnClient.fetchCommentsWithParser(itemId);
 
   return (
     <article className='flex flex-col gap-8'>
@@ -17,20 +18,8 @@ export default async function ItemPage({ params, searchParams }: RouteParams) {
       </section>
 
       <section className='flex flex-col gap-4'>
-        <h2 className='font-semibold'>Comments</h2>
-        <ul className='flex flex-col gap-8'>
-          {comments.map(
-            (comment) =>
-              comment.text && (
-                <li key={comment.id}>
-                  <div
-                    className='flex flex-col gap-4'
-                    dangerouslySetInnerHTML={{ __html: comment.text }}
-                  />
-                </li>
-              ),
-          )}
-        </ul>
+        <h2 className='font-semibold'>comments</h2>
+        <Comments comments={comments} />
       </section>
     </article>
   );

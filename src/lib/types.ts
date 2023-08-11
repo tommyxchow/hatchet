@@ -24,6 +24,13 @@ export const HNItem = z.object({
 });
 export type HNItem = z.infer<typeof HNItem>;
 
+export const HNComment = HNItem.extend({
+  indent: z.number(),
+  collapsed: z.boolean(),
+  hidden: z.boolean(),
+});
+export type HNComment = z.infer<typeof HNComment>;
+
 export const HNFeedTypes = [
   'top',
   'new',
