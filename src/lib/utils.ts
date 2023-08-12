@@ -1,3 +1,7 @@
+function getDisplayTime(value: number, unit: string): string {
+  return value === 1 ? `1 ${unit} ago` : `${value} ${unit}s ago`;
+}
+
 export function getTimeAgo(timestamp: number) {
   const seconds = Math.floor((Date.now() - timestamp * 1000) / 1000);
   const minutes = Math.floor(seconds / 60);
@@ -8,19 +12,21 @@ export function getTimeAgo(timestamp: number) {
   const years = Math.floor(days / 365);
 
   if (years > 0) {
-    return `${years} years ago`;
+    return getDisplayTime(years, 'year');
   } else if (months > 0) {
-    return `${months} months ago`;
+    return getDisplayTime(months, 'month');
   } else if (weeks > 0) {
-    return `${weeks} weeks ago`;
+    return getDisplayTime(weeks, 'week');
   } else if (days > 0) {
-    return `${days} days ago`;
+    return getDisplayTime(days, 'day');
   } else if (hours > 0) {
-    return `${hours} hours ago`;
+    return getDisplayTime(hours, 'hour');
   } else if (minutes > 0) {
-    return `${minutes} minutes ago`;
+    return getDisplayTime(minutes, 'minute');
+  } else if (seconds > 0) {
+    return getDisplayTime(seconds, 'second');
   } else {
-    return `${seconds} seconds ago`;
+    return 'just now';
   }
 }
 
