@@ -10,8 +10,10 @@ const hnClient = new HNClient();
 export default async function ItemPage({ params }: RouteParams) {
   const itemId = parseInt(params.slug);
 
-  const story = await hnClient.fetchItem(itemId);
-  const comments = await hnClient.fetchCommentsWithParser(itemId);
+  const getStory = hnClient.fetchItem(itemId);
+  const getComments = hnClient.fetchCommentsWithParser(itemId);
+
+  const [story, comments] = await Promise.all([getStory, getComments]);
 
   return (
     <article className='flex flex-col gap-8'>
