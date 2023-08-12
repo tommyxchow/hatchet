@@ -3,9 +3,11 @@ import StoryTile from '@/components/ui/StoryTile';
 import { HNClient } from '@/lib/hnClient';
 import { RouteParams } from '@/lib/types';
 
+export const revalidate = 60 * 5;
+
 const hnClient = new HNClient();
 
-export default async function ItemPage({ params, searchParams }: RouteParams) {
+export default async function ItemPage({ params }: RouteParams) {
   const itemId = parseInt(params.slug);
 
   const story = await hnClient.fetchItem(itemId);
