@@ -7,7 +7,7 @@ type CommentProps = {
 
 export default function CommentTile({ comment }: CommentProps) {
   return (
-    <article className='flex overflow-x-auto'>
+    <article className='flex'>
       <div className='flex'>
         {[...Array(comment.indent).keys()].map((index) => (
           <div key={index} className='w-4 border-l border-neutral-700' />
