@@ -1,4 +1,4 @@
-import { JSDOM } from 'jsdom';
+import * as htmlparser2 from 'htmlparser2';
 import { HNComment, HNFeedType, HNItem } from './types';
 
 export class HNClient {
@@ -52,29 +52,49 @@ export class HNClient {
     }
 
     const html = await response.text();
-    const dom = new JSDOM(html);
-    const document = dom.window.document;
-    const comments = document.querySelectorAll('.comtr');
+    const dom = htmlparser2.parseDocument(html);
+    const domUtils = htmlparser2.DomUtils;
+
+    const comments = domUtils.findAll(
+      (element) => element.attribs?.class?.includes('athing comtr'),
+      dom.children,
+    );
 
     const parsedComments: HNComment[] = [];
     for (const comment of comments) {
-      const indent = parseInt(
-        comment.querySelector('.ind')?.getAttribute('indent') ?? '0',
+      const indentNode = domUtils.findOne(
+        (element) => element.attribs?.class?.includes('ind'),
+        comment.children,
       );
-      const commentId = parseInt(comment.id);
-      const commentNode = comment.querySelector('.comment');
-      commentNode?.querySelector('.reply')?.remove();
-      const commentText = commentNode?.innerHTML ?? '';
-      const commentAuthor = comment.querySelector('.hnuser')?.innerHTML ?? '';
-      const commentTime =
-        comment.querySelector('.age')?.getAttribute('title') ?? '';
+      const indent = parseInt(indentNode?.attribs?.indent ?? '0');
+
+      const commentId = parseInt(comment.attribs?.id);
+
+      const commentNode = domUtils.findOne(
+        (element) => element.attribs?.class?.includes('comment'),
+        comment.children,
+      );
+      const commentText = domUtils.innerText(commentNode!).replace('reply', '');
+
+      const commentAuthorNode = domUtils.findOne(
+        (element) => element.attribs?.class?.includes('hnuser'),
+        comment.children,
+      );
+      const commentAuthorText = domUtils.innerText(commentAuthorNode!);
+
+      const commentTimeNode = domUtils.findOne(
+        (element) => element.attribs?.class?.includes('age'),
+        comment.children,
+      );
+      const commentTime = commentTimeNode?.attribs?.title;
+
       const commentTimestamp = new Date(commentTime + 'Z').getTime() / 1000;
 
       const parsedComment: HNComment = {
         id: commentId,
         indent,
         text: commentText,
-        by: commentAuthor,
+        by: commentAuthorText,
         time: commentTimestamp,
         collapsed: false,
         hidden: false,
