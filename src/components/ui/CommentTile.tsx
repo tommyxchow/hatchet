@@ -21,7 +21,8 @@ export default async function CommentTile({ id, level }: CommentProps) {
         <div className='flex flex-col py-2'>
           <div className='flex gap-4 text-sm font-medium text-neutral-400'>
             <p>
-              {comment.by} · {comment.time ? getTimeAgo(comment.time) : '? ago'}
+              {comment.deleted ? 'deleted' : comment.by} ·{' '}
+              {comment.time ? getTimeAgo(comment.time) : '? ago'}
             </p>
           </div>
           <div
