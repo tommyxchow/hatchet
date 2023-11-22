@@ -5,12 +5,10 @@ import Link from 'next/link';
 
 export const revalidate = 60 * 5;
 
-const hnClient = new HNClient();
-
 export default async function Stories({ params, searchParams }: RouteParams) {
   const feedType = (params.slug || 'top') as HNFeedType;
   const pageNumber = parseInt(searchParams.p as string) || 1;
-  const stories = await hnClient.fetchStories(feedType, pageNumber);
+  const stories = await HNClient.fetchStories(feedType, pageNumber);
 
   return (
     <article>
