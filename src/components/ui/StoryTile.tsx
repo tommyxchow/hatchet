@@ -30,14 +30,14 @@ export default function StoryTile({ story }: StoryTileProps) {
         <p>{story.score} points</p>
         <p>
           {story.descendants}{' '}
-          <Link className='hover:underline' href={`/item/${story.id}`}>
+          <Link className='hover:underline' href={`/item?id=${story.id}`}>
             comments
           </Link>
         </p>
         <p>{story.time ? getTimeAgo(story.time) : '? ago'}</p>
         <p>
           by{' '}
-          <Link className='hover:underline' href={`/user/${story.by}`}>
+          <Link className='hover:underline' href={`/user?id=${story.by}`}>
             {story.by}
           </Link>
         </p>
