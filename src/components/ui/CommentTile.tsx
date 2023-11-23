@@ -13,7 +13,7 @@ export default async function CommentTile({ id, level }: CommentProps) {
     <article className='flex flex-col'>
       <div className='flex'>
         <div className='flex'>
-          {Array(level).map((_, index) => (
+          {Array.from({ length: level }).map((_, index) => (
             <div
               key={`${id}-${index}`}
               className='w-4 border-l border-neutral-700'
