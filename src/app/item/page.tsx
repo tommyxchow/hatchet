@@ -5,10 +5,14 @@ import { RouteParams } from '@/lib/types';
 
 export const revalidate = 60 * 5;
 
-export default async function ItemPage({ params }: RouteParams) {
-  const itemId = parseInt(params.slug);
+export default async function ItemPage({ searchParams }: RouteParams) {
+  const itemId = searchParams.id;
 
-  const item = await HNClient.fetchItem(itemId);
+  if (!itemId || typeof itemId !== 'string') {
+    return <p>Invalid item id</p>;
+  }
+
+  const item = await HNClient.fetchItem(parseInt(itemId));
 
   return (
     <article className='flex flex-col gap-8'>
