@@ -1,4 +1,4 @@
-import { HNFeedType, HNItem } from './types';
+import { HNItem, type HNFeedType } from './types';
 
 function createApiUrl(path: string) {
   return `https://hacker-news.firebaseio.com/v0/${path}.json`;
@@ -11,12 +11,12 @@ async function get(url: string) {
     throw new Error(`Failed to fetch ${url}`);
   }
 
-  return await response.json();
+  return response.json();
 }
 
 async function fetchItem(id: number) {
   const url = createApiUrl(`item/${id}`);
-  const itemDataResponse: HNItem = await get(url);
+  const itemDataResponse = (await get(url)) as HNItem;
   const itemObject = HNItem.parse(itemDataResponse);
 
   return itemObject;
@@ -27,7 +27,7 @@ async function fetchStories(type: HNFeedType, page: number) {
   const endIndex = startIndex + 30;
 
   const url = createApiUrl(`${type}stories`);
-  const storyIds: number[] = await get(url);
+  const storyIds = (await get(url)) as number[];
   const storyPromises = storyIds
     .slice(startIndex, endIndex)
     .map((id) => fetchItem(id));

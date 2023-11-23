@@ -1,7 +1,7 @@
 import Comments from '@/components/ui/Comments';
 import StoryTile from '@/components/ui/StoryTile';
 import { HNClient } from '@/lib/hnClient';
-import { RouteParams } from '@/lib/types';
+import { type RouteParams } from '@/lib/types';
 
 export const revalidate = 60;
 

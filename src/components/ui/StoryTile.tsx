@@ -1,10 +1,10 @@
-import { HNItem } from '@/lib/types';
+import { type HNItem } from '@/lib/types';
 import { getDisplayURL, getTimeAgo } from '@/lib/utils';
 import Link from 'next/link';
 
-type StoryTileProps = {
+interface StoryTileProps {
   story: HNItem;
-};
+}
 
 export default function StoryTile({ story }: StoryTileProps) {
   return (

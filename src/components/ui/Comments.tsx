@@ -1,10 +1,10 @@
 import CommentTile from './CommentTile';
 
-type CommentsProps = {
+interface CommentsProps {
   ids: number[];
-};
+}
 
-export default async function Comments({ ids }: CommentsProps) {
+export default function Comments({ ids }: CommentsProps) {
   return (
     <ul className='flex flex-col'>
       {ids.map((id) => (

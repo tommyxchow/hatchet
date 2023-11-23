@@ -1,10 +1,10 @@
 import { HNClient } from '@/lib/hnClient';
 import { getTimeAgo } from '@/lib/utils';
 
-type CommentProps = {
+interface CommentProps {
   id: number;
   level: number;
-};
+}
 
 export default async function CommentTile({ id, level }: CommentProps) {
   const comment = await HNClient.fetchItem(id);
@@ -13,7 +13,7 @@ export default async function CommentTile({ id, level }: CommentProps) {
     <article className='flex flex-col'>
       <div className='flex'>
         <div className='flex'>
-          {[...Array(level)].map((_, index) => (
+          {Array(level).map((_, index) => (
             <div
               key={`${id}-${index}`}
               className='w-4 border-l border-neutral-700'

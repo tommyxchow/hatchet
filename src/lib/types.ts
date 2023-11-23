@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-export type RouteParams = {
+export interface RouteParams {
   params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+  searchParams: Record<string, string | string[] | undefined>;
+}
 
 export const HNItem = z.object({
   id: z.number(),
