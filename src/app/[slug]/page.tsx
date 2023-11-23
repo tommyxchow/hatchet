@@ -3,7 +3,7 @@ import { HNClient } from '@/lib/hnClient';
 import { HNFeedType, HNFeedTypes, RouteParams } from '@/lib/types';
 import Link from 'next/link';
 
-export const revalidate = 60 * 5;
+export const revalidate = 60;
 
 export default async function Stories({ params, searchParams }: RouteParams) {
   const feedType = (params.slug || 'top') as HNFeedType;
