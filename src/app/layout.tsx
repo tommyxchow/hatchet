@@ -1,3 +1,4 @@
+import Providers from '@/components/Providers';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import Link from 'next/link';
@@ -28,7 +29,9 @@ export default function RootLayout({
           </Link>
         </header>
 
-        <main>{children}</main>
+        <main>
+          <Providers>{children}</Providers>
+        </main>
       </body>
     </html>
   );
