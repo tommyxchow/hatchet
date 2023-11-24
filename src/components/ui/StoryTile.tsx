@@ -12,7 +12,7 @@ export default function StoryTile({ story }: StoryTileProps) {
       <h3 className='font-semibold'>
         <Link
           className='transition-opacity hover:opacity-50'
-          href={`/item/${story.id}`}
+          href={`/item?id=${story.id}`}
         >
           {story.title}
         </Link>{' '}
