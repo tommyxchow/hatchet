@@ -49,12 +49,14 @@ export default function CommentTile({ id, level }: CommentProps) {
           <div className='flex gap-1 text-sm font-medium text-neutral-400'>
             <p>{comment.deleted ? 'deleted' : comment.by}</p>·
             <p>{comment.time ? getTimeAgo(comment.time) : '? ago'}</p>·
-            <button
-              className='hover:underline'
-              onClick={() => setIsCollapsed(!isCollapsed)}
-            >
-              {isCollapsed ? 'expand' : 'collapse'}
-            </button>
+            {!comment.deleted && (
+              <button
+                className='hover:underline'
+                onClick={() => setIsCollapsed(!isCollapsed)}
+              >
+                {isCollapsed ? 'expand' : 'collapse'}
+              </button>
+            )}
           </div>
 
           <div
