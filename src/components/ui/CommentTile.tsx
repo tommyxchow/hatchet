@@ -33,6 +33,8 @@ export default function CommentTile({ id, level }: CommentProps) {
   if (isPending) return <div className='h-48' ref={commentRef} />;
   if (error) return <p>Error: {error.message}</p>;
 
+  if (comment.dead) return null;
+
   return (
     <article className='flex flex-col'>
       <div className='flex'>
