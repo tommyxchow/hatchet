@@ -16,15 +16,11 @@ export default async function ItemPage({ searchParams }: RouteParams) {
 
   return (
     <article className='flex flex-col gap-8'>
-      <section>
-        <StoryTile story={item} />
-      </section>
+      <StoryTile story={item} />
 
-      <section className='flex flex-col gap-4'>
-        <h2 className='font-semibold'>comments</h2>
-
+      <div className='flex flex-col gap-4'>
         {item.kids && <Comments ids={item.kids} />}
-      </section>
+      </div>
     </article>
   );
 }
