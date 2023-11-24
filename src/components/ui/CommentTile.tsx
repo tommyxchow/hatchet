@@ -1,13 +1,36 @@
+'use client';
+
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
 import { getTimeAgo } from '@/lib/utils';
+import { useQuery } from '@tanstack/react-query';
+import { useRef } from 'react';
 
 interface CommentProps {
   id: number;
   level: number;
 }
 
-export default async function CommentTile({ id, level }: CommentProps) {
-  const comment = await HNClient.fetchItem(id);
+export default function CommentTile({ id, level }: CommentProps) {
+  const commentRef = useRef<HTMLDivElement>(null);
+
+  const isVisible = useIntersectionObserver(commentRef, {
+    rootMargin: '0px 0px 1000px 0px',
+  });
+
+  const {
+    isPending,
+    error,
+    data: comment,
+  } = useQuery({
+    queryKey: ['comment', id],
+    queryFn: () => HNClient.fetchItem(id),
+    enabled: isVisible,
+    staleTime: 60 * 5,
+  });
+
+  if (isPending) return <div className='h-48' ref={commentRef} />;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <article className='flex flex-col'>

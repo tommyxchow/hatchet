@@ -1,6 +1,6 @@
 import StoryTile from '@/components/ui/StoryTile';
 import { HNClient } from '@/lib/hnClient';
-import { type HNFeedType, HNFeedTypes, type RouteParams } from '@/lib/types';
+import { HNFeedTypes, type HNFeedType, type RouteParams } from '@/lib/types';
 import Link from 'next/link';
 
 export const revalidate = 60;
