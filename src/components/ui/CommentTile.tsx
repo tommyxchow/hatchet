@@ -4,7 +4,7 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
 import { getTimeAgo } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 interface CommentProps {
   id: number;
@@ -12,6 +12,7 @@ interface CommentProps {
 }
 
 export default function CommentTile({ id, level }: CommentProps) {
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const commentRef = useRef<HTMLDivElement>(null);
 
   const isVisible = useIntersectionObserver(commentRef, {
@@ -38,28 +39,33 @@ export default function CommentTile({ id, level }: CommentProps) {
         <div className='flex'>
           {Array.from({ length: level }).map((_, index) => (
             <div
-              key={`${id}-${index}`}
               className='w-4 border-l border-neutral-700'
+              key={`${id}-${index}`}
             />
           ))}
         </div>
 
         <div className='flex flex-col py-2'>
-          <div className='flex gap-4 text-sm font-medium text-neutral-400'>
-            <p>
-              {comment.deleted ? 'deleted' : comment.by} ·{' '}
-              {comment.time ? getTimeAgo(comment.time) : '? ago'}
-            </p>
+          <div className='flex gap-1 text-sm font-medium text-neutral-400'>
+            <p>{comment.deleted ? 'deleted' : comment.by}</p>·
+            <p>{comment.time ? getTimeAgo(comment.time) : '? ago'}</p>·
+            <button
+              className='hover:underline'
+              onClick={() => setIsCollapsed(!isCollapsed)}
+            >
+              {isCollapsed ? 'expand' : 'collapse'}
+            </button>
           </div>
+
           <div
-            className='flex flex-col gap-4'
+            className={`flex flex-col gap-4 ${isCollapsed ? 'hidden' : ''}`}
             dangerouslySetInnerHTML={{ __html: comment.text ?? '' }}
           />
         </div>
       </div>
 
       {comment.kids && (
-        <div className='flex flex-col'>
+        <div className={`flex flex-col ${isCollapsed ? 'hidden' : ''}`}>
           {comment.kids.map((id) => (
             <CommentTile key={id} id={id} level={level + 1} />
           ))}
