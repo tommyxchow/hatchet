@@ -15,16 +15,15 @@ export default function StoryTile({ story }: StoryTileProps) {
           href={`/item?id=${story.id}`}
         >
           {story.title}
-        </Link>{' '}
-        {story.url && (
-          <span className='font-medium text-neutral-400'>
-            (
-            <a className='hover:underline' href={story.url} target='_blank'>
-              {getDisplayURL(story.url)}
-            </a>
-            )
-          </span>
-        )}
+          {story.url && (
+            <>
+              {' '}
+              <span className='font-medium text-neutral-400'>
+                ({getDisplayURL(story.url)})
+              </span>
+            </>
+          )}
+        </Link>
       </h3>
       <div className='flex flex-wrap gap-1 text-sm font-medium text-neutral-400'>
         <p>{story.score} points</p>·
