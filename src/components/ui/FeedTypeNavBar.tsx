@@ -17,7 +17,11 @@ export function FeedTypeNavBar() {
           <li key={type}>
             <Link href={`/${type}`}>
               <h2
-                className={type === resolvedFeedType ? '' : 'text-neutral-400'}
+                className={
+                  type === resolvedFeedType
+                    ? 'underline decoration-2 underline-offset-2'
+                    : 'text-neutral-400 transition-colors hover:text-neutral-200'
+                }
               >
                 {type}
               </h2>
