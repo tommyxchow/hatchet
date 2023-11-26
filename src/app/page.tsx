@@ -1,4 +1,4 @@
-import Stories from './[feedType]/page';
+import Stories from './[slug]/page';
 
 export const revalidate = 60;
 

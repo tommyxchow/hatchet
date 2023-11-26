@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 
 export function FeedTypeNavBar() {
-  const { feedType } = useParams();
+  const { slug: feedType } = useParams();
   const pathname = usePathname();
 
   const resolvedFeedType = pathname !== '/item' ? feedType || 'top' : null;
