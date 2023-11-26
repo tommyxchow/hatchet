@@ -25,14 +25,15 @@ export default function StoryTile({ story }: StoryTileProps) {
           )}
         </Link>
       </h3>
-      <div className='flex flex-wrap gap-1 text-sm font-medium text-neutral-400'>
-        <p>{story.score} points</p>·
+
+      <div className='flex flex-wrap gap-4 gap-y-2 text-sm text-neutral-400'>
+        <p>{story.score} points</p>
         <p>
           <Link className='hover:underline' href={`/item?id=${story.id}`}>
             {story.descendants ?? 0} comments
           </Link>
         </p>
-        ·<p>{story.time ? getTimeAgo(story.time) : '? ago'}</p>·
+        <time>{story.time ? getTimeAgo(story.time) : '? ago'}</time>
         <p>
           <Link className='hover:underline' href={`/user?id=${story.by}`}>
             by {story.by}
