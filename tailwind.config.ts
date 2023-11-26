@@ -13,6 +13,10 @@ export default {
         hn: '#ff6600',
       },
     },
+    fontFamily: {
+      sans: ['var(--font-sans)'],
+      mono: ['var(--font-mono)'],
+    },
   },
   plugins: [typography],
 } satisfies Config;

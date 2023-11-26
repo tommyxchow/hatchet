@@ -5,6 +5,7 @@ import { HNClient } from '@/lib/hnClient';
 import { getTimeAgo } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
+import { ItemText } from './ItemText';
 
 interface CommentProps {
   id: number;
@@ -48,17 +49,22 @@ export default function CommentTile({ id, level }: CommentProps) {
         </div>
 
         <div className='flex flex-col py-2'>
-          <div className='flex gap-1 text-sm font-medium text-neutral-400'>
-            <p>{comment.deleted ? 'deleted' : comment.by}</p>·
-            <p>{comment.time ? getTimeAgo(comment.time) : '? ago'}</p>·
+          <div className='flex gap-2 text-sm font-medium text-neutral-400'>
             {!comment.deleted && (
               <button
-                className='hover:underline'
+                aria-label={isCollapsed ? 'Expand comment' : 'Collapse comment'}
+                className='group font-mono font-normal'
                 onClick={() => setIsCollapsed(!isCollapsed)}
               >
-                {isCollapsed ? 'expand' : 'collapse'}
+                [
+                <span className='group-hover:underline'>
+                  {isCollapsed ? '+' : '-'}
+                </span>
+                ]
               </button>
             )}
+            <p>{comment.deleted ? 'deleted' : comment.by}</p>
+            <p>{comment.time ? getTimeAgo(comment.time) : '? ago'}</p>
           </div>
 
           <div className={isCollapsed ? 'hidden' : undefined}>
