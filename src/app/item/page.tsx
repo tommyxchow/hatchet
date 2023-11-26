@@ -1,4 +1,5 @@
 import Comments from '@/components/ui/Comments';
+import { ItemText } from '@/components/ui/ItemText';
 import StoryTile from '@/components/ui/StoryTile';
 import { HNClient } from '@/lib/hnClient';
 import { type RouteParams } from '@/lib/types';
@@ -17,6 +18,8 @@ export default async function ItemPage({ searchParams }: RouteParams) {
   return (
     <article className='flex flex-col gap-8'>
       <StoryTile story={item} />
+
+      {item.text && <ItemText text={item.text} />}
 
       <div className='flex flex-col gap-4'>
         {item.kids && <Comments ids={item.kids} />}

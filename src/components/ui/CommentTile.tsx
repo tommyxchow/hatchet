@@ -61,12 +61,9 @@ export default function CommentTile({ id, level }: CommentProps) {
             )}
           </div>
 
-          <div
-            className={`prose prose-neutral prose-invert max-w-screen-md text-neutral-200 ${
-              isCollapsed ? 'hidden' : ''
-            }`}
-            dangerouslySetInnerHTML={{ __html: comment.text ?? '' }}
-          />
+          <div className={isCollapsed ? 'hidden' : undefined}>
+            {comment.text && <ItemText text={comment.text} />}
+          </div>
         </div>
       </div>
 
