@@ -8,7 +8,10 @@ export function FeedTypeNavBar() {
   const { slug: feedType } = useParams();
   const pathname = usePathname();
 
-  const resolvedFeedType = pathname !== '/item' ? feedType || 'top' : null;
+  let resolvedFeedType: string | null = null;
+  if (pathname !== '/item' && pathname !== '/user') {
+    resolvedFeedType = !Array.isArray(feedType) ? feedType || 'top' : null;
+  }
 
   return (
     <nav>

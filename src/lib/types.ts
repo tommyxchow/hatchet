@@ -24,6 +24,15 @@ export const HNItem = z.object({
 });
 export type HNItem = z.infer<typeof HNItem>;
 
+export const HNUser = z.object({
+  id: z.string(),
+  created: z.number(),
+  karma: z.number(),
+  about: z.string().optional(),
+  submitted: z.array(z.number()).optional(),
+});
+export type HNUser = z.infer<typeof HNUser>;
+
 export const HNComment = HNItem.extend({
   indent: z.number(),
   collapsed: z.boolean(),
