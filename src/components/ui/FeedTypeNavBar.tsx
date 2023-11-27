@@ -18,7 +18,7 @@ export function FeedTypeNavBar() {
     <nav
       className={`py-4 ${
         isStoryPage
-          ? 'sticky inset-0 mb-4 border-b border-neutral-400 bg-black'
+          ? 'sticky inset-0 mb-4 border-b border-neutral-700 bg-black'
           : ''
       }`}
     >
