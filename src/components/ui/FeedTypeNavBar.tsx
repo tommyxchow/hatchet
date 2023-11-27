@@ -7,14 +7,21 @@ import { useParams, usePathname } from 'next/navigation';
 export function FeedTypeNavBar() {
   const { slug: feedType } = useParams();
   const pathname = usePathname();
+  const isStoryPage = pathname !== '/item' && pathname !== '/user';
 
   let resolvedFeedType: string | null = null;
-  if (pathname !== '/item' && pathname !== '/user') {
+  if (isStoryPage) {
     resolvedFeedType = !Array.isArray(feedType) ? feedType || 'top' : null;
   }
 
   return (
-    <nav>
+    <nav
+      className={`py-4 ${
+        isStoryPage
+          ? 'sticky inset-0 mb-4 border-b border-neutral-400 bg-black'
+          : ''
+      }`}
+    >
       <ul className='flex gap-4 text-lg font-semibold'>
         {HNFeedTypes.map((type) => (
           <li key={type}>

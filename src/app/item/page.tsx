@@ -16,8 +16,10 @@ export default async function ItemPage({ searchParams }: RouteParams) {
   const item = await HNClient.fetchItem(parseInt(itemId));
 
   return (
-    <article className='flex flex-col gap-8'>
-      <StoryTile story={item} />
+    <article className='flex flex-col gap-4'>
+      <div className='sticky inset-0 border-y border-neutral-400 border-t-transparent bg-black py-4'>
+        <StoryTile story={item} />
+      </div>
 
       {item.text && <ItemText text={item.text} />}
 
