@@ -4,6 +4,7 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
 import { getTimeAgo } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 import { ItemText } from './ItemText';
 
@@ -63,7 +64,13 @@ export default function CommentTile({ id, level }: CommentProps) {
                 ]
               </button>
             )}
-            <p>{comment.deleted ? 'deleted' : comment.by}</p>
+            {comment.deleted ? (
+              <p>deleted</p>
+            ) : (
+              <Link className='hover:underline' href={`/user?id=${comment.by}`}>
+                {comment.by}
+              </Link>
+            )}
             <time>{comment.time ? getTimeAgo(comment.time) : '? ago'}</time>
           </div>
 
