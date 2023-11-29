@@ -11,6 +11,8 @@ const fontMono = JetBrains_Mono({
   variable: '--font-mono',
 });
 
+export const runtime = 'edge';
+
 export const metadata: Metadata = {
   title: 'Hatchet News',
   description: 'A simple and modern Hacker News web client.',
