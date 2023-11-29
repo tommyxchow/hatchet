@@ -12,8 +12,8 @@ const fontMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'hatchet news',
-  description: 'An alternative hacker news web client.',
+  title: 'Hatchet News',
+  description: 'A simple and modern Hacker News web client.',
 };
 
 export default function RootLayout({
