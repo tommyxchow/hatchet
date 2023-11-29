@@ -17,7 +17,7 @@ export default async function ItemPage({ searchParams }: RouteParams) {
 
   return (
     <article className='flex flex-col gap-4'>
-      <div className='sticky inset-0 border-y border-neutral-700 border-t-transparent bg-black py-4'>
+      <div className='sticky inset-0 border-b border-neutral-700 bg-black py-4'>
         <StoryTile story={item} />
       </div>
 

@@ -16,10 +16,10 @@ export function FeedTypeNavBar() {
 
   return (
     <nav
-      className={`py-4 ${
+      className={`border-b py-4 ${
         isStoryPage
-          ? 'sticky inset-0 mb-4 border-b border-neutral-700 bg-black'
-          : ''
+          ? 'sticky inset-0 mb-4 border-neutral-700 bg-black'
+          : 'border-transparent'
       }`}
     >
       <ul className='flex gap-4 text-lg font-semibold'>
