@@ -3,6 +3,8 @@ import { HNClient } from '@/lib/hnClient';
 import { type HNFeedType, type RouteParams } from '@/lib/types';
 import Link from 'next/link';
 
+export const runtime = 'edge';
+
 export const revalidate = 60;
 
 export default async function Stories({ params, searchParams }: RouteParams) {

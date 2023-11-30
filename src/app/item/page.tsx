@@ -4,6 +4,8 @@ import StoryTile from '@/components/ui/StoryTile';
 import { HNClient } from '@/lib/hnClient';
 import { type RouteParams } from '@/lib/types';
 
+export const runtime = 'edge';
+
 export const revalidate = 60;
 
 export default async function ItemPage({ searchParams }: RouteParams) {

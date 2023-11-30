@@ -2,6 +2,8 @@ import { ItemText } from '@/components/ui/ItemText';
 import { HNClient } from '@/lib/hnClient';
 import { type RouteParams } from '@/lib/types';
 
+export const runtime = 'edge';
+
 export default async function User({ searchParams }: RouteParams) {
   const uesrname = searchParams.id;
 
