@@ -49,7 +49,7 @@ export default function CommentTile({ id, level }: CommentProps) {
           ))}
         </div>
 
-        <div className='flex flex-col py-2'>
+        <div className='flex grow flex-col py-2'>
           <div className='flex gap-2 text-sm text-neutral-400'>
             {!comment.deleted && (
               <button
@@ -72,6 +72,12 @@ export default function CommentTile({ id, level }: CommentProps) {
               </Link>
             )}
             <time>{comment.time ? getTimeAgo(comment.time) : '? ago'}</time>
+
+            <button
+              aria-hidden
+              className='grow sm:hidden'
+              onClick={() => setIsCollapsed(!isCollapsed)}
+            />
           </div>
 
           <div className={isCollapsed ? 'hidden' : undefined}>
