@@ -3,6 +3,7 @@ import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
 import type { Metadata } from 'next';
 import { Figtree, JetBrains_Mono } from 'next/font/google';
 import Link from 'next/link';
+import { twJoin } from 'tailwind-merge';
 import './globals.css';
 
 const fontSans = Figtree({
@@ -28,7 +29,11 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body
-        className={`${fontSans.variable} ${fontMono.variable} mx-auto min-h-screen max-w-screen-md bg-black px-4 pb-4 font-sans text-neutral-200 lg:px-0 lg:pb-8`}
+        className={twJoin(
+          'mx-auto min-h-screen max-w-screen-md bg-black px-4 pb-4 font-sans text-neutral-200 lg:px-0 lg:pb-8',
+          fontSans.variable,
+          fontMono.variable,
+        )}
       >
         <header className='flex flex-col gap-4 pt-8'>
           <Link href='/'>

@@ -6,6 +6,7 @@ import { getTimeAgo } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
+import { twJoin } from 'tailwind-merge';
 import { ItemText } from './ItemText';
 
 interface CommentProps {
@@ -80,14 +81,14 @@ export default function CommentTile({ id, level }: CommentProps) {
             />
           </div>
 
-          <div className={isCollapsed ? 'hidden' : undefined}>
+          <div className={twJoin(isCollapsed && 'hidden')}>
             {comment.text && <ItemText text={comment.text} />}
           </div>
         </div>
       </div>
 
       {comment.kids && (
-        <div className={`flex flex-col ${isCollapsed ? 'hidden' : ''}`}>
+        <div className={twJoin('flex flex-col', isCollapsed && 'hidden')}>
           {comment.kids.map((id) => (
             <CommentTile key={id} id={id} level={level + 1} />
           ))}

@@ -3,6 +3,7 @@
 import { HNFeedTypes } from '@/lib/types';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
+import { twJoin } from 'tailwind-merge';
 
 export function FeedTypeNavBar() {
   const { slug: feedType } = useParams();
@@ -16,9 +17,10 @@ export function FeedTypeNavBar() {
 
   return (
     <nav
-      className={`overflow-x-auto border-b border-neutral-700 py-4${
-        isStoryPage ? ' sticky inset-0 mb-4 bg-black' : ''
-      }`}
+      className={twJoin(
+        'overflow-x-auto border-b border-neutral-700 py-4',
+        isStoryPage && 'sticky inset-0 mb-4 bg-black',
+      )}
     >
       <ul className='flex gap-4 text-lg font-semibold'>
         {HNFeedTypes.map((type) => (
