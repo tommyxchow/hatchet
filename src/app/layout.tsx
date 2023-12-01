@@ -1,11 +1,15 @@
 import Providers from '@/components/Providers';
 import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Figtree, JetBrains_Mono } from 'next/font/google';
 import Link from 'next/link';
 import './globals.css';
 
-const fontSans = Inter({ subsets: ['latin'], variable: '--font-sans' });
+const fontSans = Figtree({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  variable: '--font-sans',
+});
 const fontMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
