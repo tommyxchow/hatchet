@@ -26,7 +26,11 @@ export default async function ItemPage({ searchParams }: RouteParams) {
         <StoryTile story={item} />
       </div>
 
-      {item.text && <ItemText text={item.text} />}
+      {item.text && (
+        <div className='border-b border-neutral-700 pb-4'>
+          <ItemText text={item.text} />
+        </div>
+      )}
 
       <div className='flex flex-col gap-4'>
         {item.kids && <Comments ids={item.kids} />}
