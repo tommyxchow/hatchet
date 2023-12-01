@@ -34,18 +34,13 @@ export default async function Stories({ params, searchParams }: RouteParams) {
         ))}
       </ol>
 
-      <nav className='grid grid-cols-2 font-semibold'>
-        {pageNumber > 1 && (
-          <Link className='' href={`/${resolvedFeedType}?p=${pageNumber - 1}`}>
-            Previous
-          </Link>
-        )}
+      <nav>
         {stories.length == 30 && (
           <Link
-            className='col-start-2 justify-self-end'
+            className='font-medium hover:underline'
             href={`/${resolvedFeedType}?p=${pageNumber + 1}`}
           >
-            Next
+            more
           </Link>
         )}
       </nav>
