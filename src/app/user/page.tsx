@@ -1,17 +1,21 @@
 import { ItemText } from '@/components/ui/ItemText';
 import { HNClient } from '@/lib/hnClient';
 import { type RouteParams } from '@/lib/types';
+import { notFound } from 'next/navigation';
 
 export const runtime = 'edge';
 
 export default async function User({ searchParams }: RouteParams) {
-  const uesrname = searchParams.id;
+  console.log(searchParams);
+  const userId = searchParams.id;
 
-  if (!uesrname || typeof uesrname !== 'string') {
-    return <p>Unknown user</p>;
+  if (!userId || typeof userId !== 'string') {
+    throw Error('Invalid user id');
   }
 
-  const user = await HNClient.fetchUser(uesrname);
+  const user = await HNClient.fetchUserById(userId);
+
+  if (!user) notFound();
 
   return (
     <article className='flex flex-col gap-4'>

@@ -27,7 +27,7 @@ export default function CommentTile({ id, level }: CommentProps) {
     data: comment,
   } = useQuery({
     queryKey: ['comment', id],
-    queryFn: () => HNClient.fetchItem(id),
+    queryFn: () => HNClient.fetchItemById(id),
     enabled: isVisible,
     staleTime: 60 * 5,
   });
@@ -35,7 +35,7 @@ export default function CommentTile({ id, level }: CommentProps) {
   if (isPending) return <div className='h-48' ref={commentRef} />;
   if (error) return <p>Error: {error.message}</p>;
 
-  if (comment.dead) return null;
+  if (!comment || comment.dead) return null;
 
   return (
     <article className='flex flex-col'>

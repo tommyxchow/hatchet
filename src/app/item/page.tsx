@@ -3,6 +3,7 @@ import { ItemText } from '@/components/ui/ItemText';
 import StoryTile from '@/components/ui/StoryTile';
 import { HNClient } from '@/lib/hnClient';
 import { type RouteParams } from '@/lib/types';
+import { notFound } from 'next/navigation';
 
 export const runtime = 'edge';
 
@@ -12,10 +13,12 @@ export default async function ItemPage({ searchParams }: RouteParams) {
   const itemId = searchParams.id;
 
   if (!itemId || typeof itemId !== 'string') {
-    return <p>Invalid item id</p>;
+    throw Error('Invalid item id');
   }
 
-  const item = await HNClient.fetchItem(parseInt(itemId));
+  const item = await HNClient.fetchItemById(parseInt(itemId));
+
+  if (!item) notFound();
 
   return (
     <article className='flex flex-col gap-4'>

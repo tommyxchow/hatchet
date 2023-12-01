@@ -9,14 +9,14 @@ export function FeedTypeNavBar() {
   const pathname = usePathname();
   const isStoryPage = pathname !== '/item' && pathname !== '/user';
 
-  let resolvedFeedType: string | null = null;
+  let resolvedPath: string | null = null;
   if (isStoryPage) {
-    resolvedFeedType = !Array.isArray(feedType) ? feedType || 'top' : null;
+    resolvedPath = !Array.isArray(feedType) ? feedType || 'top' : null;
   }
 
   return (
     <nav
-      className={`border-b py-4 ${
+      className={`overflow-x-auto border-b py-4 ${
         isStoryPage
           ? 'sticky inset-0 mb-4 border-neutral-700 bg-black'
           : 'border-transparent'
@@ -28,7 +28,7 @@ export function FeedTypeNavBar() {
             <Link href={`/${type}`}>
               <h2
                 className={
-                  type === resolvedFeedType
+                  resolvedPath === type
                     ? 'underline decoration-2 underline-offset-2'
                     : 'text-neutral-400 transition-colors hover:text-neutral-200'
                 }
@@ -38,6 +38,20 @@ export function FeedTypeNavBar() {
             </Link>
           </li>
         ))}
+
+        <li>
+          <Link className='justify-self-end' href='/settings'>
+            <h2
+              className={
+                resolvedPath === 'about'
+                  ? 'underline decoration-2 underline-offset-2'
+                  : 'text-neutral-400 transition-colors hover:text-neutral-200'
+              }
+            >
+              settings
+            </h2>
+          </Link>
+        </li>
       </ul>
     </nav>
   );
