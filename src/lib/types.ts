@@ -46,6 +46,6 @@ export const HNFeedTypes = [
   'best',
   'ask',
   'show',
-  'job',
+  'jobs',
 ] as const;
 export type HNFeedType = (typeof HNFeedTypes)[number];

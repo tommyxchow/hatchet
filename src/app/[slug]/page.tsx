@@ -9,7 +9,7 @@ export const runtime = 'edge';
 export const revalidate = 60;
 
 export default async function Stories({ params, searchParams }: RouteParams) {
-  const feedType = params.slug;
+  const { slug: feedType } = params;
 
   // Check for undefined because we want to allow the default feed type when no
   // slug is provided.

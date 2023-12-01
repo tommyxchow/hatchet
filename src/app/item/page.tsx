@@ -10,7 +10,7 @@ export const runtime = 'edge';
 export const revalidate = 60;
 
 export default async function ItemPage({ searchParams }: RouteParams) {
-  const itemId = searchParams.id;
+  const { id: itemId } = searchParams;
 
   if (!itemId || typeof itemId !== 'string') {
     throw Error('Invalid item id');

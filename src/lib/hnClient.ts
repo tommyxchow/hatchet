@@ -47,7 +47,9 @@ async function fetchStoriesByFeedType(
   const startIndex = (page - 1) * 30;
   const endIndex = startIndex + 30;
 
-  const url = createApiUrl(`${type}stories`);
+  const storyType = type === 'jobs' ? 'job' : type;
+  const url = createApiUrl(`${storyType}stories`);
+
   const storyIds = await get<number[]>(url);
   const storyPromises = storyIds
     .slice(startIndex, endIndex)

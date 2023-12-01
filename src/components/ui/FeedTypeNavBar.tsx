@@ -38,20 +38,6 @@ export function FeedTypeNavBar() {
             </Link>
           </li>
         ))}
-
-        <li>
-          <Link className='justify-self-end' href='/settings'>
-            <h2
-              className={
-                resolvedPath === 'about'
-                  ? 'underline decoration-2 underline-offset-2'
-                  : 'text-neutral-400 transition-colors hover:text-neutral-200'
-              }
-            >
-              settings
-            </h2>
-          </Link>
-        </li>
       </ul>
     </nav>
   );
