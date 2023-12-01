@@ -17,7 +17,7 @@ export default async function User({ searchParams }: RouteParams) {
   if (!user) notFound();
 
   return (
-    <article className='flex flex-col gap-4'>
+    <article className='flex flex-col gap-4 pt-4'>
       <div>
         <h3 className='text-xl font-semibold'>{user.id}</h3>
         <time className='text-neutral-400'>
