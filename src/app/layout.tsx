@@ -1,12 +1,12 @@
 import Providers from '@/components/Providers';
 import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
 import type { Metadata } from 'next';
-import { Figtree, JetBrains_Mono } from 'next/font/google';
+import { JetBrains_Mono, Rubik } from 'next/font/google';
 import Link from 'next/link';
 import { twJoin } from 'tailwind-merge';
 import './globals.css';
 
-const fontSans = Figtree({
+const fontSans = Rubik({
   subsets: ['latin'],
   style: ['normal', 'italic'],
   variable: '--font-sans',
