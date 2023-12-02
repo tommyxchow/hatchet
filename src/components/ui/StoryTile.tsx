@@ -18,7 +18,7 @@ export default function StoryTile({ story }: StoryTileProps) {
           {story.url && (
             <>
               {' '}
-              <span className='font-medium text-neutral-500 dark:text-neutral-400'>
+              <span className='font-medium text-neutral-600 dark:text-neutral-400'>
                 ({getDisplayURL(story.url)})
               </span>
             </>
@@ -26,7 +26,7 @@ export default function StoryTile({ story }: StoryTileProps) {
         </Link>
       </h3>
 
-      <div className='flex flex-wrap gap-4 gap-y-2 text-sm text-neutral-500 dark:text-neutral-400'>
+      <div className='flex flex-wrap gap-4 gap-y-2 text-sm text-neutral-600 dark:text-neutral-400'>
         <p>{story.score} points</p>
         <p>
           <Link className='hover:underline' href={`/item?id=${story.id}`}>

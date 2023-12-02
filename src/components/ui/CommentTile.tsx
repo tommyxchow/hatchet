@@ -51,7 +51,7 @@ export default function CommentTile({ id, level }: CommentProps) {
         </div>
 
         <div className='flex grow flex-col py-2'>
-          <div className='flex gap-2 text-sm text-neutral-500 dark:text-neutral-400'>
+          <div className='flex gap-2 text-sm text-neutral-600 dark:text-neutral-400'>
             {!comment.deleted && (
               <button
                 aria-label={isCollapsed ? 'Expand comment' : 'Collapse comment'}
