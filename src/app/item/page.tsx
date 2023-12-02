@@ -22,12 +22,12 @@ export default async function ItemPage({ searchParams }: RouteParams) {
 
   return (
     <article className='flex flex-col gap-4'>
-      <div className='sticky inset-0 border-b border-neutral-400 bg-white py-4 dark:border-neutral-700 dark:bg-black'>
+      <div className='sticky inset-0 border-b border-neutral-300 bg-neutral-50 py-4 dark:border-neutral-700 dark:bg-black'>
         <StoryTile story={item} />
       </div>
 
       {item.text && (
-        <div className='border-b border-neutral-400 pb-4 dark:border-neutral-700'>
+        <div className='border-b border-neutral-300 pb-4 dark:border-neutral-700'>
           <ItemText text={item.text} />
         </div>
       )}

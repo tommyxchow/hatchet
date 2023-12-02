@@ -11,7 +11,7 @@ function navItemClassname(
 ): string {
   return resolvedPathname === pathname
     ? 'underline decoration-2 underline-offset-2'
-    : 'transition-colors text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-200';
+    : 'transition-colors text-neutral-500 hover:text-neutral-900 dark:text-neutral-400 dark:hover:text-neutral-100';
 }
 
 export function FeedTypeNavBar() {
@@ -30,8 +30,8 @@ export function FeedTypeNavBar() {
   return (
     <nav
       className={twJoin(
-        'overflow-x-auto border-b border-neutral-400 py-4 dark:border-neutral-700',
-        !isItemPage && 'sticky inset-0 mb-4 bg-white dark:bg-black',
+        'overflow-x-auto border-b border-neutral-300 py-4 dark:border-neutral-700',
+        !isItemPage && 'sticky inset-0 mb-4 bg-neutral-50 dark:bg-black',
       )}
     >
       <ul className='flex gap-4 text-lg font-semibold'>

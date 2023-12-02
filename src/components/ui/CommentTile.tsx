@@ -44,14 +44,14 @@ export default function CommentTile({ id, level }: CommentProps) {
         <div className='flex'>
           {Array.from({ length: level }).map((_, index) => (
             <div
-              className='w-4 border-l border-neutral-400 dark:border-neutral-700'
+              className='w-4 border-l border-neutral-300 dark:border-neutral-700'
               key={`${id}-${index}`}
             />
           ))}
         </div>
 
         <div className='flex grow flex-col py-2'>
-          <div className='flex gap-2 text-sm text-neutral-700 dark:text-neutral-400'>
+          <div className='flex gap-2 text-sm text-neutral-500 dark:text-neutral-400'>
             {!comment.deleted && (
               <button
                 aria-label={isCollapsed ? 'Expand comment' : 'Collapse comment'}

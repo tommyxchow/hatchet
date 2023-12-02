@@ -4,7 +4,7 @@ export default function StoryListLoadingSkeleton() {
       {Array.from({ length: 30 }).map((_, i) => (
         <div
           key={i}
-          className='h-16 animate-pulse rounded bg-neutral-200 dark:bg-neutral-900'
+          className='h-16 animate-pulse rounded bg-neutral-200 dark:bg-neutral-800'
         />
       ))}
     </div>
