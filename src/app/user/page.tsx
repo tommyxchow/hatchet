@@ -19,12 +19,12 @@ export default async function User({ searchParams }: RouteParams) {
   return (
     <article className='flex flex-col gap-4 pt-4'>
       <div>
-        <h3 className='text-xl font-semibold'>{user.id}</h3>
-        <time className='text-neutral-400'>
+        <h3 className='text-lg font-semibold'>{user.id}</h3>
+        <time className='text-neutral-700 dark:text-neutral-400'>
           joined on {new Date(user.created * 1000).toLocaleDateString()}
         </time>
         {user.karma && (
-          <p className='text-neutral-400'>
+          <p className='text-neutral-700 dark:text-neutral-400'>
             {user.karma.toLocaleString()} karma
           </p>
         )}

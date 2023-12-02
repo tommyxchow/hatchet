@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (min-width: 1024px) {
+@media screen(lg) {
   html {
     padding-left: calc(100vw - 100%);
   }
