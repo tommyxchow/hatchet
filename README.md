@@ -2,7 +2,7 @@
 
 A fast, modern, and simple web client for Hacker News.
 
-![Screenshot of the home page](https://github.com/tommyxchow/hatchet/assets/54859075/e9f485fd-cfaf-41a9-86b3-d996fe7b207c)
+![Two screenshot of the home page with light mode on the left and dark mode on the right.](https://github.com/tommyxchow/hatchet/assets/54859075/c0bed8a8-4dec-4666-8e2a-3de6a3846f3c)
 
 ## Stack
 
