@@ -1,4 +1,4 @@
-import Providers from '@/components/Providers';
+import { Providers } from '@/components/Providers';
 import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
 import { Footer } from '@/components/ui/Footer';
 import { Header } from '@/components/ui/Header';
