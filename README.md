@@ -1,34 +1,24 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# [hatchet](https://github.com/tommyxchow/next-template)
 
-## Getting Started
+A fast, modern, and simple web client for Hacker News.
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- [Next.js](https://nextjs.org/) (App Router)
+- [TanStack Query](https://tanstack.com/query/latest)
+- [next-themes](https://github.com/pacocoursey/next-themes)
+- [Tailwind CSS](https://tailwindcss.com/) (with [Typography](https://tailwindcss.com/docs/typography-plugin) plugin)
+- [tailwind-merge](https://github.com/dcastil/tailwind-merge)
+- [zod](https://zod.dev/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Background
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+I've always enjoyed browsing [Hacker News](https://news.ycombinator.com/) but personally found the web client's UI/UX lacking (it's pretty much the same since launching in [2007](https://web.archive.org/web/20070221033032/https://news.ycombinator.com/)). Although I do like the nostalgic "old web" feeling, UI/UX and design patterns have grown a lot since then.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+My goal was to create a web client that aims to "remaster" the Hacker News experience by maintaining its minimalistic nature while bringing in best practices in UI/UX and performance.
 
-## Learn More
+Also, I know the "redesign Hacker News" idea has been done a million times already, but I wanted to give my own try at it! Plus, it was a great opportunity for me to get familiar with the newer Next.js App Router and other packages.
 
-To learn more about Next.js, take a look at the following resources:
+## License
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+hatchet is licensed under [MIT](LICENSE).
