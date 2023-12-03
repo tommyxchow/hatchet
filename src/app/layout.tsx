@@ -18,8 +18,9 @@ const fontMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://hatchetnews.vercel.app/'),
   title: 'Hatchet News',
-  description: 'A simple and modern Hacker News web client.',
+  description: 'A fast, modern, and simple web client for Hacker News.',
 };
 
 export default function RootLayout({
