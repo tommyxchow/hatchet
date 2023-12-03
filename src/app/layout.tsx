@@ -1,8 +1,9 @@
 import Providers from '@/components/Providers';
 import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
+import { Footer } from '@/components/ui/Footer';
+import { Header } from '@/components/ui/Header';
 import type { Metadata } from 'next';
 import { JetBrains_Mono, Rubik } from 'next/font/google';
-import Link from 'next/link';
 import { twJoin } from 'tailwind-merge';
 import './globals.css';
 
@@ -30,24 +31,22 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body
         className={twJoin(
-          'mx-auto min-h-screen max-w-screen-md bg-neutral-50 px-4 pb-4 font-sans text-neutral-900 dark:bg-black dark:text-neutral-100 lg:px-0 lg:pb-8',
+          'mx-auto flex min-h-screen max-w-screen-md flex-col bg-neutral-50 px-4 font-sans text-neutral-900 dark:bg-black dark:text-neutral-100 lg:px-0',
           fontSans.variable,
           fontMono.variable,
         )}
       >
-        <header className='flex flex-col gap-4 pt-8'>
-          <Link href='/'>
-            <h1 className='text-2xl font-bold'>
-              hatchet <span className='text-hn'>news</span>
-            </h1>
-          </Link>
-        </header>
+        <Header />
 
         <FeedTypeNavBar />
 
-        <main>
+        <main className='grow'>
           <Providers>{children}</Providers>
         </main>
+
+        <div className='pb-4 pt-8'>
+          <Footer />
+        </div>
       </body>
     </html>
   );
