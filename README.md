@@ -2,6 +2,8 @@
 
 A fast, modern, and simple web client for Hacker News.
 
+![Screenshot of the home page](https://github.com/tommyxchow/hatchet/assets/54859075/cae22d65-668e-48f0-877d-90c82feb95f9)
+
 ## Stack
 
 - [Next.js](https://nextjs.org/) (App Router)
