@@ -10,9 +10,10 @@ export default function StoryTile({ story }: StoryTileProps) {
   return (
     <article className='flex flex-col gap-2'>
       <h3 className='font-semibold'>
-        <Link
+        <a
           className='transition-opacity hover:opacity-50'
           href={story.url ?? `/item?id=${story.id}`}
+          target='_blank'
         >
           {story.title}
           {story.url && (
@@ -23,7 +24,7 @@ export default function StoryTile({ story }: StoryTileProps) {
               </span>
             </>
           )}
-        </Link>
+        </a>
       </h3>
 
       <div className='flex flex-wrap gap-4 gap-y-2 text-sm text-neutral-600 dark:text-neutral-400'>
