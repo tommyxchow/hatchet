@@ -1,14 +1,12 @@
-import StoryTile from '@/components/ui/StoryTile';
-import { HNClient } from '@/lib/hnClient';
+import { StoryList } from '@/components/ui/StoryList';
+import { StoryListSkeleton } from '@/components/ui/StoryListSkeleton';
 import { HNFeedTypes, type HNFeedType, type RouteParams } from '@/lib/types';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
-
-export const runtime = 'edge';
+import { Suspense } from 'react';
 
 export const revalidate = 60;
 
-export default async function Stories({ params, searchParams }: RouteParams) {
+export default function Stories({ params, searchParams }: RouteParams) {
   const { slug: feedType } = params;
 
   // Check for undefined because we want to allow the default feed type when no
@@ -19,32 +17,13 @@ export default async function Stories({ params, searchParams }: RouteParams) {
 
   const resolvedFeedType = feedType || 'top';
   const pageNumber = parseInt(searchParams.p as string) || 1;
-  const stories = await HNClient.fetchStoriesByFeedType(
-    resolvedFeedType,
-    pageNumber,
-  );
 
   return (
-    <div className='flex flex-col gap-8'>
-      <ol className='flex flex-col gap-8'>
-        {stories.map((story) => (
-          <li key={story.id}>
-            <StoryTile story={story} />
-          </li>
-        ))}
-      </ol>
-
-      <nav>
-        {stories.length == 30 && (
-          <Link
-            className='font-medium hover:underline'
-            href={`/${resolvedFeedType}?p=${pageNumber + 1}`}
-          >
-            more
-          </Link>
-        )}
-      </nav>
-    </div>
+    // Suspense here instead of loading.tsx because notFound() can only return
+    // the proper 404 status code on the server rather than client.
+    <Suspense fallback={<StoryListSkeleton />}>
+      <StoryList feedType={resolvedFeedType} pageNumber={pageNumber} />
+    </Suspense>
   );
 }
 

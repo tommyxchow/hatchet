@@ -1,4 +1,4 @@
-export default function StoryListLoadingSkeleton() {
+export function StoryListSkeleton() {
   return (
     <div className='flex flex-col gap-8'>
       {Array.from({ length: 30 }).map((_, i) => (
