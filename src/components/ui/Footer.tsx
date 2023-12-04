@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <div className='text-sm text-neutral-400 underline-offset-2 dark:text-neutral-500'>
+    <div className='text-sm text-neutral-500 underline-offset-2 dark:text-neutral-400'>
       <p>
         designed and developed by{' '}
         <a
