@@ -9,11 +9,7 @@ export default {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {
-      colors: {
-        hn: '#ff6600',
-      },
-    },
+    extend: {},
     fontFamily: {
       sans: ['var(--font-sans)'],
       mono: ['var(--font-mono)'],
