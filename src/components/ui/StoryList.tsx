@@ -27,7 +27,7 @@ export async function StoryList({ feedType, pageNumber }: StoryListProps) {
             className='font-medium hover:underline'
             href={`/${feedType}?p=${pageNumber + 1}`}
           >
-            more
+            next page
           </Link>
         )}
       </nav>
