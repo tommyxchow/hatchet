@@ -33,7 +33,9 @@ export default async function ItemPage({ searchParams }: RouteParams) {
       )}
 
       <div className='flex flex-col gap-4'>
-        {item.kids && <Comments ids={item.kids} />}
+        {item.kids && (
+          <Comments postAuthorUsername={item.by ?? null} ids={item.kids} />
+        )}
       </div>
     </article>
   );

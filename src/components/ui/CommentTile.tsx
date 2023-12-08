@@ -5,9 +5,12 @@ import { HNClient } from '@/lib/hnClient';
 import { getTimeAgo } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { twJoin } from 'tailwind-merge';
+import { PostAuthorContext } from './Comments';
 import { ItemText } from './ItemText';
+
+// TODO: Highlight author if OP
 
 interface CommentProps {
   id: number;
@@ -17,6 +20,7 @@ interface CommentProps {
 export default function CommentTile({ id, level }: CommentProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const commentRef = useRef<HTMLDivElement>(null);
+  const postAuthorUsername = useContext(PostAuthorContext);
 
   const isVisible = useIntersectionObserver(commentRef, {
     rootMargin: '0px 0px 1000px 0px',
@@ -68,7 +72,14 @@ export default function CommentTile({ id, level }: CommentProps) {
             {comment.deleted ? (
               <p>deleted</p>
             ) : (
-              <Link className='hover:underline' href={`/user?id=${comment.by}`}>
+              <Link
+                className={twJoin(
+                  'hover:underline',
+                  postAuthorUsername === comment.by &&
+                    'text-orange-700 dark:text-orange-500',
+                )}
+                href={`/user?id=${comment.by}`}
+              >
                 {comment.by}
               </Link>
             )}
