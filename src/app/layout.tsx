@@ -3,15 +3,24 @@ import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
 import { Footer } from '@/components/ui/Footer';
 import { Header } from '@/components/ui/Header';
 import type { Metadata } from 'next';
-import { JetBrains_Mono, Rubik } from 'next/font/google';
+import { JetBrains_Mono } from 'next/font/google';
+import localFont from 'next/font/local';
 import { twJoin } from 'tailwind-merge';
 import './globals.css';
 
-const fontSans = Rubik({
-  subsets: ['latin'],
-  style: ['normal', 'italic'],
+const fontSans = localFont({
+  src: [
+    {
+      path: './InterVariable.woff2',
+    },
+    {
+      path: './InterVariable-Italic.woff2',
+      style: 'italic',
+    },
+  ],
   variable: '--font-sans',
 });
+
 const fontMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
