@@ -23,6 +23,7 @@ const fontSans = localFont({
 
 const fontMono = JetBrains_Mono({
   subsets: ['latin'],
+  style: ['normal', 'italic'],
   variable: '--font-mono',
 });
 
