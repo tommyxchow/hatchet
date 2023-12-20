@@ -16,12 +16,17 @@ export default async function User({ searchParams }: RouteParams) {
 
   if (!user) notFound();
 
+  const joinDate = new Date(user.created * 1000);
+
   return (
     <article className='flex flex-col gap-4'>
       <div className='font-medium'>
         <h3 className='text-lg font-semibold'>{user.id}</h3>
-        <time className='text-neutral-600 dark:text-neutral-400'>
-          joined on {new Date(user.created * 1000).toLocaleDateString()}
+        <time
+          className='text-neutral-600 dark:text-neutral-400'
+          dateTime={joinDate.toISOString()}
+        >
+          joined on {joinDate.toLocaleDateString()}
         </time>
         {user.karma && (
           <p className='text-neutral-600 dark:text-neutral-400'>

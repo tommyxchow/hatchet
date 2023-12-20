@@ -2,8 +2,8 @@ function getDisplayTime(value: number, unit: string): string {
   return value === 1 ? `1 ${unit} ago` : `${value} ${unit}s ago`;
 }
 
-export function getTimeAgo(timestamp: number): string {
-  const seconds = Math.floor((Date.now() - timestamp * 1000) / 1000);
+export function getTimeAgo(date: Date): string {
+  const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
   const minutes = Math.floor(seconds / 60);
   const hours = Math.floor(minutes / 60);
   const days = Math.floor(hours / 24);

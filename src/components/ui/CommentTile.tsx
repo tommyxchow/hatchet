@@ -42,6 +42,8 @@ export default function CommentTile({ id, level }: CommentProps) {
 
   if (!comment || comment.dead) return null;
 
+  const commentDate = comment.time ? new Date(comment.time * 1000) : null;
+
   return (
     <article className='flex flex-col'>
       <div className='flex'>
@@ -83,7 +85,12 @@ export default function CommentTile({ id, level }: CommentProps) {
                 {comment.by}
               </Link>
             )}
-            <time>{comment.time ? getTimeAgo(comment.time) : '? ago'}</time>
+            <time
+              dateTime={commentDate?.toISOString()}
+              title={commentDate?.toLocaleString()}
+            >
+              {commentDate ? getTimeAgo(commentDate) : '? ago'}
+            </time>
 
             <button
               aria-hidden

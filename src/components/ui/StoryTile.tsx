@@ -7,6 +7,8 @@ interface StoryTileProps {
 }
 
 export default function StoryTile({ story }: StoryTileProps) {
+  const storyDate = story.time ? new Date(story.time * 1000) : null;
+
   return (
     <article className='flex flex-col gap-2'>
       <h3 className='font-semibold'>
@@ -34,7 +36,12 @@ export default function StoryTile({ story }: StoryTileProps) {
             {story.descendants ?? 0} comments
           </Link>
         </p>
-        <time>{story.time ? getTimeAgo(story.time) : '? ago'}</time>
+        <time
+          dateTime={storyDate?.toISOString()}
+          title={storyDate?.toLocaleString()}
+        >
+          {storyDate ? getTimeAgo(storyDate) : '? ago'}
+        </time>
         <p>
           <Link className='hover:underline' href={`/user?id=${story.by}`}>
             by {story.by}
