@@ -10,8 +10,6 @@ import { twJoin } from 'tailwind-merge';
 import { PostAuthorContext } from './Comments';
 import { ItemText } from './ItemText';
 
-// TODO: Highlight author if OP
-
 interface CommentProps {
   id: number;
   level: number;
