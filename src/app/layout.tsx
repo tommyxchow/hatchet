@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body
         className={twJoin(
-          'mx-auto flex min-h-screen max-w-screen-md flex-col bg-neutral-50 px-4 font-sans text-neutral-900 dark:bg-black dark:text-neutral-100 lg:px-0',
+          'mx-auto flex min-h-screen max-w-screen-md flex-col bg-neutral-50 px-4 font-sans text-neutral-900 lg:px-0 dark:bg-black dark:text-neutral-100',
           fontSans.variable,
           fontMono.variable,
         )}
