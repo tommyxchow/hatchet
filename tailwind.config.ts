@@ -1,5 +1,6 @@
 import typography from '@tailwindcss/typography';
 import { type Config } from 'tailwindcss';
+import animate from 'tailwindcss-animate';
 
 export default {
   darkMode: 'selector',
@@ -15,5 +16,5 @@ export default {
       mono: ['var(--font-mono)'],
     },
   },
-  plugins: [typography],
+  plugins: [typography, animate],
 } satisfies Config;
