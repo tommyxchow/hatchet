@@ -3,13 +3,13 @@ import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
 import { Footer } from '@/components/ui/Footer';
 import { Header } from '@/components/ui/Header';
 import type { Metadata } from 'next';
-import { JetBrains_Mono, Schibsted_Grotesk } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import { twJoin } from 'tailwind-merge';
 import './globals.css';
 
-const fontSans = Schibsted_Grotesk({
+const fontSans = Inter({
   subsets: ['latin'],
-  style: ['normal', 'italic'],
+  style: ['normal'],
   variable: '--font-sans',
 });
 
