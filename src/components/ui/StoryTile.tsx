@@ -1,16 +1,18 @@
 import { type HNItem } from '@/lib/types';
 import { getDisplayURL, getTimeAgo } from '@/lib/utils';
 import Link from 'next/link';
+import { ItemText } from './ItemText';
 
 interface StoryTileProps {
   story: HNItem;
+  showText?: boolean;
 }
 
-export default function StoryTile({ story }: StoryTileProps) {
+export default function StoryTile({ story, showText }: StoryTileProps) {
   const storyDate = story.time ? new Date(story.time * 1000) : null;
 
   return (
-    <article className='flex flex-col gap-2'>
+    <article className='flex flex-col gap-2 rounded-lg border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900'>
       <h3 className='font-semibold'>
         <a
           className='transition-opacity hover:opacity-50'
@@ -48,6 +50,8 @@ export default function StoryTile({ story }: StoryTileProps) {
           </Link>
         </p>
       </div>
+
+      {showText && story.text && <ItemText text={story.text} />}
     </article>
   );
 }

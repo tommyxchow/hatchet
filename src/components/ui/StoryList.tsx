@@ -13,7 +13,7 @@ export async function StoryList({ feedType, pageNumber }: StoryListProps) {
 
   return (
     <div className='flex flex-col gap-8'>
-      <ol className='flex flex-col gap-8'>
+      <ol className='flex flex-col gap-4'>
         {stories.map((story) => (
           <li key={story.id}>
             <StoryTile story={story} />

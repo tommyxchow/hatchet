@@ -1,5 +1,4 @@
 import CommentTile from '@/components/ui/CommentTile';
-import { ItemText } from '@/components/ui/ItemText';
 import StoryTile from '@/components/ui/StoryTile';
 import { HNClient } from '@/lib/hnClient';
 import { type RouteParams } from '@/lib/types';
@@ -20,19 +19,11 @@ export default async function ItemPage({ searchParams }: RouteParams) {
 
   if (!item) notFound();
 
-  const { text, kids, by } = item;
+  const { kids, by } = item;
 
   return (
     <article className='flex flex-col gap-4'>
-      <div className='sticky inset-0 border-b border-neutral-300 bg-neutral-50 py-4 dark:border-neutral-700 dark:bg-black'>
-        <StoryTile story={item} />
-      </div>
-
-      {text && (
-        <div className='border-b border-neutral-300 pb-4 dark:border-neutral-700'>
-          <ItemText text={text} />
-        </div>
-      )}
+      <StoryTile story={item} showText />
 
       {kids && by && (
         <ul className='flex flex-col'>

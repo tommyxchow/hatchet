@@ -1,4 +1,5 @@
 import { Providers } from '@/components/Providers';
+import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
 import { Footer } from '@/components/ui/Footer';
 import { Header } from '@/components/ui/Header';
 import type { Metadata } from 'next';
@@ -33,7 +34,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body
         className={twJoin(
-          'mx-auto flex min-h-screen max-w-screen-md flex-col bg-neutral-50 px-4 font-sans text-neutral-900 lg:px-0 dark:bg-black dark:text-neutral-100',
+          'mx-auto flex min-h-screen max-w-screen-md flex-col gap-4 bg-neutral-50 px-4 font-sans text-neutral-900 lg:px-0 dark:bg-black dark:text-neutral-100',
           fontSans.variable,
           fontMono.variable,
         )}
@@ -41,7 +42,11 @@ export default function RootLayout({
         <Providers>
           <Header />
 
-          <main className='grow'>{children}</main>
+          <main className='flex grow flex-col gap-4'>
+            <FeedTypeNavBar />
+
+            {children}
+          </main>
 
           <div className='pb-4 pt-8'>
             <Footer />
