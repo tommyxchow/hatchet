@@ -69,6 +69,7 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
         <a
           className='relative flex aspect-[4/3] h-16 shrink-0 items-center justify-center overflow-hidden rounded-md bg-neutral-200 transition-opacity hover:opacity-50 dark:bg-neutral-800'
           href={url ?? `/item?id=${id}`}
+          target={url ? '_blank' : undefined}
         >
           {url ? (
             thumbnailUrl && isValidThumbnail ? (
