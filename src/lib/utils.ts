@@ -1,3 +1,5 @@
+import { parse } from 'node-html-parser';
+
 function getDisplayTime(value: number, unit: string): string {
   return value === 1 ? `1 ${unit} ago` : `${value} ${unit}s ago`;
 }
@@ -39,4 +41,46 @@ export function getDisplayURL(url: string): string {
   }
 
   return host;
+}
+
+export async function getThumbnailUrl(url: string): Promise<string | null> {
+  try {
+    const response = await fetch(url, {
+      next: { revalidate: 3600 },
+    });
+
+    const contentType = response.headers.get('content-type');
+    if (!contentType?.includes('text/html')) {
+      return null;
+    }
+
+    const html = await response.text();
+    const root = parse(html);
+
+    // Extract og:image
+    const ogImage = root.querySelector('meta[property="og:image"]');
+    if (ogImage) {
+      return ogImage.getAttribute('content') ?? null;
+    }
+
+    // Extract twitter:image
+    const twitterImage = root.querySelector('meta[name="twitter:image"]');
+    if (twitterImage) {
+      return twitterImage.getAttribute('content') ?? null;
+    }
+
+    return null;
+  } catch (error) {
+    console.error('Error fetching thumbnail:', error);
+    return null;
+  }
+}
+
+export async function isCorsSafeImage(url: string): Promise<boolean> {
+  try {
+    const response = await fetch(url, { method: 'HEAD' });
+    return response.ok;
+  } catch {
+    return false;
+  }
 }
