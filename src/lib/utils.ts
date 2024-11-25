@@ -45,9 +45,7 @@ export function getDisplayURL(url: string): string {
 
 export async function getThumbnailUrl(url: string): Promise<string | null> {
   try {
-    const response = await fetch(url, {
-      next: { revalidate: 3600 },
-    });
+    const response = await fetch(url);
 
     const contentType = response.headers.get('content-type');
     if (!contentType?.includes('text/html')) {
