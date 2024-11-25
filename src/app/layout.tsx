@@ -1,5 +1,4 @@
 import { Providers } from '@/components/Providers';
-import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
 import { Footer } from '@/components/ui/Footer';
 import { Header } from '@/components/ui/Header';
 import type { Metadata } from 'next';
@@ -39,17 +38,15 @@ export default function RootLayout({
           fontMono.variable,
         )}
       >
-        <Header />
+        <Providers>
+          <Header />
 
-        <FeedTypeNavBar />
+          <main className='grow'>{children}</main>
 
-        <main className='grow'>
-          <Providers>{children}</Providers>
-        </main>
-
-        <div className='pb-4 pt-8'>
-          <Footer />
-        </div>
+          <div className='pb-4 pt-8'>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );

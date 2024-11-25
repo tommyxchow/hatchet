@@ -2,34 +2,28 @@
 
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { twJoin } from 'tailwind-merge';
+import { HiMoon, HiSun } from 'react-icons/hi2';
 
-export default function ThemeSelect() {
+export function ThemeSelect() {
+  const { resolvedTheme, setTheme } = useTheme();
+
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
+  if (!mounted) return <div className='size-4' />;
+
+  const isDarkMode = resolvedTheme === 'dark';
+
   return (
-    <div>
-      {mounted && (
-        <div className='flex gap-2'>
-          <button
-            className={twJoin(theme == 'light' && 'font-semibold')}
-            onClick={() => setTheme('light')}
-          >
-            light
-          </button>
-          <button
-            className={twJoin(theme == 'dark' && 'font-semibold')}
-            onClick={() => setTheme('dark')}
-          >
-            dark
-          </button>
-        </div>
-      )}
-    </div>
+    <button
+      className='transition-opacity duration-300 ease-out animate-in fade-in hover:opacity-50'
+      aria-label={`Toggle ${isDarkMode ? 'light mode' : 'dark mode'}`}
+      onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
+    >
+      {isDarkMode ? <HiSun /> : <HiMoon />}
+    </button>
   );
 }
