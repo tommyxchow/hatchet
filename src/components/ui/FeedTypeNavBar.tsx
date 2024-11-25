@@ -2,13 +2,15 @@
 
 import { HNFeedTypes } from '@/lib/types';
 import Link from 'next/link';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { twJoin } from 'tailwind-merge';
 
 export function FeedTypeNavBar() {
   const { slug } = useParams();
+  const path = usePathname();
 
-  const resolvedPathname = !Array.isArray(slug) ? slug || 'top' : null;
+  const resolvedPathname =
+    !Array.isArray(slug) && path !== '/item' ? slug || 'top' : null;
 
   return (
     <nav className='overflow-x-auto'>
