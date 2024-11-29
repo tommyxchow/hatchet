@@ -36,7 +36,9 @@ export function getDisplayURL(url: string): string {
 
 export async function getThumbnailUrl(url: string): Promise<string | null> {
   try {
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      cache: 'no-store',
+    });
 
     const contentType = response.headers.get('content-type');
     if (!contentType?.includes('text/html')) {
@@ -67,7 +69,7 @@ export async function getThumbnailUrl(url: string): Promise<string | null> {
 
 export async function isCorsSafeImage(url: string): Promise<boolean> {
   try {
-    const response = await fetch(url, { method: 'HEAD' });
+    const response = await fetch(url, { method: 'HEAD', cache: 'no-store' });
     return response.ok;
   } catch {
     return false;
