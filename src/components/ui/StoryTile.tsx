@@ -58,23 +58,23 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
             )}
           </a>
           <div className='flex flex-col gap-1'>
-            {url && (
-              <div className='flex flex-wrap gap-x-2 text-sm font-medium text-neutral-600 dark:text-neutral-400'>
-                <div className='flex items-center gap-1'>
-                  <HiOutlineClock />
-                  <time
-                    dateTime={storyDate?.toISOString()}
-                    title={storyDate?.toLocaleString()}
-                  >
-                    {storyDate ? getTimeAgo(storyDate) : '? ago'}
-                  </time>
-                </div>
+            <div className='flex flex-wrap gap-x-2 text-sm font-medium text-neutral-600 dark:text-neutral-400'>
+              <div className='flex items-center gap-1'>
+                <HiOutlineClock />
+                <time
+                  dateTime={storyDate?.toISOString()}
+                  title={storyDate?.toLocaleString()}
+                >
+                  {storyDate ? getTimeAgo(storyDate) : '? ago'}
+                </time>
+              </div>
+              {url && (
                 <div className='flex items-center gap-1'>
                   <HiOutlineGlobeAlt />
                   <span>{getDisplayURL(url)}</span>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
             <h3 className='font-semibold'>
               <a
                 className='transition-opacity hover:opacity-50'
