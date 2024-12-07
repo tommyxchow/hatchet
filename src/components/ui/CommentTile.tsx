@@ -5,20 +5,23 @@ import { HNClient } from '@/lib/hnClient';
 import { getTimeAgo } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
-import { useContext, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { twJoin } from 'tailwind-merge';
-import { PostAuthorContext } from './Comments';
 import { ItemText } from './ItemText';
 
 interface CommentProps {
+  postAuthorUsername: string;
   id: number;
   level: number;
 }
 
-export default function CommentTile({ id, level }: CommentProps) {
+export default function CommentTile({
+  postAuthorUsername,
+  id,
+  level,
+}: CommentProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const commentRef = useRef<HTMLDivElement>(null);
-  const postAuthorUsername = useContext(PostAuthorContext);
 
   const isVisible = useIntersectionObserver(commentRef, {
     rootMargin: '0px 0px 1000px 0px',
@@ -43,7 +46,7 @@ export default function CommentTile({ id, level }: CommentProps) {
   const commentDate = comment.time ? new Date(comment.time * 1000) : null;
 
   return (
-    <article className='flex flex-col'>
+    <article className='animate-in fade-in flex flex-col duration-500'>
       <div className='flex'>
         <div className='flex'>
           {Array.from({ length: level }).map((_, index) => (
@@ -106,7 +109,12 @@ export default function CommentTile({ id, level }: CommentProps) {
       {comment.kids && (
         <div className={twJoin('flex flex-col', isCollapsed && 'hidden')}>
           {comment.kids.map((id) => (
-            <CommentTile key={id} id={id} level={level + 1} />
+            <CommentTile
+              key={id}
+              postAuthorUsername={postAuthorUsername}
+              id={id}
+              level={level + 1}
+            />
           ))}
         </div>
       )}

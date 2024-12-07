@@ -3,13 +3,13 @@ import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
 import { Footer } from '@/components/ui/Footer';
 import { Header } from '@/components/ui/Header';
 import type { Metadata } from 'next';
-import { JetBrains_Mono, Schibsted_Grotesk } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import { twJoin } from 'tailwind-merge';
 import './globals.css';
 
-const fontSans = Schibsted_Grotesk({
+const fontSans = Inter({
   subsets: ['latin'],
-  style: ['normal', 'italic'],
+  style: ['normal'],
   variable: '--font-sans',
 });
 
@@ -34,22 +34,24 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body
         className={twJoin(
-          'mx-auto flex min-h-screen max-w-screen-md flex-col bg-neutral-50 px-4 font-sans text-neutral-900 dark:bg-black dark:text-neutral-100 lg:px-0',
+          'mx-auto flex min-h-screen max-w-screen-md flex-col gap-4 bg-neutral-50 px-4 font-sans text-neutral-900 lg:px-0 dark:bg-black dark:text-neutral-100',
           fontSans.variable,
           fontMono.variable,
         )}
       >
-        <Header />
+        <Providers>
+          <Header />
 
-        <FeedTypeNavBar />
+          <main className='flex grow flex-col gap-4'>
+            <FeedTypeNavBar />
 
-        <main className='grow'>
-          <Providers>{children}</Providers>
-        </main>
+            {children}
+          </main>
 
-        <div className='pb-4 pt-8'>
-          <Footer />
-        </div>
+          <div className='pb-4 pt-8'>
+            <Footer />
+          </div>
+        </Providers>
       </body>
     </html>
   );
