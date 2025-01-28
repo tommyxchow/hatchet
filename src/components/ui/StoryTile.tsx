@@ -1,10 +1,5 @@
 import { type HNItem } from '@/lib/types';
-import {
-  getDisplayURL,
-  getThumbnailUrl,
-  getTimeAgo,
-  isCorsSafeImage,
-} from '@/lib/utils';
+import { getDisplayURL, getThumbnailUrl, getTimeAgo } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -29,8 +24,6 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
   const storyDate = time ? new Date(time * 1000) : null;
 
   const thumbnailUrl = url && (await getThumbnailUrl(url));
-  const isValidThumbnail =
-    thumbnailUrl && (await isCorsSafeImage(thumbnailUrl));
 
   return (
     <article className='flex flex-col rounded-lg border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900'>
@@ -42,7 +35,7 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
             target={url ? '_blank' : undefined}
           >
             {url ? (
-              thumbnailUrl && isValidThumbnail ? (
+              thumbnailUrl ? (
                 <Image
                   className='object-cover'
                   src={thumbnailUrl}

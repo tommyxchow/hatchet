@@ -48,30 +48,21 @@ export async function getThumbnailUrl(url: string): Promise<string | null> {
     const html = await response.text();
     const root = parse(html);
 
-    // Extract og:image
-    const ogImage = root.querySelector('meta[property="og:image"]');
-    if (ogImage) {
-      return ogImage.getAttribute('content') ?? null;
-    }
-
     // Extract twitter:image
     const twitterImage = root.querySelector('meta[name="twitter:image"]');
     if (twitterImage) {
       return twitterImage.getAttribute('content') ?? null;
     }
 
+    // Extract og:image
+    const ogImage = root.querySelector('meta[property="og:image"]');
+    if (ogImage) {
+      return ogImage.getAttribute('content') ?? null;
+    }
+
     return null;
   } catch (error) {
     console.error('Error fetching thumbnail:', error);
     return null;
-  }
-}
-
-export async function isCorsSafeImage(url: string): Promise<boolean> {
-  try {
-    const response = await fetch(url, { method: 'HEAD', cache: 'no-store' });
-    return response.ok;
-  } catch {
-    return false;
   }
 }
