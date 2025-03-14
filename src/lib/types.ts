@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export interface RouteParams {
-  params: { slug: string };
-  searchParams: Record<string, string | string[] | undefined>;
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
 export const HNItem = z.object({

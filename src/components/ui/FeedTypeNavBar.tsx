@@ -10,7 +10,7 @@ export function FeedTypeNavBar() {
   const path = usePathname();
 
   const resolvedPathname =
-    !Array.isArray(slug) && path !== '/item' ? slug || 'top' : null;
+    !Array.isArray(slug) && path !== '/item' ? (slug ?? 'top') : null;
 
   return (
     <nav className='overflow-x-auto'>

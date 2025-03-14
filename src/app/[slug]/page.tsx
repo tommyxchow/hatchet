@@ -6,8 +6,9 @@ import { Suspense } from 'react';
 
 export const revalidate = 60;
 
-export default function Stories({ params, searchParams }: RouteParams) {
-  const { slug: feedType } = params;
+export default async function Stories({ searchParams, params }: RouteParams) {
+  const { p } = await searchParams;
+  const { slug: feedType } = await params;
 
   // Check for undefined because we want to allow the default feed type when no
   // slug is provided.
@@ -16,7 +17,7 @@ export default function Stories({ params, searchParams }: RouteParams) {
   }
 
   const resolvedFeedType = feedType || 'top';
-  const pageNumber = parseInt(searchParams.p as string) || 1;
+  const pageNumber = parseInt(p as string) || 1;
 
   return (
     // Suspense here instead of loading.tsx because notFound() can only return

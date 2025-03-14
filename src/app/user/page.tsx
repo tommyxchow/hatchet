@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation';
 export const runtime = 'edge';
 
 export default async function User({ searchParams }: RouteParams) {
-  const userId = searchParams.id;
+  const { id: userId } = await searchParams;
 
   if (!userId || typeof userId !== 'string') {
     throw Error('Invalid user id');
