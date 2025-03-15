@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body
         className={twJoin(
-          'mx-auto flex min-h-screen max-w-screen-md flex-col gap-4 bg-neutral-50 px-4 font-sans text-neutral-900 lg:px-0 dark:bg-black dark:text-neutral-100',
+          'mx-auto flex min-h-screen max-w-3xl flex-col gap-4 bg-neutral-50 px-4 font-sans text-neutral-900 lg:px-0 dark:bg-black dark:text-neutral-100',
           fontSans.variable,
           fontMono.variable,
         )}
@@ -48,7 +48,7 @@ export default function RootLayout({
             {children}
           </main>
 
-          <div className='pb-4 pt-8'>
+          <div className='pt-8 pb-4'>
             <Footer />
           </div>
         </Providers>

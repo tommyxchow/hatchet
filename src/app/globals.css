@@ -1,9 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@media screen(lg) {
-  html {
-    padding-left: calc(100vw - 100%);
-  }
+@plugin '@tailwindcss/typography';
+@plugin 'tailwindcss-animate';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+html {
+  scrollbar-gutter: stable;
 }

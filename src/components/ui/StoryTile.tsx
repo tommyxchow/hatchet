@@ -30,7 +30,7 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
       <div className='flex items-center gap-4'>
         <div className='flex grow items-center gap-4'>
           <a
-            className='relative flex aspect-square h-20 shrink-0 items-center justify-center overflow-hidden rounded-md bg-neutral-200 transition-opacity hover:opacity-50 sm:aspect-[4/3] dark:bg-neutral-800'
+            className='relative flex aspect-square h-20 shrink-0 items-center justify-center overflow-hidden rounded-md bg-neutral-200 transition-opacity hover:opacity-50 sm:aspect-4/3 dark:bg-neutral-800'
             href={url ?? `/item?id=${id}`}
             target={url ? '_blank' : undefined}
           >
