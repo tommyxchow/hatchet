@@ -13,7 +13,7 @@ export function ThemeSelect() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <div className='size-8' />;
+  if (!mounted) return <div className='size-8.5' />;
 
   const isDarkMode = resolvedTheme === 'dark';
 

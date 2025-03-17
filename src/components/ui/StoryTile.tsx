@@ -1,17 +1,19 @@
 import { type HNItem } from '@/lib/types';
 import { getDisplayURL, getThumbnailUrl, getTimeAgo } from '@/lib/utils';
 import {
-  ArrowTopRightOnSquareIcon,
   ArrowUpIcon,
   ChatBubbleBottomCenterTextIcon,
   ClockIcon,
-  DocumentTextIcon,
   GlobeAltIcon,
   UserIcon,
 } from '@heroicons/react/16/solid';
-import Image from 'next/image';
+import {
+  ArrowTopRightOnSquareIcon,
+  DocumentTextIcon,
+} from '@heroicons/react/24/solid';
 import { ItemText } from './ItemText';
 import { LinkWithHoverEffect } from './LinkWithHoverEffect';
+import { ThumbnailImage } from './ThumbnailImage';
 
 interface StoryTileProps {
   story: HNItem;
@@ -26,7 +28,7 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
   const thumbnailUrl = url && (await getThumbnailUrl(url));
 
   return (
-    <article className='flex flex-col rounded-md border border-neutral-200 p-2 dark:border-neutral-800'>
+    <article className='animate-in fade-in flex flex-col rounded-md border border-neutral-200 p-2 dark:border-neutral-800'>
       <div className='flex items-center gap-4'>
         <div className='flex grow items-center gap-4'>
           <a
@@ -36,18 +38,12 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
           >
             {url ? (
               thumbnailUrl ? (
-                <Image
-                  className='object-cover'
-                  src={thumbnailUrl}
-                  alt={title ?? 'Thumbnail'}
-                  fill
-                  unoptimized
-                />
+                <ThumbnailImage src={thumbnailUrl} alt={title ?? 'Thumbnail'} />
               ) : (
-                <ArrowTopRightOnSquareIcon className='h-5 w-5' />
+                <ArrowTopRightOnSquareIcon className='size-6' />
               )
             ) : (
-              <DocumentTextIcon className='h-5 w-5' />
+              <DocumentTextIcon className='size-6' />
             )}
           </a>
           <div className='flex flex-col items-start gap-0.5'>
