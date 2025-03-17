@@ -13,7 +13,9 @@ const queryClient = new QueryClient();
 export function Providers({ children }: ProvidersProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute='class'>{children}</ThemeProvider>
+      <ThemeProvider attribute='class' disableTransitionOnChange>
+        {children}
+      </ThemeProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

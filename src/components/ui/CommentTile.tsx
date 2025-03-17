@@ -4,10 +4,16 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
 import { getTimeAgo } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
-import Link from 'next/link';
 import { useRef, useState } from 'react';
+import {
+  HiMiniMinus,
+  HiMiniPlus,
+  HiOutlineClock,
+  HiOutlineUser,
+} from 'react-icons/hi2';
 import { twJoin } from 'tailwind-merge';
 import { ItemText } from './ItemText';
+import { LinkWithHoverEffect } from './LinkWithHoverEffect';
 
 interface CommentProps {
   postAuthorUsername: string;
@@ -51,47 +57,49 @@ export default function CommentTile({
         <div className='flex'>
           {Array.from({ length: level }).map((_, index) => (
             <div
-              className='w-4 border-l border-neutral-300 dark:border-neutral-700'
+              className='w-4 border-l border-neutral-200 dark:border-neutral-800'
               key={`${id}-${index}`}
             />
           ))}
         </div>
 
         <div className='flex grow flex-col py-2'>
-          <div className='flex gap-2 text-sm text-neutral-600 dark:text-neutral-400'>
+          <div className='flex items-center gap-x-1'>
             {!comment.deleted && (
               <button
                 aria-label={isCollapsed ? 'Expand comment' : 'Collapse comment'}
-                className='group font-mono'
+                className='rounded-sm border border-neutral-200 p-0.5 transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800'
                 onClick={() => setIsCollapsed(!isCollapsed)}
               >
-                [
-                <span className='group-hover:underline'>
-                  {isCollapsed ? '+' : '-'}
-                </span>
-                ]
+                {isCollapsed ? <HiMiniPlus /> : <HiMiniMinus />}
               </button>
             )}
             {comment.deleted ? (
               <p>deleted</p>
             ) : (
-              <Link
+              <LinkWithHoverEffect
                 className={twJoin(
-                  'hover:underline',
+                  'text-sm text-neutral-600 dark:text-neutral-400',
                   postAuthorUsername === comment.by &&
-                    'text-orange-700 dark:text-orange-500',
+                    'font-medium text-orange-700 dark:text-orange-500',
                 )}
                 href={`/user?id=${comment.by}`}
               >
-                {comment.by}
-              </Link>
+                <HiOutlineUser />
+                <span>{comment.by}</span>
+              </LinkWithHoverEffect>
             )}
-            <time
-              dateTime={commentDate?.toISOString()}
-              title={commentDate?.toLocaleString()}
-            >
-              {commentDate ? getTimeAgo(commentDate) : '? ago'}
-            </time>
+            <div className='flex flex-wrap items-baseline gap-x-2 text-sm font-medium text-neutral-600 dark:text-neutral-400'>
+              <div className='flex items-center gap-1'>
+                <HiOutlineClock />
+                <time
+                  dateTime={commentDate?.toISOString()}
+                  title={commentDate?.toLocaleString()}
+                >
+                  {commentDate ? getTimeAgo(commentDate) : '? ago'}
+                </time>
+              </div>
+            </div>
 
             <button
               aria-hidden

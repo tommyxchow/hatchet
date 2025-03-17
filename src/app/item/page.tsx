@@ -22,7 +22,7 @@ export default async function ItemPage({ searchParams }: RouteParams) {
   const { kids, by } = item;
 
   return (
-    <article className='flex flex-col gap-4'>
+    <article className='flex flex-col'>
       <StoryTile story={item} showText />
 
       {kids && by && (

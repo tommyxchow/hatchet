@@ -3,11 +3,11 @@ import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
 import { Footer } from '@/components/ui/Footer';
 import { Header } from '@/components/ui/Header';
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Host_Grotesk, JetBrains_Mono } from 'next/font/google';
 import { twJoin } from 'tailwind-merge';
 import './globals.css';
 
-const fontSans = Inter({
+const fontSans = Host_Grotesk({
   subsets: ['latin'],
   style: ['normal'],
   variable: '--font-sans',
@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body
         className={twJoin(
-          'mx-auto flex min-h-screen max-w-3xl flex-col gap-4 bg-neutral-50 px-4 font-sans text-neutral-900 lg:px-0 dark:bg-black dark:text-neutral-100',
+          'mx-auto flex min-h-screen max-w-3xl flex-col gap-2 bg-neutral-50 px-4 font-sans text-neutral-800 lg:px-0 dark:bg-black dark:text-neutral-100',
           fontSans.variable,
           fontMono.variable,
         )}
@@ -42,7 +42,7 @@ export default function RootLayout({
         <Providers>
           <Header />
 
-          <main className='flex grow flex-col gap-4'>
+          <main className='flex grow flex-col gap-2'>
             <FeedTypeNavBar />
 
             {children}

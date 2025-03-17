@@ -23,7 +23,7 @@ export function getTimeAgo(date: Date): string {
   return '0s';
 }
 
-export function getDisplayURL(url: string): string {
+export function getDisplayURL(url: string, preserveProtocol = false): string {
   const parsedURL = new URL(url);
   let host = parsedURL.hostname;
 
@@ -31,7 +31,7 @@ export function getDisplayURL(url: string): string {
     host = host.substring(4);
   }
 
-  return host;
+  return preserveProtocol ? `${parsedURL.protocol}//${host}` : host;
 }
 
 export async function getThumbnailUrl(url: string): Promise<string | null> {

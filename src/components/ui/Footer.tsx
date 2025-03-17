@@ -1,8 +1,8 @@
 export function Footer() {
   return (
-    <div className='text-sm text-neutral-500 underline-offset-2 dark:text-neutral-400'>
+    <footer className='text-center text-sm text-neutral-400 underline-offset-2 dark:text-neutral-500'>
       <p>
-        designed and developed by{' '}
+        Designed and developed by{' '}
         <a
           className='underline'
           href='https://www.tommychow.com/'
@@ -16,10 +16,10 @@ export function Footer() {
           href='https://github.com/tommyxchow/hatchet'
           target='_blank'
         >
-          source
+          GitHub
         </a>
         )
       </p>
-    </div>
+    </footer>
   );
 }

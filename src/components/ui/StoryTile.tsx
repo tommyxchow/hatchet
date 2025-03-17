@@ -1,7 +1,6 @@
 import { type HNItem } from '@/lib/types';
 import { getDisplayURL, getThumbnailUrl, getTimeAgo } from '@/lib/utils';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
   HiArrowTopRightOnSquare,
   HiArrowUp,
@@ -12,6 +11,7 @@ import {
   HiOutlineUser,
 } from 'react-icons/hi2';
 import { ItemText } from './ItemText';
+import { LinkWithHoverEffect } from './LinkWithHoverEffect';
 
 interface StoryTileProps {
   story: HNItem;
@@ -26,11 +26,11 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
   const thumbnailUrl = url && (await getThumbnailUrl(url));
 
   return (
-    <article className='flex flex-col rounded-lg border border-neutral-200 bg-neutral-100 p-4 dark:border-neutral-800 dark:bg-neutral-900'>
+    <article className='flex flex-col rounded-md border border-neutral-200 p-2 dark:border-neutral-800'>
       <div className='flex items-center gap-4'>
         <div className='flex grow items-center gap-4'>
           <a
-            className='relative flex aspect-square h-20 shrink-0 items-center justify-center overflow-hidden rounded-md bg-neutral-200 transition-opacity hover:opacity-50 sm:aspect-4/3 dark:bg-neutral-800'
+            className='relative flex aspect-square h-20 shrink-0 items-center justify-center overflow-hidden rounded-sm bg-neutral-200 transition-opacity hover:opacity-50 sm:aspect-4/3 dark:bg-neutral-800'
             href={url ?? `/item?id=${id}`}
             target={url ? '_blank' : undefined}
           >
@@ -50,8 +50,8 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
               <HiDocumentText className='text-lg' />
             )}
           </a>
-          <div className='flex flex-col gap-1'>
-            <div className='flex flex-wrap gap-x-2 text-sm font-medium text-neutral-600 dark:text-neutral-400'>
+          <div className='flex flex-col items-start gap-0.5'>
+            <div className='flex flex-wrap items-baseline gap-x-2 text-sm font-medium text-neutral-600 dark:text-neutral-400'>
               <div className='flex items-center gap-1'>
                 <HiOutlineClock />
                 <time
@@ -62,10 +62,13 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
                 </time>
               </div>
               {url && (
-                <div className='flex items-center gap-1'>
+                <LinkWithHoverEffect
+                  href={getDisplayURL(url, true)}
+                  openInNewTab
+                >
                   <HiOutlineGlobeAlt />
                   <span>{getDisplayURL(url)}</span>
-                </div>
+                </LinkWithHoverEffect>
               )}
             </div>
             <h3 className='font-semibold'>
@@ -77,32 +80,26 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
                 {title}
               </a>
             </h3>
-            <div className='flex flex-wrap items-baseline text-sm font-medium text-neutral-600 dark:text-neutral-400'>
+            <div className='mt-0.5 flex flex-wrap items-baseline text-sm font-medium text-neutral-600 dark:text-neutral-400'>
               <div className='flex items-center gap-1 pr-2'>
                 <HiArrowUp />
                 <span>{score}</span>
               </div>
-              <Link
-                className='flex items-center gap-1 rounded-md px-2 py-1 hover:bg-neutral-200 dark:hover:bg-neutral-800'
-                href={`/item?id=${id}`}
-              >
+              <LinkWithHoverEffect href={`/item?id=${id}`}>
                 <HiOutlineChatBubbleBottomCenterText />
                 <span>{descendants ?? 0}</span>
-              </Link>
-              <Link
-                className='flex items-center gap-1 rounded-md px-2 py-1 hover:bg-neutral-200 dark:hover:bg-neutral-800'
-                href={`/user?id=${by}`}
-              >
+              </LinkWithHoverEffect>
+              <LinkWithHoverEffect href={`/user?id=${by}`}>
                 <HiOutlineUser />
                 <span>{by}</span>
-              </Link>
+              </LinkWithHoverEffect>
             </div>
           </div>
         </div>
       </div>
 
       {showText && text && (
-        <div className='mt-4 border-t border-neutral-200 pt-4 dark:border-neutral-800'>
+        <div className='mt-2 border-t border-neutral-200 pt-2 dark:border-neutral-800'>
           <ItemText text={text} />
         </div>
       )}
