@@ -1,8 +1,8 @@
 'use client';
 
+import { MoonIcon, SunIcon } from '@heroicons/react/16/solid';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { HiMoon, HiSun } from 'react-icons/hi2';
 
 export function ThemeSelect() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -23,7 +23,11 @@ export function ThemeSelect() {
       aria-label={`Toggle ${isDarkMode ? 'light mode' : 'dark mode'}`}
       onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
     >
-      {isDarkMode ? <HiSun /> : <HiMoon />}
+      {isDarkMode ? (
+        <SunIcon className='size-4' />
+      ) : (
+        <MoonIcon className='size-4' />
+      )}
     </button>
   );
 }

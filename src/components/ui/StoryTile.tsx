@@ -1,15 +1,15 @@
 import { type HNItem } from '@/lib/types';
 import { getDisplayURL, getThumbnailUrl, getTimeAgo } from '@/lib/utils';
-import Image from 'next/image';
 import {
-  HiArrowTopRightOnSquare,
-  HiArrowUp,
-  HiDocumentText,
-  HiOutlineChatBubbleBottomCenterText,
-  HiOutlineClock,
-  HiOutlineGlobeAlt,
-  HiOutlineUser,
-} from 'react-icons/hi2';
+  ArrowTopRightOnSquareIcon,
+  ArrowUpIcon,
+  ChatBubbleBottomCenterTextIcon,
+  ClockIcon,
+  DocumentTextIcon,
+  GlobeAltIcon,
+  UserIcon,
+} from '@heroicons/react/16/solid';
+import Image from 'next/image';
 import { ItemText } from './ItemText';
 import { LinkWithHoverEffect } from './LinkWithHoverEffect';
 
@@ -44,16 +44,16 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
                   unoptimized
                 />
               ) : (
-                <HiArrowTopRightOnSquare className='text-lg' />
+                <ArrowTopRightOnSquareIcon className='h-5 w-5' />
               )
             ) : (
-              <HiDocumentText className='text-lg' />
+              <DocumentTextIcon className='h-5 w-5' />
             )}
           </a>
           <div className='flex flex-col items-start gap-0.5'>
             <div className='flex flex-wrap items-baseline gap-x-2 text-sm font-medium text-neutral-600 dark:text-neutral-400'>
               <div className='flex items-center gap-1'>
-                <HiOutlineClock />
+                <ClockIcon className='size-4' />
                 <time
                   dateTime={storyDate?.toISOString()}
                   title={storyDate?.toLocaleString()}
@@ -66,7 +66,7 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
                   href={getDisplayURL(url, true)}
                   openInNewTab
                 >
-                  <HiOutlineGlobeAlt />
+                  <GlobeAltIcon className='size-4' />
                   <span>{getDisplayURL(url)}</span>
                 </LinkWithHoverEffect>
               )}
@@ -82,15 +82,15 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
             </h3>
             <div className='mt-0.5 flex flex-wrap items-baseline text-sm font-medium text-neutral-600 dark:text-neutral-400'>
               <div className='flex items-center gap-1 pr-2'>
-                <HiArrowUp />
+                <ArrowUpIcon className='size-4' />
                 <span>{score}</span>
               </div>
               <LinkWithHoverEffect href={`/item?id=${id}`}>
-                <HiOutlineChatBubbleBottomCenterText />
+                <ChatBubbleBottomCenterTextIcon className='size-4' />
                 <span>{descendants ?? 0}</span>
               </LinkWithHoverEffect>
               <LinkWithHoverEffect href={`/user?id=${by}`}>
-                <HiOutlineUser />
+                <UserIcon className='size-4' />
                 <span>{by}</span>
               </LinkWithHoverEffect>
             </div>

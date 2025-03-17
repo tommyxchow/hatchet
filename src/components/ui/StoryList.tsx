@@ -1,7 +1,7 @@
 import { HNClient } from '@/lib/hnClient';
 import { type HNFeedType } from '@/lib/types';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid';
 import Link from 'next/link';
-import { HiMiniChevronLeft, HiMiniChevronRight } from 'react-icons/hi2';
 import StoryTile from './StoryTile';
 
 interface StoryListProps {
@@ -26,14 +26,14 @@ export async function StoryList({ feedType, pageNumber }: StoryListProps) {
         {pageNumber > 1 && (
           <Link href={`/${feedType}?p=${pageNumber - 1}`}>
             <div className='rounded-sm border border-neutral-200 p-2 transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800'>
-              <HiMiniChevronLeft />
+              <ChevronLeftIcon className='h-5 w-5' />
             </div>
           </Link>
         )}
         {stories.length == 30 && (
           <Link className='ml-auto' href={`/${feedType}?p=${pageNumber + 1}`}>
             <div className='rounded-sm border border-neutral-200 p-2 transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800'>
-              <HiMiniChevronRight />
+              <ChevronRightIcon className='size-4' />
             </div>
           </Link>
         )}

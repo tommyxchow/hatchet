@@ -3,14 +3,14 @@
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
 import { getTimeAgo } from '@/lib/utils';
+import {
+  ChevronDownIcon,
+  ChevronRightIcon,
+  ClockIcon,
+  UserIcon,
+} from '@heroicons/react/16/solid';
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
-import {
-  HiMiniMinus,
-  HiMiniPlus,
-  HiOutlineClock,
-  HiOutlineUser,
-} from 'react-icons/hi2';
 import { twJoin } from 'tailwind-merge';
 import { ItemText } from './ItemText';
 import { LinkWithHoverEffect } from './LinkWithHoverEffect';
@@ -71,7 +71,11 @@ export default function CommentTile({
                 className='rounded-sm border border-neutral-200 p-0.5 transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800'
                 onClick={() => setIsCollapsed(!isCollapsed)}
               >
-                {isCollapsed ? <HiMiniPlus /> : <HiMiniMinus />}
+                {isCollapsed ? (
+                  <ChevronRightIcon className='size-4.5' />
+                ) : (
+                  <ChevronDownIcon className='size-4.5' />
+                )}
               </button>
             )}
             {comment.deleted ? (
@@ -85,13 +89,13 @@ export default function CommentTile({
                 )}
                 href={`/user?id=${comment.by}`}
               >
-                <HiOutlineUser />
+                <UserIcon className='size-4' />
                 <span>{comment.by}</span>
               </LinkWithHoverEffect>
             )}
             <div className='flex flex-wrap items-baseline gap-x-2 text-sm font-medium text-neutral-600 dark:text-neutral-400'>
               <div className='flex items-center gap-1'>
-                <HiOutlineClock />
+                <ClockIcon className='size-4' />
                 <time
                   dateTime={commentDate?.toISOString()}
                   title={commentDate?.toLocaleString()}
