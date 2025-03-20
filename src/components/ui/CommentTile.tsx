@@ -83,7 +83,7 @@ export default function CommentTile({
             ) : (
               <LinkWithHoverEffect
                 className={twJoin(
-                  'text-sm text-neutral-600 dark:text-neutral-400',
+                  'text-sm font-medium text-neutral-600 dark:text-neutral-400',
                   postAuthorUsername === comment.by &&
                     'font-medium text-orange-700 dark:text-orange-500',
                 )}

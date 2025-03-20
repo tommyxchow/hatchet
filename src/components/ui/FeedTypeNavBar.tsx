@@ -13,14 +13,14 @@ export function FeedTypeNavBar() {
     !Array.isArray(slug) && path !== '/item' ? (slug ?? 'top') : null;
 
   return (
-    <nav className='overflow-x-auto rounded-sm border border-neutral-200 p-2 dark:border-neutral-800'>
+    <nav className='overflow-x-auto rounded-md border border-neutral-200 p-2 dark:border-neutral-800'>
       <ul className='grid grid-cols-6 gap-1'>
         {HNFeedTypes.map((type) => (
           <li key={type}>
             <Link href={`/${type}`}>
               <h2
                 className={twJoin(
-                  'd rounded-sm py-1 text-center text-sm capitalize',
+                  'rounded-sm py-1 text-center text-sm capitalize',
                   resolvedPathname === type
                     ? 'bg-neutral-200 font-semibold dark:bg-neutral-800'
                     : 'opacity-80 transition-colors hover:bg-neutral-200 dark:hover:bg-neutral-800',

@@ -25,14 +25,14 @@ export async function StoryList({ feedType, pageNumber }: StoryListProps) {
       <nav className='flex justify-between'>
         {pageNumber > 1 && (
           <Link href={`/${feedType}?p=${pageNumber - 1}`}>
-            <div className='rounded-sm border border-neutral-200 p-2 transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800'>
+            <div className='rounded-md border border-neutral-200 p-2 transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800'>
               <ChevronLeftIcon className='size-4' />
             </div>
           </Link>
         )}
         {stories.length == 30 && (
           <Link className='ml-auto' href={`/${feedType}?p=${pageNumber + 1}`}>
-            <div className='rounded-sm border border-neutral-200 p-2 transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800'>
+            <div className='rounded-md border border-neutral-200 p-2 transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800'>
               <ChevronRightIcon className='size-4' />
             </div>
           </Link>

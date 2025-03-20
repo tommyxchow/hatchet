@@ -19,7 +19,7 @@ export function ThemeSelect() {
 
   return (
     <button
-      className='animate-in fade-in rounded-sm border border-neutral-200 p-2 text-sm transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800'
+      className='animate-in fade-in rounded-md p-2 text-sm transition-colors hover:bg-neutral-200 dark:hover:bg-neutral-800'
       aria-label={`Toggle ${isDarkMode ? 'light mode' : 'dark mode'}`}
       onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
     >
