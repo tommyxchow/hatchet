@@ -34,10 +34,18 @@ export function getDisplayURL(url: string, preserveProtocol = false): string {
   return preserveProtocol ? `${parsedURL.protocol}//${host}` : host;
 }
 
-export async function getThumbnailUrl(url: string): Promise<string | null> {
+export async function getThumbnailUrl(
+  url: string,
+  options = { timeout: 5000 },
+): Promise<string | null> {
+  // Create abort controller for timeout
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), options.timeout);
+
   try {
     const response = await fetch(url, {
       cache: 'no-store',
+      signal: controller.signal,
     });
 
     const contentType = response.headers.get('content-type');
@@ -48,21 +56,43 @@ export async function getThumbnailUrl(url: string): Promise<string | null> {
     const html = await response.text();
     const root = parse(html);
 
-    // Extract twitter:image
-    const twitterImage = root.querySelector('meta[name="twitter:image"]');
-    if (twitterImage) {
-      return twitterImage.getAttribute('content') ?? null;
-    }
+    // Try multiple meta tags in priority order
+    const metaSelectors = [
+      'meta[name="twitter:image"]',
+      'meta[property="og:image"]',
+      'meta[property="og:image:secure_url"]',
+      'meta[itemprop="image"]',
+      'meta[name="thumbnail"]',
+    ];
 
-    // Extract og:image
-    const ogImage = root.querySelector('meta[property="og:image"]');
-    if (ogImage) {
-      return ogImage.getAttribute('content') ?? null;
+    for (const selector of metaSelectors) {
+      const metaTag = root.querySelector(selector);
+      if (metaTag) {
+        const imageUrl = metaTag.getAttribute('content');
+        if (imageUrl) {
+          return normalizeUrl(imageUrl, url);
+        }
+      }
     }
 
     return null;
-  } catch (error) {
-    console.error('Error fetching thumbnail:', error);
+  } catch (error: unknown) {
+    if (error instanceof Error && error.name === 'AbortError') {
+      console.error(`Thumbnail fetch timed out for ${url}`);
+    } else {
+      console.error('Error fetching thumbnail:', error);
+    }
     return null;
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
+// Helper to convert relative URLs to absolute
+function normalizeUrl(imageUrl: string, baseUrl: string): string {
+  try {
+    return new URL(imageUrl, baseUrl).toString();
+  } catch {
+    return imageUrl;
   }
 }
