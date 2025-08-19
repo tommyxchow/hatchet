@@ -42,7 +42,7 @@ export function getDisplayURL(url: string, preserveProtocol = false): string {
 
 export async function getThumbnailUrl(
   url: string,
-  options = { timeout: 5000 },
+  options = { timeout: 3000 },
 ): Promise<string | null> {
   // Create abort controller for timeout
   const controller = new AbortController();
@@ -50,9 +50,17 @@ export async function getThumbnailUrl(
 
   try {
     const response = await fetch(url, {
-      cache: 'no-store',
       signal: controller.signal,
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; HatchetBot/1.0)',
+      },
     });
+
+    // Check response size to avoid processing huge documents
+    const contentLength = response.headers.get('content-length');
+    if (contentLength && parseInt(contentLength) > 1_000_000) {
+      return null;
+    }
 
     const contentType = response.headers.get('content-type');
     if (!contentType?.includes('text/html')) {
@@ -60,7 +68,10 @@ export async function getThumbnailUrl(
     }
 
     const html = await response.text();
-    const root = parse(html);
+    
+    // Optimize parsing by truncating to first 50KB (meta tags are typically in head)
+    const truncatedHtml = html.slice(0, 50_000);
+    const root = parse(truncatedHtml);
 
     // Try multiple meta tags in priority order
     const metaSelectors = [
