@@ -2,6 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+
 ## Development Commands
 
 - **Development server**: `pnpm dev` (uses Next.js with Turbopack for fast development)
@@ -40,3 +41,5 @@ This is a Next.js 15 App Router application that serves as a modern Hacker News 
 - ESLint config uses flat config format with TypeScript, Next.js, and accessibility rules
 - Edge runtime enabled for better performance
 - 60-second revalidation for story lists
+
+BEFORE YOU FINISH EDITING/MAKING CHANGES: ALWAYS run format and lint to verify and double check for any broken changes or final fixes needed.
