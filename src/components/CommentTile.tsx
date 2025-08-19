@@ -1,5 +1,6 @@
 'use client';
 
+import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
@@ -83,29 +84,31 @@ export default function CommentTile({
             {comment.deleted ? (
               <p>deleted</p>
             ) : (
-              <LinkWithHoverEffect
-                className={cn(
-                  'text-sm font-medium text-muted-foreground',
-                  postAuthorUsername === comment.by &&
-                    'font-medium text-orange-700 dark:text-orange-500',
-                )}
-                href={`/user?id=${comment.by}`}
-              >
-                <User className='size-4' />
-                <span>{comment.by}</span>
-              </LinkWithHoverEffect>
-            )}
-            <div className='flex flex-wrap items-baseline gap-x-2 text-sm font-medium text-muted-foreground'>
-              <div className='flex items-center gap-1'>
-                <Clock className='size-4' />
-                <time
-                  dateTime={commentDate?.toISOString()}
-                  title={commentDate?.toLocaleString()}
+              <div className='flex flex-wrap items-baseline gap-2'>
+                <Badge
+                  variant='outline'
+                  className={cn(
+                    postAuthorUsername === comment.by &&
+                      'border-orange-600 text-orange-700 dark:border-orange-500 dark:text-orange-500',
+                  )}
+                  asChild
                 >
-                  {commentDate ? getTimeAgo(commentDate) : '? ago'}
-                </time>
+                  <LinkWithHoverEffect href={`/user?id=${comment.by}`}>
+                    <User className='size-3' />
+                    <span>{comment.by}</span>
+                  </LinkWithHoverEffect>
+                </Badge>
+                <Badge variant='secondary'>
+                  <Clock className='size-3' />
+                  <time
+                    dateTime={commentDate?.toISOString()}
+                    title={commentDate?.toLocaleString()}
+                  >
+                    {commentDate ? getTimeAgo(commentDate) : '? ago'}
+                  </time>
+                </Badge>
               </div>
-            </div>
+            )}
 
             <Button
               variant='ghost'

@@ -4,12 +4,12 @@ import { type HNItem } from '@/lib/types';
 import { getDisplayURL, getThumbnailUrl, getTimeAgo } from '@/lib/utils';
 import {
   ArrowUp,
-  MessageSquare,
   Clock,
-  Globe,
-  User,
   ExternalLink,
   FileText,
+  Globe,
+  MessageSquare,
+  User,
 } from 'lucide-react';
 import Link from 'next/link';
 import { ItemText } from './ItemText';
@@ -30,9 +30,9 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
   return (
     <Card className='py-0'>
       <CardContent className='p-4'>
-        <div className='flex items-start gap-4'>
+        <div className='flex items-center gap-4'>
           <a
-            className='bg-muted hover:bg-muted/80 relative flex aspect-square h-16 shrink-0 items-center justify-center overflow-hidden rounded-lg transition-colors sm:aspect-4/3'
+            className='bg-muted hover:bg-muted/80 relative flex aspect-square h-18 shrink-0 items-center justify-center overflow-hidden rounded-lg transition-colors sm:aspect-4/3'
             href={url ?? `/item?id=${id}`}
             target={url ? '_blank' : undefined}
           >
