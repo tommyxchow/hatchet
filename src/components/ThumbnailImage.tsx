@@ -1,6 +1,6 @@
 'use client';
 
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/solid';
+import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -15,7 +15,7 @@ export function ThumbnailImage({
   const [isLoaded, setIsLoaded] = useState(false);
 
   if (!src || imgError) {
-    return <ArrowTopRightOnSquareIcon className='size-6' />;
+    return <ExternalLink className='size-6' />;
   }
 
   return (

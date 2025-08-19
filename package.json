@@ -12,7 +12,6 @@
     "nuke": "rimraf .next node_modules pnpm-lock.yaml"
   },
   "dependencies": {
-    "@heroicons/react": "^2.2.0",
     "@radix-ui/react-slot": "^1.2.3",
     "@radix-ui/react-tabs": "^1.1.13",
     "@tanstack/react-query": "^5.85.3",

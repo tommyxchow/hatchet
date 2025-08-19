@@ -5,11 +5,11 @@ import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
 import { cn, getTimeAgo } from '@/lib/utils';
 import {
-  ChevronDownIcon,
-  ChevronRightIcon,
-  ClockIcon,
-  UserIcon,
-} from '@heroicons/react/16/solid';
+  ChevronDown,
+  ChevronRight,
+  Clock,
+  User,
+} from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { ItemText } from './ItemText';
@@ -74,9 +74,9 @@ export default function CommentTile({
                 onClick={() => setIsCollapsed(!isCollapsed)}
               >
                 {isCollapsed ? (
-                  <ChevronRightIcon className='size-3.5' />
+                  <ChevronRight className='size-3.5' />
                 ) : (
-                  <ChevronDownIcon className='size-3.5' />
+                  <ChevronDown className='size-3.5' />
                 )}
               </Button>
             )}
@@ -91,13 +91,13 @@ export default function CommentTile({
                 )}
                 href={`/user?id=${comment.by}`}
               >
-                <UserIcon className='size-4' />
+                <User className='size-4' />
                 <span>{comment.by}</span>
               </LinkWithHoverEffect>
             )}
             <div className='flex flex-wrap items-baseline gap-x-2 text-sm font-medium text-muted-foreground'>
               <div className='flex items-center gap-1'>
-                <ClockIcon className='size-4' />
+                <Clock className='size-4' />
                 <time
                   dateTime={commentDate?.toISOString()}
                   title={commentDate?.toLocaleString()}

@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 import { HNClient } from '@/lib/hnClient';
 import { type HNFeedType } from '@/lib/types';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import StoryTile from './StoryTile';
 
@@ -27,14 +27,14 @@ export async function StoryList({ feedType, pageNumber }: StoryListProps) {
         {pageNumber > 1 && (
           <Button variant='outline' size='icon' asChild>
             <Link href={`/${feedType}?p=${pageNumber - 1}`}>
-              <ChevronLeftIcon className='size-4' />
+              <ChevronLeft className='size-4' />
             </Link>
           </Button>
         )}
         {stories.length === 30 && (
           <Button variant='outline' size='icon' className='ml-auto' asChild>
             <Link href={`/${feedType}?p=${pageNumber + 1}`}>
-              <ChevronRightIcon className='size-4' />
+              <ChevronRight className='size-4' />
             </Link>
           </Button>
         )}

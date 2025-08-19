@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { MoonIcon, SunIcon } from '@heroicons/react/16/solid';
+import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 
@@ -26,9 +26,9 @@ export function ThemeSelect() {
       onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
     >
       {isDarkMode ? (
-        <SunIcon className='size-4' />
+        <Sun className='size-4' />
       ) : (
-        <MoonIcon className='size-4' />
+        <Moon className='size-4' />
       )}
     </Button>
   );
