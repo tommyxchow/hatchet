@@ -1,8 +1,13 @@
-import { Button } from '@/components/ui/button';
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@/components/ui/pagination';
 import { HNClient } from '@/lib/hnClient';
 import { type HNFeedType } from '@/lib/types';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Link from 'next/link';
 import StoryTile from './StoryTile';
 
 interface StoryListProps {
@@ -23,22 +28,58 @@ export async function StoryList({ feedType, pageNumber }: StoryListProps) {
         ))}
       </ol>
 
-      <nav className='flex justify-between'>
-        {pageNumber > 1 && (
-          <Button variant='outline' size='icon' asChild>
-            <Link href={`/${feedType}?p=${pageNumber - 1}`}>
-              <ChevronLeft className='size-4' />
-            </Link>
-          </Button>
-        )}
-        {stories.length === 30 && (
-          <Button variant='outline' size='icon' className='ml-auto' asChild>
-            <Link href={`/${feedType}?p=${pageNumber + 1}`}>
-              <ChevronRight className='size-4' />
-            </Link>
-          </Button>
-        )}
-      </nav>
+      <Pagination>
+        <PaginationContent className='flex w-full justify-between'>
+          {/* Previous button - always on left edge */}
+          <div className='flex'>
+            {pageNumber > 1 && (
+              <PaginationItem>
+                <PaginationPrevious href={`/${feedType}?p=${pageNumber - 1}`} />
+              </PaginationItem>
+            )}
+          </div>
+
+          {/* Page numbers in center */}
+          <div className='flex items-center gap-1'>
+            {pageNumber > 2 && (
+              <PaginationItem>
+                <PaginationLink href={`/${feedType}?p=1`}>1</PaginationLink>
+              </PaginationItem>
+            )}
+
+            {pageNumber > 1 && (
+              <PaginationItem>
+                <PaginationLink href={`/${feedType}?p=${pageNumber - 1}`}>
+                  {pageNumber - 1}
+                </PaginationLink>
+              </PaginationItem>
+            )}
+
+            <PaginationItem>
+              <PaginationLink href={`/${feedType}?p=${pageNumber}`} isActive>
+                {pageNumber}
+              </PaginationLink>
+            </PaginationItem>
+
+            {stories.length === 30 && (
+              <PaginationItem>
+                <PaginationLink href={`/${feedType}?p=${pageNumber + 1}`}>
+                  {pageNumber + 1}
+                </PaginationLink>
+              </PaginationItem>
+            )}
+          </div>
+
+          {/* Next button - always on right edge */}
+          <div className='flex'>
+            {stories.length === 30 && (
+              <PaginationItem>
+                <PaginationNext href={`/${feedType}?p=${pageNumber + 1}`} />
+              </PaginationItem>
+            )}
+          </div>
+        </PaginationContent>
+      </Pagination>
     </div>
   );
 }
