@@ -4,7 +4,7 @@ export function StoryListSkeleton() {
       {Array.from({ length: 30 }).map((_, i) => (
         <div
           key={i}
-          className='h-24.5 animate-pulse rounded-md bg-neutral-200 dark:bg-neutral-800'
+          className='h-24 animate-pulse rounded-xl bg-muted'
         />
       ))}
     </div>

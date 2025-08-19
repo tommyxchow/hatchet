@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import { HNClient } from '@/lib/hnClient';
 import { type HNFeedType } from '@/lib/types';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/16/solid';
@@ -24,18 +25,18 @@ export async function StoryList({ feedType, pageNumber }: StoryListProps) {
 
       <nav className='flex justify-between'>
         {pageNumber > 1 && (
-          <Link href={`/${feedType}?p=${pageNumber - 1}`}>
-            <div className='rounded-md border border-neutral-200 p-2 transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800'>
+          <Button variant='outline' size='icon' asChild>
+            <Link href={`/${feedType}?p=${pageNumber - 1}`}>
               <ChevronLeftIcon className='size-4' />
-            </div>
-          </Link>
+            </Link>
+          </Button>
         )}
         {stories.length === 30 && (
-          <Link className='ml-auto' href={`/${feedType}?p=${pageNumber + 1}`}>
-            <div className='rounded-md border border-neutral-200 p-2 transition-colors hover:bg-neutral-200 dark:border-neutral-800 dark:hover:bg-neutral-800'>
+          <Button variant='outline' size='icon' className='ml-auto' asChild>
+            <Link href={`/${feedType}?p=${pageNumber + 1}`}>
               <ChevronRightIcon className='size-4' />
-            </div>
-          </Link>
+            </Link>
+          </Button>
         )}
       </nav>
     </div>

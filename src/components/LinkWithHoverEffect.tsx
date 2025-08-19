@@ -1,6 +1,6 @@
+import { cn } from '@/lib/utils';
 import Link, { type LinkProps } from 'next/link';
 import { type ReactNode } from 'react';
-import { twMerge } from 'tailwind-merge';
 
 interface LinkWithHoverEffectProps extends LinkProps {
   children: ReactNode;
@@ -16,8 +16,8 @@ export function LinkWithHoverEffect({
 }: LinkWithHoverEffectProps) {
   return (
     <Link
-      className={twMerge(
-        'flex items-center gap-1 rounded-sm px-1.5 py-0.5 transition-colors hover:bg-neutral-200 dark:hover:bg-neutral-800',
+      className={cn(
+        'flex items-center gap-1 rounded-sm px-1.5 py-0.5 transition-colors hover:bg-accent hover:text-accent-foreground',
         className,
       )}
       href={href}

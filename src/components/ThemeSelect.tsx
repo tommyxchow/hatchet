@@ -1,5 +1,6 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { MoonIcon, SunIcon } from '@heroicons/react/16/solid';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
@@ -13,13 +14,14 @@ export function ThemeSelect() {
     setMounted(true);
   }, []);
 
-  if (!mounted) return <div className='size-8.5' />;
+  if (!mounted) return <div className='size-9' />;
 
   const isDarkMode = resolvedTheme === 'dark';
 
   return (
-    <button
-      className='animate-in fade-in rounded-md p-2 text-sm transition-colors hover:bg-neutral-200 dark:hover:bg-neutral-800'
+    <Button
+      variant='ghost'
+      size='icon'
       aria-label={`Toggle ${isDarkMode ? 'light mode' : 'dark mode'}`}
       onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
     >
@@ -28,6 +30,6 @@ export function ThemeSelect() {
       ) : (
         <MoonIcon className='size-4' />
       )}
-    </button>
+    </Button>
   );
 }

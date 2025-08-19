@@ -1,5 +1,5 @@
-import CommentTile from '@/components/ui/CommentTile';
-import StoryTile from '@/components/ui/StoryTile';
+import CommentTile from '@/components/CommentTile';
+import StoryTile from '@/components/StoryTile';
 import { HNClient } from '@/lib/hnClient';
 import { type RouteParams } from '@/lib/types';
 import { notFound } from 'next/navigation';

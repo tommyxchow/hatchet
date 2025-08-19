@@ -1,5 +1,5 @@
-import { StoryList } from '@/components/ui/StoryList';
-import { StoryListSkeleton } from '@/components/ui/StoryListSkeleton';
+import { StoryList } from '@/components/StoryList';
+import { StoryListSkeleton } from '@/components/StoryListSkeleton';
 import { HNFeedTypes, type HNFeedType, type RouteParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';

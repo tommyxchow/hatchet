@@ -1,10 +1,10 @@
 import { Providers } from '@/components/Providers';
-import { FeedTypeNavBar } from '@/components/ui/FeedTypeNavBar';
-import { Footer } from '@/components/ui/Footer';
-import { Header } from '@/components/ui/Header';
+import { FeedTypeNavBar } from '@/components/FeedTypeNavBar';
+import { Footer } from '@/components/Footer';
+import { Header } from '@/components/Header';
+import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Host_Grotesk, JetBrains_Mono } from 'next/font/google';
-import { twJoin } from 'tailwind-merge';
 import './globals.css';
 
 const fontSans = Host_Grotesk({
@@ -33,8 +33,8 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body
-        className={twJoin(
-          'mx-auto flex min-h-screen max-w-3xl flex-col gap-2 bg-neutral-50 px-4 font-sans text-neutral-800 lg:px-0 dark:bg-black dark:text-neutral-100',
+        className={cn(
+          'mx-auto flex min-h-screen max-w-3xl flex-col gap-2 bg-background px-4 font-sans text-foreground lg:px-0',
           fontSans.variable,
           fontMono.variable,
         )}

@@ -1,4 +1,4 @@
-import { StoryListSkeleton } from '@/components/ui/StoryListSkeleton';
+import { StoryListSkeleton } from '@/components/StoryListSkeleton';
 import { type RouteParams } from '@/lib/types';
 import { Suspense } from 'react';
 import Stories from './[slug]/page';
