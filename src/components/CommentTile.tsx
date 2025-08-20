@@ -5,13 +5,8 @@ import { Button } from '@/components/ui/button';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
 import { cn, getTimeAgo } from '@/lib/utils';
-import {
-  ChevronDown,
-  ChevronRight,
-  Clock,
-  User,
-} from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
+import { ChevronDown, ChevronRight, Clock, User } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { ItemText } from './ItemText';
 import { LinkWithHoverEffect } from './LinkWithHoverEffect';
@@ -58,7 +53,7 @@ export default function CommentTile({
         <div className='flex'>
           {Array.from({ length: level }).map((_, index) => (
             <div
-              className='w-4 border-l border-border'
+              className='border-border w-4 border-l'
               key={`${id}-${index}`}
             />
           ))}

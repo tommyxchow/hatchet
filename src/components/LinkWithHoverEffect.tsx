@@ -1,8 +1,9 @@
 import { cn } from '@/lib/utils';
+import { type RouteType } from 'next/dist/lib/load-custom-routes';
 import Link, { type LinkProps } from 'next/link';
 import { type ReactNode } from 'react';
 
-interface LinkWithHoverEffectProps extends LinkProps {
+interface LinkWithHoverEffectProps extends LinkProps<RouteType> {
   children: ReactNode;
   className?: string;
   openInNewTab?: boolean;
@@ -17,7 +18,7 @@ export function LinkWithHoverEffect({
   return (
     <Link
       className={cn(
-        'flex items-center gap-1 rounded-sm px-1.5 py-0.5 transition-colors hover:bg-accent hover:text-accent-foreground',
+        'hover:bg-accent hover:text-accent-foreground flex items-center gap-1 rounded-sm px-1.5 py-0.5 transition-colors',
         className,
       )}
       href={href}

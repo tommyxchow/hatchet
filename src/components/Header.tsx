@@ -5,7 +5,7 @@ export function Header() {
   return (
     <header className='flex justify-between gap-2 pt-8'>
       <Link href='/'>
-        <h1 className='text-lg font-bold text-foreground transition-colors hover:text-muted-foreground'>
+        <h1 className='text-foreground hover:text-muted-foreground text-lg font-bold transition-colors'>
           <span className='text-orange-600 dark:text-orange-500'>Hatchet</span>{' '}
           News
         </h1>

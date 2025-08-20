@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className='text-center text-sm text-muted-foreground underline-offset-2'>
+    <footer className='text-muted-foreground text-center text-sm underline-offset-2'>
       <p>
         Designed and developed by{' '}
         <a

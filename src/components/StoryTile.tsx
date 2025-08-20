@@ -61,7 +61,7 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
                 <Badge variant='outline' asChild>
                   <Link href={getDisplayURL(url, true)} target='_blank'>
                     <Globe className='size-3' />
-                    <span>{getDisplayURL(url)}</span>
+                    <span>{getDisplayURL(url).hostname}</span>
                   </Link>
                 </Badge>
               )}

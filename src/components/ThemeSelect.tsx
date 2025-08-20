@@ -25,11 +25,7 @@ export function ThemeSelect() {
       aria-label={`Toggle ${isDarkMode ? 'light mode' : 'dark mode'}`}
       onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
     >
-      {isDarkMode ? (
-        <Sun className='size-4' />
-      ) : (
-        <Moon className='size-4' />
-      )}
+      {isDarkMode ? <Sun className='size-4' /> : <Moon className='size-4' />}
     </Button>
   );
 }

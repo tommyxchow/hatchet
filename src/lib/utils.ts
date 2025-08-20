@@ -1,9 +1,10 @@
-import { clsx, type ClassValue } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { clsx, type ClassValue } from 'clsx';
 import { parse } from 'node-html-parser';
+import { twMerge } from 'tailwind-merge';
+import type { UrlObject } from 'url';
 
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
+  return twMerge(clsx(inputs));
 }
 
 export function getTimeAgo(date: Date): string {
@@ -29,7 +30,10 @@ export function getTimeAgo(date: Date): string {
   return '0s';
 }
 
-export function getDisplayURL(url: string, preserveProtocol = false): string {
+export function getDisplayURL(
+  url: string,
+  preserveProtocol = false,
+): UrlObject {
   const parsedURL = new URL(url);
   let host = parsedURL.hostname;
 
@@ -37,7 +41,16 @@ export function getDisplayURL(url: string, preserveProtocol = false): string {
     host = host.substring(4);
   }
 
-  return preserveProtocol ? `${parsedURL.protocol}//${host}` : host;
+  if (preserveProtocol) {
+    return {
+      protocol: parsedURL.protocol,
+      hostname: host,
+    };
+  } else {
+    return {
+      hostname: host,
+    };
+  }
 }
 
 export async function getThumbnailUrl(
@@ -68,7 +81,7 @@ export async function getThumbnailUrl(
     }
 
     const html = await response.text();
-    
+
     // Optimize parsing by truncating to first 50KB (meta tags are typically in head)
     const truncatedHtml = html.slice(0, 50_000);
     const root = parse(truncatedHtml);

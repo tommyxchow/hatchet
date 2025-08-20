@@ -1,7 +1,7 @@
-import { Providers } from '@/components/Providers';
 import { FeedTypeNavBar } from '@/components/FeedTypeNavBar';
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
+import { Providers } from '@/components/Providers';
 import { cn } from '@/lib/utils';
 import type { Metadata } from 'next';
 import { Host_Grotesk, JetBrains_Mono } from 'next/font/google';
@@ -34,7 +34,7 @@ export default function RootLayout({
     <html lang='en' suppressHydrationWarning>
       <body
         className={cn(
-          'mx-auto flex min-h-screen max-w-3xl flex-col gap-2 bg-background px-4 font-sans text-foreground lg:px-0',
+          'bg-background text-foreground mx-auto flex min-h-screen max-w-3xl flex-col gap-2 px-4 font-sans lg:px-0',
           fontSans.variable,
           fontMono.variable,
         )}
