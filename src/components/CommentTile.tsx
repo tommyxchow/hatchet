@@ -3,6 +3,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import { SimpleTooltip } from './SimpleTooltip';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
 import { cn, getTimeAgo } from '@/lib/utils';
@@ -100,19 +101,27 @@ export default function CommentTile({
               <p>deleted</p>
             ) : (
               <div className='flex flex-wrap items-baseline gap-2'>
-                <Badge
-                  variant='outline'
-                  className={cn(
-                    postAuthorUsername === comment.by &&
-                      'border-orange-600 text-orange-700 dark:border-orange-500 dark:text-orange-500',
-                  )}
-                  asChild
-                >
-                  <LinkWithHoverEffect href={`/user?id=${comment.by}`}>
-                    <User className='size-3' />
-                    <span>{comment.by}</span>
-                  </LinkWithHoverEffect>
-                </Badge>
+                {postAuthorUsername === comment.by ? (
+                  <SimpleTooltip content='Post Author'>
+                    <Badge
+                      variant='outline'
+                      className='border-orange-600 text-orange-700 dark:border-orange-500 dark:text-orange-500'
+                      asChild
+                    >
+                      <LinkWithHoverEffect href={`/user?id=${comment.by}`}>
+                        <User className='size-3' />
+                        <span>{comment.by}</span>
+                      </LinkWithHoverEffect>
+                    </Badge>
+                  </SimpleTooltip>
+                ) : (
+                  <Badge variant='outline' asChild>
+                    <LinkWithHoverEffect href={`/user?id=${comment.by}`}>
+                      <User className='size-3' />
+                      <span>{comment.by}</span>
+                    </LinkWithHoverEffect>
+                  </Badge>
+                )}
                 <Badge variant='secondary'>
                   <Clock className='size-3' />
                   <time
