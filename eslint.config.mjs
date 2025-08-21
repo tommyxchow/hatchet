@@ -14,6 +14,9 @@ const compat = new FlatCompat({
 });
 
 export default tseslint.config(
+  {
+    ignores: ['.next/', 'node_modules/'],
+  },
   eslintJs.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
