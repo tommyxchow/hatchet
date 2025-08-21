@@ -41,21 +41,30 @@ export default function CommentTile({
     staleTime: 60 * 5,
   });
 
-  if (isPending) return (
-    <div className='flex' ref={commentRef}>
-      <div className='flex'>
-        {Array.from({ length: level }).map((_, index) => (
-          <div
-            className='border-border w-4 border-l'
-            key={`${id}-${index}`}
-          />
-        ))}
+  if (isPending)
+    return (
+      <div className='flex' ref={commentRef}>
+        <div className='flex'>
+          {Array.from({ length: level }).map((_, index) => (
+            <div
+              className='border-border w-4 border-l'
+              key={`${id}-${index}`}
+            />
+          ))}
+        </div>
+        <div className='flex grow flex-col gap-2 py-2'>
+          <div className='flex items-center gap-x-1'>
+            <Skeleton className='h-6 w-6' />
+            <Skeleton className='h-5 w-20' />
+            <Skeleton className='h-5 w-16' />
+          </div>
+          <div className='space-y-2'>
+            <Skeleton className='h-4 w-full' />
+            <Skeleton className='h-4 w-3/4' />
+          </div>
+        </div>
       </div>
-      <div className='flex grow flex-col py-2'>
-        <Skeleton className='h-4 w-full' />
-      </div>
-    </div>
-  );
+    );
   if (error) return <p>Error: {error.message}</p>;
 
   if (!comment || comment.dead) return null;
@@ -63,7 +72,7 @@ export default function CommentTile({
   const commentDate = comment.time ? new Date(comment.time * 1000) : null;
 
   return (
-    <article className='animate-in fade-in flex flex-col duration-500'>
+    <article className='animate-in fade-in slide-in-from-top-2 flex flex-col duration-500'>
       <div className='flex'>
         <div className='flex'>
           {Array.from({ length: level }).map((_, index) => (
@@ -80,15 +89,11 @@ export default function CommentTile({
               <Button
                 variant='outline'
                 size='sm'
-                className='size-6 p-1'
+                className='size-5.5'
                 aria-label={isCollapsed ? 'Expand comment' : 'Collapse comment'}
                 onClick={() => setIsCollapsed(!isCollapsed)}
               >
-                {isCollapsed ? (
-                  <ChevronRight className='size-3.5' />
-                ) : (
-                  <ChevronDown className='size-3.5' />
-                )}
+                {isCollapsed ? <ChevronRight /> : <ChevronDown />}
               </Button>
             )}
             {comment.deleted ? (
