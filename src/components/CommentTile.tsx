@@ -2,6 +2,7 @@
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
 import { cn, getTimeAgo } from '@/lib/utils';
@@ -40,7 +41,21 @@ export default function CommentTile({
     staleTime: 60 * 5,
   });
 
-  if (isPending) return <div className='h-48' ref={commentRef} />;
+  if (isPending) return (
+    <div className='flex' ref={commentRef}>
+      <div className='flex'>
+        {Array.from({ length: level }).map((_, index) => (
+          <div
+            className='border-border w-4 border-l'
+            key={`${id}-${index}`}
+          />
+        ))}
+      </div>
+      <div className='flex grow flex-col py-2'>
+        <Skeleton className='h-4 w-full' />
+      </div>
+    </div>
+  );
   if (error) return <p>Error: {error.message}</p>;
 
   if (!comment || comment.dead) return null;
