@@ -6,6 +6,7 @@ function createApiUrl(path: string) {
 
 async function get<T>(url: string): Promise<T> {
   const response = await fetch(url, {
+    cache: 'force-cache',
     next: { revalidate: 60 },
   });
 
