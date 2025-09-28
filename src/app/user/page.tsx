@@ -3,8 +3,6 @@ import { HNClient } from '@/lib/hnClient';
 import { type RouteParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
 
-export const runtime = 'edge';
-
 export default async function User({ searchParams }: RouteParams) {
   const { id: userId } = await searchParams;
 
