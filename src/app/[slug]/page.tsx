@@ -1,6 +1,8 @@
 import { StoryList } from '@/components/StoryList';
+import { StoryListSkeleton } from '@/components/StoryListSkeleton';
 import { HNFeedTypes, type HNFeedType, type RouteParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
 export default async function Stories({ searchParams, params }: RouteParams) {
   const { p } = await searchParams;
@@ -15,7 +17,11 @@ export default async function Stories({ searchParams, params }: RouteParams) {
   const resolvedFeedType = feedType || 'top';
   const pageNumber = parseInt(p as string) || 1;
 
-  return <StoryList feedType={resolvedFeedType} pageNumber={pageNumber} />;
+  return (
+    <Suspense fallback={<StoryListSkeleton />}>
+      <StoryList feedType={resolvedFeedType} pageNumber={pageNumber} />
+    </Suspense>
+  );
 }
 
 function isHNFeedType(value: unknown): value is HNFeedType {
