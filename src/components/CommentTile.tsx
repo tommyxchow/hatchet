@@ -73,7 +73,7 @@ export default function CommentTile({
   const commentDate = comment.time ? new Date(comment.time * 1000) : null;
 
   return (
-    <article className='animate-in fade-in slide-in-from-top-2 flex flex-col duration-500'>
+    <article className='animate-in fade-in slide-in-from-top-1 flex flex-col duration-500'>
       <div className='flex'>
         <div className='flex'>
           {Array.from({ length: level }).map((_, index) => (
