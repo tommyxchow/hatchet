@@ -67,6 +67,7 @@ export async function getThumbnailUrl(
       headers: {
         'User-Agent': 'Mozilla/5.0 (compatible; HatchetBot/1.0)',
       },
+      next: { revalidate: 3600 }, // Cache thumbnails for 1 hour
     });
 
     // Check response size to avoid processing huge documents
