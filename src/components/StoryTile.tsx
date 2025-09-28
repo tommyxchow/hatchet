@@ -1,7 +1,7 @@
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { type HNItem } from '@/lib/types';
-import { getDisplayURL, getThumbnailUrl, getTimeAgo } from '@/lib/utils';
+import { getDisplayURL, getTimeAgo } from '@/lib/utils';
 import {
   ArrowUp,
   Clock,
@@ -13,19 +13,16 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { ItemText } from './ItemText';
-import { ThumbnailImage } from './ThumbnailImage';
 
 interface StoryTileProps {
   story: HNItem;
   showText?: boolean;
 }
 
-export default async function StoryTile({ story, showText }: StoryTileProps) {
+export default function StoryTile({ story, showText }: StoryTileProps) {
   const { by, descendants, id, score, text, time, title, url } = story;
 
   const storyDate = time ? new Date(time * 1000) : null;
-
-  const thumbnailUrl = url && (await getThumbnailUrl(url));
 
   return (
     <Card className='py-0'>
@@ -37,11 +34,7 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
             target={url ? '_blank' : undefined}
           >
             {url ? (
-              thumbnailUrl ? (
-                <ThumbnailImage src={thumbnailUrl} alt={title ?? 'Thumbnail'} />
-              ) : (
-                <ExternalLink className='text-muted-foreground size-6' />
-              )
+              <ExternalLink className='text-muted-foreground size-6' />
             ) : (
               <FileText className='text-muted-foreground size-6' />
             )}
