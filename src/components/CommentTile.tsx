@@ -3,7 +3,6 @@
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { SimpleTooltip } from './SimpleTooltip';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
 import { cn, getTimeAgo } from '@/lib/utils';
@@ -12,6 +11,7 @@ import { ChevronDown, ChevronRight, Clock, User } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { ItemText } from './ItemText';
 import { LinkWithHoverEffect } from './LinkWithHoverEffect';
+import { SimpleTooltip } from './SimpleTooltip';
 
 interface CommentProps {
   postAuthorUsername: string;
