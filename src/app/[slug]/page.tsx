@@ -1,8 +1,6 @@
 import { StoryList } from '@/components/StoryList';
-import { StoryListSkeleton } from '@/components/StoryListSkeleton';
 import { HNFeedTypes, type HNFeedType, type RouteParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
-import { Suspense } from 'react';
 
 export const revalidate = 60;
 
@@ -19,13 +17,7 @@ export default async function Stories({ searchParams, params }: RouteParams) {
   const resolvedFeedType = feedType || 'top';
   const pageNumber = parseInt(p as string) || 1;
 
-  return (
-    // Suspense here instead of loading.tsx because notFound() can only return
-    // the proper 404 status code on the server rather than client.
-    <Suspense fallback={<StoryListSkeleton />}>
-      <StoryList feedType={resolvedFeedType} pageNumber={pageNumber} />
-    </Suspense>
-  );
+  return <StoryList feedType={resolvedFeedType} pageNumber={pageNumber} />;
 }
 
 function isHNFeedType(value: unknown): value is HNFeedType {
