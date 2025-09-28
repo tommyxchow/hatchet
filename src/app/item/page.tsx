@@ -4,8 +4,6 @@ import { HNClient } from '@/lib/hnClient';
 import { type RouteParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
 
-export const revalidate = 60;
-
 export default async function ItemPage({ searchParams }: RouteParams) {
   const { id: itemId } = await searchParams;
 

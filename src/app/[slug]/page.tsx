@@ -2,8 +2,6 @@ import { StoryList } from '@/components/StoryList';
 import { HNFeedTypes, type HNFeedType, type RouteParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
 
-export const revalidate = 60;
-
 export default async function Stories({ searchParams, params }: RouteParams) {
   const { p } = await searchParams;
   const { slug: feedType } = await params;
