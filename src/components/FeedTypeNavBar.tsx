@@ -12,7 +12,7 @@ export function FeedTypeNavBar() {
   // slug is an array for catch-all routes [[...slug]]
   const feedSlug = slug?.[0];
   const isItemPage = pathname.startsWith('/item');
-  const activeFeed = isItemPage ? undefined : (feedSlug ?? 'top');
+  const activeFeed = isItemPage ? '' : (feedSlug ?? 'top');
 
   return (
     <nav>

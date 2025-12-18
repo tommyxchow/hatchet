@@ -20,7 +20,7 @@ interface StoryTileProps {
   showText?: boolean;
 }
 
-export default async function StoryTile({ story, showText }: StoryTileProps) {
+export async function StoryTile({ story, showText }: StoryTileProps) {
   const { by, descendants, id, score, text, time, title, url } = story;
 
   const storyDate = time !== undefined ? new Date(time * 1000) : null;

@@ -8,7 +8,7 @@ import {
 } from '@/components/ui/pagination';
 import { HNClient } from '@/lib/hnClient';
 import { type HNFeedType } from '@/lib/types';
-import StoryTile from './StoryTile';
+import { StoryTile } from './StoryTile';
 
 interface StoryListProps {
   feedType: HNFeedType;
