@@ -30,6 +30,10 @@ async function fetchItemById(id: number): Promise<HNItem | null> {
   }
 }
 
+async function fetchItemsByIds(ids: number[]): Promise<(HNItem | null)[]> {
+  return Promise.all(ids.map((id) => fetchItemById(id)));
+}
+
 async function fetchUserById(username: string): Promise<HNUser | null> {
   try {
     const url = createApiUrl(`user/${username}`);
@@ -67,6 +71,7 @@ async function fetchStoriesByFeedType(
 
 export const HNClient = {
   fetchItemById,
+  fetchItemsByIds,
   fetchUserById,
   fetchStoriesByFeedType,
 };

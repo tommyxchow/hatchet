@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
 import { HNClient } from '@/lib/hnClient';
+import type { HNItem } from '@/lib/types';
 import { cn, getTimeAgo } from '@/lib/utils';
 import { useQuery } from '@tanstack/react-query';
 import { ChevronDown, ChevronRight, Clock, User } from 'lucide-react';
@@ -17,18 +18,23 @@ interface CommentProps {
   postAuthorUsername: string;
   id: number;
   level: number;
+  initialData?: HNItem;
 }
 
 export default function CommentTile({
   postAuthorUsername,
   id,
   level,
+  initialData,
 }: CommentProps) {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const commentRef = useRef<HTMLDivElement>(null);
 
+  // Use once: true so we don't refetch when scrolling back up
+  // Increased margin to 2000px for more aggressive prefetching
   const isVisible = useIntersectionObserver(commentRef, {
-    rootMargin: '0px 0px 1000px 0px',
+    rootMargin: '0px 0px 2000px 0px',
+    once: true,
   });
 
   const {
@@ -38,8 +44,10 @@ export default function CommentTile({
   } = useQuery({
     queryKey: ['comment', id],
     queryFn: () => HNClient.fetchItemById(id),
+    // Only fetch when visible (initialData is used immediately if provided)
     enabled: isVisible,
-    staleTime: 60 * 5,
+    initialData,
+    staleTime: 5 * 60 * 1000,
   });
 
   if (isPending)
