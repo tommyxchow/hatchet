@@ -15,14 +15,17 @@ export function FeedTypeNavBar() {
   const activeFeed = isItemPage ? undefined : (feedSlug ?? 'top');
 
   return (
-    <nav className='overflow-x-auto'>
+    <nav>
       <Tabs value={activeFeed}>
         <TabsList>
           {HNFeedTypes.map((type) => (
-            <TabsTrigger key={type} value={type} asChild>
-              <Link href={`/${type}`} className='capitalize'>
-                {type}
-              </Link>
+            <TabsTrigger
+              key={type}
+              value={type}
+              render={<Link href={`/${type}`} />}
+              className='capitalize'
+            >
+              {type}
             </TabsTrigger>
           ))}
         </TabsList>

@@ -58,15 +58,18 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
                 </time>
               </Badge>
               {url && (
-                <Badge variant='outline' asChild>
-                  <Link href={getDisplayURL(url, true)} target='_blank'>
-                    <Globe className='size-3' />
-                    <span>{getDisplayURL(url).hostname}</span>
-                  </Link>
+                <Badge
+                  variant='outline'
+                  render={
+                    <Link href={getDisplayURL(url, true)} target='_blank' />
+                  }
+                >
+                  <Globe className='size-3' />
+                  <span>{getDisplayURL(url).hostname}</span>
                 </Badge>
               )}
             </div>
-            <h3 className='text-foreground leading-tight font-semibold'>
+            <h3 className='text-foreground text-base leading-tight font-semibold'>
               <a
                 className='hover:text-muted-foreground transition-colors'
                 href={url ?? `/item?id=${id}`}
@@ -80,17 +83,19 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
                 <ArrowUp className='size-3' />
                 <span>{score}</span>
               </Badge>
-              <Badge variant='outline' asChild>
-                <Link href={`/item?id=${id}`}>
-                  <MessageSquare className='size-3' />
-                  <span>{descendants ?? 0}</span>
-                </Link>
+              <Badge
+                variant='outline'
+                render={<Link href={`/item?id=${id}`} />}
+              >
+                <MessageSquare className='size-3' />
+                <span>{descendants ?? 0}</span>
               </Badge>
-              <Badge variant='outline' asChild>
-                <Link href={`/user?id=${by}`}>
-                  <User className='size-3' />
-                  <span>{by}</span>
-                </Link>
+              <Badge
+                variant='outline'
+                render={<Link href={`/user?id=${by}`} />}
+              >
+                <User className='size-3' />
+                <span>{by}</span>
               </Badge>
             </div>
           </div>

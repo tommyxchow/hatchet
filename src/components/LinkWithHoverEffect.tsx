@@ -4,7 +4,7 @@ import Link, { type LinkProps } from 'next/link';
 import { type ReactNode } from 'react';
 
 interface LinkWithHoverEffectProps extends LinkProps<RouteType> {
-  children: ReactNode;
+  children?: ReactNode;
   className?: string;
   openInNewTab?: boolean;
 }
