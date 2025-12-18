@@ -23,6 +23,7 @@ export function FeedTypeNavBar() {
               key={type}
               value={type}
               render={<Link href={`/${type}`} />}
+              nativeButton={false}
               className='capitalize'
             >
               {type}
