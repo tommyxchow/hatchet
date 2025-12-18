@@ -2,7 +2,7 @@ export function Footer() {
   return (
     <footer className='text-muted-foreground text-center text-sm underline-offset-2'>
       <p>
-        Designed and developed by{' '}
+        Made by{' '}
         <a
           className='underline'
           href='https://www.tommychow.com/'
