@@ -1,13 +1,12 @@
 import CommentTile from '@/components/CommentTile';
 import StoryTile from '@/components/StoryTile';
 import { HNClient } from '@/lib/hnClient';
-import { type RouteParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
 
-export default async function ItemPage({ searchParams }: RouteParams) {
+export default async function ItemPage({ searchParams }: PageProps<'/item'>) {
   const { id: itemId } = await searchParams;
 
-  if (!itemId || typeof itemId !== 'string') {
+  if (typeof itemId !== 'string' || !itemId) {
     throw Error('Invalid item id');
   }
 

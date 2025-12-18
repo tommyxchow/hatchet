@@ -23,7 +23,7 @@ interface StoryTileProps {
 export default async function StoryTile({ story, showText }: StoryTileProps) {
   const { by, descendants, id, score, text, time, title, url } = story;
 
-  const storyDate = time ? new Date(time * 1000) : null;
+  const storyDate = time !== undefined ? new Date(time * 1000) : null;
 
   const thumbnailUrl = url && (await getThumbnailUrl(url));
 

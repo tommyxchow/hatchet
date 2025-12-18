@@ -47,10 +47,7 @@ export default function CommentTile({
       <div className='flex' ref={commentRef}>
         <div className='flex'>
           {Array.from({ length: level }).map((_, index) => (
-            <div
-              className='border-border w-4 border-l'
-              key={`${id}-${index}`}
-            />
+            <div className='border-border w-4 border-l' key={index} />
           ))}
         </div>
         <div className='flex grow flex-col gap-2 py-2'>
@@ -70,17 +67,15 @@ export default function CommentTile({
 
   if (!comment || comment.dead) return null;
 
-  const commentDate = comment.time ? new Date(comment.time * 1000) : null;
+  const commentDate =
+    comment.time !== undefined ? new Date(comment.time * 1000) : null;
 
   return (
     <article className='animate-in fade-in slide-in-from-top-1 flex flex-col duration-500'>
       <div className='flex'>
         <div className='flex'>
           {Array.from({ length: level }).map((_, index) => (
-            <div
-              className='border-border w-4 border-l'
-              key={`${id}-${index}`}
-            />
+            <div className='border-border w-4 border-l' key={index} />
           ))}
         </div>
 

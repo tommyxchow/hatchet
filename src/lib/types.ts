@@ -1,10 +1,5 @@
 import { z } from 'zod';
 
-export interface RouteParams {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}
-
 export const HNItem = z.object({
   id: z.number(),
   deleted: z.boolean().optional(),

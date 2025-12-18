@@ -1,12 +1,11 @@
 import { ItemText } from '@/components/ItemText';
 import { HNClient } from '@/lib/hnClient';
-import { type RouteParams } from '@/lib/types';
 import { notFound } from 'next/navigation';
 
-export default async function User({ searchParams }: RouteParams) {
+export default async function User({ searchParams }: PageProps<'/user'>) {
   const { id: userId } = await searchParams;
 
-  if (!userId || typeof userId !== 'string') {
+  if (typeof userId !== 'string' || !userId) {
     throw Error('Invalid user id');
   }
 
@@ -26,7 +25,7 @@ export default async function User({ searchParams }: RouteParams) {
         >
           joined on {joinDate.toLocaleDateString()}
         </time>
-        {user.karma && (
+        {user.karma > 0 && (
           <p className='text-muted-foreground'>
             {user.karma.toLocaleString()} karma
           </p>
