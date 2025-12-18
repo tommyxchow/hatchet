@@ -11,6 +11,7 @@ export function ThemeSelect() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line -- intentional hydration pattern
     setMounted(true);
   }, []);
 

@@ -1,44 +1,39 @@
-// @ts-check
-import { FlatCompat } from '@eslint/eslintrc';
+import eslintReact from '@eslint-react/eslint-plugin';
 import eslintJs from '@eslint/js';
+import nextVitals from 'eslint-config-next/core-web-vitals';
 import prettier from 'eslint-config-prettier/flat';
-import { dirname } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import reactYouMightNotNeedAnEffect from 'eslint-plugin-react-you-might-not-need-an-effect';
+import { defineConfig } from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-export default tseslint.config(
-  {
-    ignores: ['.next/', 'node_modules/'],
-  },
+export default defineConfig(
   eslintJs.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
-  ...tseslint.configs.stylisticTypeChecked,
-  ...compat.extends('next/core-web-vitals', 'plugin:jsx-a11y/recommended'),
+  nextVitals,
+
+  // Next.js bundles eslint-plugin-react; disable its rules that overlap with @eslint-react
+  eslintReact.configs['disable-conflict-eslint-plugin-react'],
+
   {
+    files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: __dirname,
+        tsconfigRootDir: import.meta.dirname,
       },
     },
+    extends: [
+      tseslint.configs.recommendedTypeChecked,
+      tseslint.configs.stylisticTypeChecked,
+      eslintReact.configs['recommended-type-checked'],
+      reactYouMightNotNeedAnEffect.configs.recommended,
+    ],
     rules: {
       eqeqeq: ['error', 'smart'],
       'no-console': ['warn', { allow: ['warn', 'error'] }],
       '@typescript-eslint/consistent-type-imports': [
         'error',
         { fixStyle: 'inline-type-imports' },
-      ],
-      '@typescript-eslint/no-misused-promises': [
-        'error',
-        { checksVoidReturn: { attributes: false } },
       ],
       '@typescript-eslint/no-unused-vars': [
         'error',
@@ -53,8 +48,15 @@ export default tseslint.config(
         },
       ],
       '@typescript-eslint/switch-exhaustiveness-check': 'error',
-      'jsx-a11y/control-has-associated-label': 'warn',
+      '@typescript-eslint/strict-boolean-expressions': 'error',
+      '@eslint-react/jsx-shorthand-boolean': 'error',
+
+      // Redundant with react-you-might-not-need-an-effect
+      '@eslint-react/hooks-extra/no-direct-set-state-in-use-effect': 'off',
+      '@eslint-react/hooks-extra/no-direct-set-state-in-use-layout-effect':
+        'off',
     },
   },
+
   prettier,
 );
