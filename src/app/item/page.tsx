@@ -1,4 +1,4 @@
-import CommentTile from '@/components/CommentTile';
+import { CommentTile } from '@/components/CommentTile';
 import { StoryTile } from '@/components/StoryTile';
 import { HNClient } from '@/lib/hnClient';
 import type { HNItem } from '@/lib/types';

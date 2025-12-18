@@ -21,7 +21,7 @@ interface CommentProps {
   initialData?: HNItem;
 }
 
-export default function CommentTile({
+export function CommentTile({
   postAuthorUsername,
   id,
   level,
