@@ -6,15 +6,17 @@ import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 
 export function FeedTypeNavBar() {
-  const { slug } = useParams();
-  const path = usePathname();
+  const { slug } = useParams<{ slug?: string[] }>();
+  const pathname = usePathname();
 
-  const resolvedPathname =
-    !Array.isArray(slug) && path !== '/item' ? (slug ?? 'top') : null;
+  // slug is an array for catch-all routes [[...slug]]
+  const feedSlug = slug?.[0];
+  const isItemPage = pathname.startsWith('/item');
+  const activeFeed = isItemPage ? undefined : (feedSlug ?? 'top');
 
   return (
     <nav className='overflow-x-auto'>
-      <Tabs value={resolvedPathname ?? 'top'}>
+      <Tabs value={activeFeed}>
         <TabsList>
           {HNFeedTypes.map((type) => (
             <TabsTrigger key={type} value={type} asChild>
