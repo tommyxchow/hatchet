@@ -1,5 +1,5 @@
 import { Badge } from '@/components/ui/badge';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { type HNItem } from '@/lib/types';
 import { getDisplayURL, getThumbnailUrl, getTimeAgo } from '@/lib/utils';
 import {
@@ -28,8 +28,8 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
   const thumbnailUrl = url && (await getThumbnailUrl(url));
 
   return (
-    <Card className='py-0'>
-      <CardContent className='p-4'>
+    <Card size='sm'>
+      <CardContent>
         <div className='flex items-center gap-4'>
           <a
             className='bg-muted hover:bg-muted/80 relative flex aspect-square h-18 shrink-0 items-center justify-center overflow-hidden rounded-lg transition-colors sm:aspect-4/3'
@@ -100,13 +100,13 @@ export default async function StoryTile({ story, showText }: StoryTileProps) {
             </div>
           </div>
         </div>
-
-        {showText && text && (
-          <div className='mt-2 border-t pt-2'>
-            <ItemText text={text} />
-          </div>
-        )}
       </CardContent>
+
+      {showText && text && (
+        <CardFooter className='border-t'>
+          <ItemText text={text} />
+        </CardFooter>
+      )}
     </Card>
   );
 }
