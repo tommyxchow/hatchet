@@ -19,8 +19,14 @@ export function FeedTypeNavBar() {
       <Tabs value={activeFeed}>
         <TabsList>
           {HNFeedTypes.map((type) => (
-            <TabsTrigger key={type} value={type} className='capitalize' asChild>
-              <Link href={`/${type}`}>{type}</Link>
+            <TabsTrigger
+              key={type}
+              value={type}
+              render={<Link href={`/${type}`} />}
+              nativeButton={false}
+              className='capitalize'
+            >
+              {type}
             </TabsTrigger>
           ))}
         </TabsList>

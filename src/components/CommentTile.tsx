@@ -109,20 +109,23 @@ export function CommentTile({
                     <Badge
                       variant='outline'
                       className='border-orange-600 text-orange-700 dark:border-orange-500 dark:text-orange-500'
-                      asChild
+                      render={
+                        <LinkWithHoverEffect href={`/user?id=${comment.by}`} />
+                      }
                     >
-                      <LinkWithHoverEffect href={`/user?id=${comment.by}`}>
-                        <User className='size-3' />
-                        <span>{comment.by}</span>
-                      </LinkWithHoverEffect>
+                      <User className='size-3' />
+                      <span>{comment.by}</span>
                     </Badge>
                   </SimpleTooltip>
                 ) : (
-                  <Badge variant='outline' asChild>
-                    <LinkWithHoverEffect href={`/user?id=${comment.by}`}>
-                      <User className='size-3' />
-                      <span>{comment.by}</span>
-                    </LinkWithHoverEffect>
+                  <Badge
+                    variant='outline'
+                    render={
+                      <LinkWithHoverEffect href={`/user?id=${comment.by}`} />
+                    }
+                  >
+                    <User className='size-3' />
+                    <span>{comment.by}</span>
                   </Badge>
                 )}
                 <Badge variant='secondary'>

@@ -16,7 +16,7 @@ interface SimpleTooltipProps {
 export function SimpleTooltip({ children, content, open }: SimpleTooltipProps) {
   return (
     <Tooltip open={open}>
-      <TooltipTrigger asChild>{children}</TooltipTrigger>
+      <TooltipTrigger render={children} />
       <TooltipContent>
         <p>{content}</p>
       </TooltipContent>
