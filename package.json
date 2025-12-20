@@ -54,6 +54,7 @@
   "packageManager": "pnpm@10.26.0",
   "pnpm": {
     "onlyBuiltDependencies": [
+      "msw",
       "sharp",
       "unrs-resolver"
     ]
