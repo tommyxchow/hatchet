@@ -58,14 +58,11 @@ export async function StoryTile({ story, showText }: StoryTileProps) {
                 </time>
               </Badge>
               {url && (
-                <Badge
-                  variant='outline'
-                  render={
-                    <Link href={getDisplayURL(url, true)} target='_blank' />
-                  }
-                >
-                  <Globe className='size-3' />
-                  <span>{getDisplayURL(url).hostname}</span>
+                <Badge variant='outline' asChild>
+                  <Link href={getDisplayURL(url, true)} target='_blank'>
+                    <Globe className='size-3' />
+                    <span>{getDisplayURL(url).hostname}</span>
+                  </Link>
                 </Badge>
               )}
             </div>
@@ -83,19 +80,17 @@ export async function StoryTile({ story, showText }: StoryTileProps) {
                 <ArrowUp className='size-3' />
                 <span>{score}</span>
               </Badge>
-              <Badge
-                variant='outline'
-                render={<Link href={`/item?id=${id}`} />}
-              >
-                <MessageSquare className='size-3' />
-                <span>{descendants ?? 0}</span>
+              <Badge variant='outline' asChild>
+                <Link href={`/item?id=${id}`}>
+                  <MessageSquare className='size-3' />
+                  <span>{descendants ?? 0}</span>
+                </Link>
               </Badge>
-              <Badge
-                variant='outline'
-                render={<Link href={`/user?id=${by}`} />}
-              >
-                <User className='size-3' />
-                <span>{by}</span>
+              <Badge variant='outline' asChild>
+                <Link href={`/user?id=${by}`}>
+                  <User className='size-3' />
+                  <span>{by}</span>
+                </Link>
               </Badge>
             </div>
           </div>
