@@ -4,7 +4,7 @@ import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
 
-export function ThumbnailImage({
+export function FaviconImage({
   src,
   alt,
 }: {
@@ -15,15 +15,16 @@ export function ThumbnailImage({
   const [isLoaded, setIsLoaded] = useState(false);
 
   if (!src || imgError) {
-    return <ExternalLink className='size-6' />;
+    return <ExternalLink className='text-muted-foreground size-6' />;
   }
 
   return (
     <Image
-      className={`object-cover ${isLoaded ? 'animate-in fade-in' : 'opacity-0'}`}
+      className={`object-contain ${isLoaded ? 'animate-in fade-in' : 'opacity-0'}`}
       src={src}
       alt={alt}
-      fill
+      width={64}
+      height={64}
       unoptimized
       onError={() => setImgError(true)}
       onLoad={() => setIsLoaded(true)}
