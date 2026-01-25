@@ -2,15 +2,9 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { type HNItem } from '@/lib/types';
 import { getDisplayURL, getTimeAgo } from '@/lib/utils';
-import {
-  ArrowUp,
-  Clock,
-  FileText,
-  Globe,
-  MessageSquare,
-  User,
-} from 'lucide-react';
+import { ArrowUp, Clock, FileText, MessageSquare, User } from 'lucide-react';
 import Link from 'next/link';
+import { Favicon } from './Favicon';
 import { ItemText } from './ItemText';
 import { Thumbnail } from './Thumbnail';
 
@@ -53,7 +47,7 @@ export function StoryTile({ story, showText }: StoryTileProps) {
               {url && (
                 <Badge variant='outline' asChild>
                   <Link href={getDisplayURL(url, true)} target='_blank'>
-                    <Globe className='size-3' />
+                    <Favicon hostname={new URL(url).hostname} />
                     <span>{getDisplayURL(url).hostname}</span>
                   </Link>
                 </Badge>
