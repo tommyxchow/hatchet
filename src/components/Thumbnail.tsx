@@ -54,6 +54,7 @@ export function Thumbnail({ url, alt }: ThumbnailProps) {
           alt={alt}
           fill
           sizes='(max-width: 640px) 72px, 96px'
+          unoptimized // Skip Vercel image optimization for external URLs
           onLoad={() => setImgLoaded(true)}
           onError={() => setImgError(true)}
         />
