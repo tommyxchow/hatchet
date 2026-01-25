@@ -5,15 +5,14 @@ import { getDisplayURL, getTimeAgo } from '@/lib/utils';
 import {
   ArrowUp,
   Clock,
-  ExternalLink,
   FileText,
   Globe,
   MessageSquare,
   User,
 } from 'lucide-react';
 import Link from 'next/link';
-import { FaviconImage } from './FaviconImage';
 import { ItemText } from './ItemText';
+import { Thumbnail } from './Thumbnail';
 
 interface StoryTileProps {
   story: HNItem;
@@ -25,12 +24,6 @@ export function StoryTile({ story, showText }: StoryTileProps) {
 
   const storyDate = time !== undefined ? new Date(time * 1000) : null;
 
-  // Use favicon instead of fetching external sites for thumbnails
-  // This eliminates 30 external HTTP requests per page load
-  const faviconUrl = url
-    ? `https://www.google.com/s2/favicons?domain=${new URL(url).hostname}&sz=64`
-    : null;
-
   return (
     <Card size='sm'>
       <CardContent>
@@ -41,11 +34,7 @@ export function StoryTile({ story, showText }: StoryTileProps) {
             target={url ? '_blank' : undefined}
           >
             {url ? (
-              faviconUrl ? (
-                <FaviconImage src={faviconUrl} alt={title ?? 'Site favicon'} />
-              ) : (
-                <ExternalLink className='text-muted-foreground size-6' />
-              )
+              <Thumbnail url={url} alt={title ?? 'Thumbnail'} />
             ) : (
               <FileText className='text-muted-foreground size-6' />
             )}
