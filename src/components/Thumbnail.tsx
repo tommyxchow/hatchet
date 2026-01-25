@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import { ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
+import { Skeleton } from './ui/skeleton';
 
 interface ThumbnailProps {
   url: string;
@@ -32,37 +33,44 @@ export function Thumbnail({ url, alt }: ThumbnailProps) {
     once: true,
   });
 
-  const { data: thumbnailUrl } = useQuery({
+  const {
+    data: thumbnailUrl,
+    isLoading,
+    isFetched,
+  } = useQuery({
     queryKey: ['thumbnail', url],
     queryFn: () => fetchThumbnailUrl(url),
     enabled: isVisible,
-    staleTime: 60 * 60 * 1000, // 1 hour
-    gcTime: 24 * 60 * 60 * 1000, // 24 hours
+    staleTime: 60 * 60 * 1000,
+    gcTime: 24 * 60 * 60 * 1000,
   });
 
-  const hasImage = thumbnailUrl != null && !imgError;
+  const hasValidThumbnail = thumbnailUrl != null && !imgError;
+  const showSkeleton =
+    !isVisible || isLoading || (hasValidThumbnail && !imgLoaded);
+  const showFallback = isFetched && !hasValidThumbnail;
 
   return (
     <div
       ref={containerRef}
       className='flex size-full items-center justify-center'
     >
-      {thumbnailUrl != null && !imgError ? (
+      {hasValidThumbnail && (
         <Image
           className={`size-full object-cover transition-opacity duration-300 ${imgLoaded ? 'opacity-100' : 'opacity-0'}`}
           src={thumbnailUrl}
           alt={alt}
           fill
           sizes='(max-width: 640px) 72px, 96px'
-          unoptimized // Skip Vercel image optimization for external URLs
+          unoptimized
           onLoad={() => setImgLoaded(true)}
           onError={() => setImgError(true)}
         />
-      ) : null}
-      {/* Show placeholder when no image or still loading */}
-      <ExternalLink
-        className={`text-muted-foreground absolute size-6 transition-opacity duration-300 ${hasImage && imgLoaded ? 'opacity-0' : 'opacity-100'}`}
-      />
+      )}
+      {showSkeleton && <Skeleton className='absolute inset-0 rounded-none' />}
+      {showFallback && (
+        <ExternalLink className='text-muted-foreground size-6' />
+      )}
     </div>
   );
 }

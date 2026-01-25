@@ -15,10 +15,11 @@ export function Favicon({ hostname }: FaviconProps) {
     return <Globe className='size-3' />;
   }
 
+  // DuckDuckGo's favicon service has better transparency handling
   return (
     <Image
       className='size-3 object-contain'
-      src={`https://www.google.com/s2/favicons?domain=${hostname}&sz=32`}
+      src={`https://icons.duckduckgo.com/ip3/${hostname}.ico`}
       alt=''
       width={12}
       height={12}
