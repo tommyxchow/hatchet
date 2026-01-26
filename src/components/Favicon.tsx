@@ -18,7 +18,7 @@ export function Favicon({ hostname }: FaviconProps) {
   // DuckDuckGo's favicon service has better transparency handling
   return (
     <Image
-      className='size-3 object-contain dark:brightness-150 dark:contrast-125'
+      className='size-3 rounded-sm bg-white object-contain dark:bg-white/90'
       src={`https://icons.duckduckgo.com/ip3/${hostname}.ico`}
       alt=''
       width={12}
