@@ -31,9 +31,9 @@ export function CommentTile({
   const commentRef = useRef<HTMLDivElement>(null);
 
   // Use once: true so we don't refetch when scrolling back up
-  // Increased margin to 2000px for more aggressive prefetching
+  // Use 500px margin for reasonable prefetching without excessive requests
   const isVisible = useIntersectionObserver(commentRef, {
-    rootMargin: '0px 0px 2000px 0px',
+    rootMargin: '0px 0px 500px 0px',
     once: true,
   });
 

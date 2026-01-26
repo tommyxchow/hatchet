@@ -57,7 +57,6 @@ export async function getThumbnailUrl(
   url: string,
   options = { timeout: 3000 },
 ): Promise<string | null> {
-  // Create abort controller for timeout
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), options.timeout);
 
@@ -65,13 +64,11 @@ export async function getThumbnailUrl(
     const response = await fetch(url, {
       signal: controller.signal,
       headers: {
-        'User-Agent': 'Mozilla/5.0 (compatible; HatchetBot/1.0)',
+        'User-Agent':
+          'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
       },
-      cache: 'force-cache',
-      next: { revalidate: 3600 }, // Cache thumbnails for 1 hour
     });
 
-    // Check response size to avoid processing huge documents
     const contentLength = response.headers.get('content-length');
     if (contentLength && parseInt(contentLength) > 1_000_000) {
       return null;
@@ -83,15 +80,12 @@ export async function getThumbnailUrl(
     }
 
     const html = await response.text();
-
-    // Optimize parsing by truncating to first 50KB (meta tags are typically in head)
     const truncatedHtml = html.slice(0, 50_000);
     const root = parse(truncatedHtml);
 
-    // Try multiple meta tags in priority order
     const metaSelectors = [
-      'meta[name="twitter:image"]',
       'meta[property="og:image"]',
+      'meta[name="twitter:image"]',
       'meta[property="og:image:secure_url"]',
       'meta[itemprop="image"]',
       'meta[name="thumbnail"]',
@@ -102,29 +96,20 @@ export async function getThumbnailUrl(
       if (metaTag) {
         const imageUrl = metaTag.getAttribute('content');
         if (imageUrl) {
-          return normalizeUrl(imageUrl, url);
+          // Convert relative URLs to absolute
+          try {
+            return new URL(imageUrl, url).toString();
+          } catch {
+            return imageUrl;
+          }
         }
       }
     }
 
     return null;
-  } catch (error: unknown) {
-    if (error instanceof Error && error.name === 'AbortError') {
-      console.error(`Thumbnail fetch timed out for ${url}`);
-    } else {
-      console.error('Error fetching thumbnail:', error);
-    }
+  } catch {
     return null;
   } finally {
     clearTimeout(timeoutId);
-  }
-}
-
-// Helper to convert relative URLs to absolute
-function normalizeUrl(imageUrl: string, baseUrl: string): string {
-  try {
-    return new URL(imageUrl, baseUrl).toString();
-  } catch {
-    return imageUrl;
   }
 }
