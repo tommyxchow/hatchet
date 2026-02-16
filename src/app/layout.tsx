@@ -3,6 +3,7 @@ import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { Providers } from '@/components/Providers';
 import { cn } from '@/lib/utils';
+import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Host_Grotesk, JetBrains_Mono } from 'next/font/google';
@@ -54,6 +55,7 @@ export default function RootLayout({
           </div>
         </Providers>
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
