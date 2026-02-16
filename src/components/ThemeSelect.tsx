@@ -1,12 +1,18 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Moon, Sun } from 'lucide-react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+import { Monitor, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 
 export function ThemeSelect() {
-  const { resolvedTheme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme()
 
   const [mounted, setMounted] = useState(false)
 
@@ -15,18 +21,34 @@ export function ThemeSelect() {
     setMounted(true)
   }, [])
 
-  if (!mounted) return <div className='size-9' />
+  if (!mounted) return <div className='size-8' />
 
-  const isDarkMode = resolvedTheme === 'dark'
+  const activeTheme = theme ?? 'system'
 
   return (
-    <Button
-      variant='ghost'
-      size='icon'
-      aria-label={`Toggle ${isDarkMode ? 'light mode' : 'dark mode'}`}
-      onClick={() => setTheme(isDarkMode ? 'light' : 'dark')}
-    >
-      {isDarkMode ? <Sun className='size-4' /> : <Moon className='size-4' />}
-    </Button>
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        aria-label='Toggle theme'
+        render={<Button variant='ghost' size='icon-sm' />}
+      >
+        {activeTheme === 'dark' && <Moon />}
+        {activeTheme === 'light' && <Sun />}
+        {activeTheme === 'system' && <Monitor />}
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align='end'>
+        <DropdownMenuItem onClick={() => setTheme('light')}>
+          <Sun className='mr-2' />
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>
+          <Moon className='mr-2' />
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('system')}>
+          <Monitor className='mr-2' />
+          System
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
