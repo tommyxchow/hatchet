@@ -1,22 +1,22 @@
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { type HNItem } from '@/lib/types';
-import { getDisplayURL, getTimeAgo } from '@/lib/utils';
-import { ArrowUp, Clock, FileText, MessageSquare, User } from 'lucide-react';
-import Link from 'next/link';
-import { Favicon } from './Favicon';
-import { ItemText } from './ItemText';
-import { Thumbnail } from './Thumbnail';
+import { Badge } from '@/components/ui/badge'
+import { Card, CardContent, CardFooter } from '@/components/ui/card'
+import { type HNItem } from '@/lib/types'
+import { getDisplayURL, getTimeAgo } from '@/lib/utils'
+import { ArrowUp, Clock, FileText, MessageSquare, User } from 'lucide-react'
+import Link from 'next/link'
+import { Favicon } from './Favicon'
+import { ItemText } from './ItemText'
+import { Thumbnail } from './Thumbnail'
 
 interface StoryTileProps {
-  story: HNItem;
-  showText?: boolean;
+  story: HNItem
+  showText?: boolean
 }
 
 export function StoryTile({ story, showText }: StoryTileProps) {
-  const { by, descendants, id, score, text, time, title, url } = story;
+  const { by, descendants, id, score, text, time, title, url } = story
 
-  const storyDate = time !== undefined ? new Date(time * 1000) : null;
+  const storyDate = time !== undefined ? new Date(time * 1000) : null
 
   return (
     <Card size='sm'>
@@ -45,11 +45,14 @@ export function StoryTile({ story, showText }: StoryTileProps) {
                 </time>
               </Badge>
               {url && (
-                <Badge variant='outline' asChild>
-                  <Link href={getDisplayURL(url, true)} target='_blank'>
-                    <Favicon hostname={new URL(url).hostname} />
-                    <span>{getDisplayURL(url).hostname}</span>
-                  </Link>
+                <Badge
+                  variant='outline'
+                  render={
+                    <Link href={getDisplayURL(url, true)} target='_blank' />
+                  }
+                >
+                  <Favicon hostname={new URL(url).hostname} />
+                  <span>{getDisplayURL(url).hostname}</span>
                 </Badge>
               )}
             </div>
@@ -67,17 +70,19 @@ export function StoryTile({ story, showText }: StoryTileProps) {
                 <ArrowUp className='size-3' />
                 <span>{score}</span>
               </Badge>
-              <Badge variant='outline' asChild>
-                <Link href={`/item?id=${id}`}>
-                  <MessageSquare className='size-3' />
-                  <span>{descendants ?? 0}</span>
-                </Link>
+              <Badge
+                variant='outline'
+                render={<Link href={`/item?id=${id}`} />}
+              >
+                <MessageSquare className='size-3' />
+                <span>{descendants ?? 0}</span>
               </Badge>
-              <Badge variant='outline' asChild>
-                <Link href={`/user?id=${by}`}>
-                  <User className='size-3' />
-                  <span>{by}</span>
-                </Link>
+              <Badge
+                variant='outline'
+                render={<Link href={`/user?id=${by}`} />}
+              >
+                <User className='size-3' />
+                <span>{by}</span>
               </Badge>
             </div>
           </div>
@@ -90,5 +95,5 @@ export function StoryTile({ story, showText }: StoryTileProps) {
         </CardFooter>
       )}
     </Card>
-  );
+  )
 }

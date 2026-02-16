@@ -1,21 +1,21 @@
-'use client';
+'use client'
 
-import { ExternalLink } from 'lucide-react';
-import Image from 'next/image';
-import { useState } from 'react';
+import { ExternalLink } from 'lucide-react'
+import Image from 'next/image'
+import { useState } from 'react'
 
 export function FaviconImage({
   src,
   alt,
 }: {
-  src: string | null;
-  alt: string;
+  src: string | null
+  alt: string
 }) {
-  const [imgError, setImgError] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [imgError, setImgError] = useState(false)
+  const [isLoaded, setIsLoaded] = useState(false)
 
   if (!src || imgError) {
-    return <ExternalLink className='text-muted-foreground size-6' />;
+    return <ExternalLink className='text-muted-foreground size-6' />
   }
 
   return (
@@ -29,5 +29,5 @@ export function FaviconImage({
       onError={() => setImgError(true)}
       onLoad={() => setIsLoaded(true)}
     />
-  );
+  )
 }

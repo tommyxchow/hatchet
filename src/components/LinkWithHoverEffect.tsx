@@ -1,12 +1,12 @@
-import { cn } from '@/lib/utils';
-import { type RouteType } from 'next/dist/lib/load-custom-routes';
-import Link, { type LinkProps } from 'next/link';
-import { type ReactNode } from 'react';
+import { cn } from '@/lib/utils'
+import { type RouteType } from 'next/dist/lib/load-custom-routes'
+import Link, { type LinkProps } from 'next/link'
+import { type ReactNode } from 'react'
 
 interface LinkWithHoverEffectProps extends LinkProps<RouteType> {
-  children?: ReactNode;
-  className?: string;
-  openInNewTab?: boolean;
+  children?: ReactNode
+  className?: string
+  openInNewTab?: boolean
 }
 
 export function LinkWithHoverEffect({
@@ -26,5 +26,5 @@ export function LinkWithHoverEffect({
     >
       {children}
     </Link>
-  );
+  )
 }

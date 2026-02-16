@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { ThemeSelect } from './ThemeSelect';
+import Link from 'next/link'
+import { ThemeSelect } from './ThemeSelect'
 
 export function Header() {
   return (
@@ -13,5 +13,5 @@ export function Header() {
 
       <ThemeSelect />
     </header>
-  );
+  )
 }

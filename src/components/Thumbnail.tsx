@@ -1,37 +1,37 @@
-'use client';
+'use client'
 
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { useQuery } from '@tanstack/react-query';
-import { ExternalLink } from 'lucide-react';
-import Image from 'next/image';
-import { useRef, useState } from 'react';
-import { Skeleton } from './ui/skeleton';
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+import { useQuery } from '@tanstack/react-query'
+import { ExternalLink } from 'lucide-react'
+import Image from 'next/image'
+import { useRef, useState } from 'react'
+import { Skeleton } from './ui/skeleton'
 
 interface ThumbnailProps {
-  url: string;
-  alt: string;
+  url: string
+  alt: string
 }
 
 interface ThumbnailResponse {
-  thumbnailUrl: string | null;
+  thumbnailUrl: string | null
 }
 
 async function fetchThumbnailUrl(url: string): Promise<string | null> {
-  const response = await fetch(`/api/thumbnail?url=${encodeURIComponent(url)}`);
-  if (!response.ok) return null;
-  const data = (await response.json()) as ThumbnailResponse;
-  return data.thumbnailUrl;
+  const response = await fetch(`/api/thumbnail?url=${encodeURIComponent(url)}`)
+  if (!response.ok) return null
+  const data = (await response.json()) as ThumbnailResponse
+  return data.thumbnailUrl
 }
 
 export function Thumbnail({ url, alt }: ThumbnailProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [imgLoaded, setImgLoaded] = useState(false);
-  const [imgError, setImgError] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null)
+  const [imgLoaded, setImgLoaded] = useState(false)
+  const [imgError, setImgError] = useState(false)
 
   const isVisible = useIntersectionObserver(containerRef, {
     rootMargin: '100px',
     once: true,
-  });
+  })
 
   const {
     data: thumbnailUrl,
@@ -43,12 +43,12 @@ export function Thumbnail({ url, alt }: ThumbnailProps) {
     enabled: isVisible,
     staleTime: 60 * 60 * 1000,
     gcTime: 24 * 60 * 60 * 1000,
-  });
+  })
 
-  const hasValidThumbnail = thumbnailUrl != null && !imgError;
+  const hasValidThumbnail = thumbnailUrl != null && !imgError
   const showSkeleton =
-    !isVisible || isLoading || (hasValidThumbnail && !imgLoaded);
-  const showFallback = isFetched && !hasValidThumbnail;
+    !isVisible || isLoading || (hasValidThumbnail && !imgLoaded)
+  const showFallback = isFetched && !hasValidThumbnail
 
   return (
     <div
@@ -72,5 +72,5 @@ export function Thumbnail({ url, alt }: ThumbnailProps) {
         <ExternalLink className='text-muted-foreground size-6' />
       )}
     </div>
-  );
+  )
 }

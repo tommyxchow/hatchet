@@ -5,18 +5,18 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination';
-import { HNClient } from '@/lib/hnClient';
-import { type HNFeedType } from '@/lib/types';
-import { StoryTile } from './StoryTile';
+} from '@/components/ui/pagination'
+import { HNClient } from '@/lib/hnClient'
+import { type HNFeedType } from '@/lib/types'
+import { StoryTile } from './StoryTile'
 
 interface StoryListProps {
-  feedType: HNFeedType;
-  pageNumber: number;
+  feedType: HNFeedType
+  pageNumber: number
 }
 
 export async function StoryList({ feedType, pageNumber }: StoryListProps) {
-  const stories = await HNClient.fetchStoriesByFeedType(feedType, pageNumber);
+  const stories = await HNClient.fetchStoriesByFeedType(feedType, pageNumber)
 
   return (
     <div className='flex flex-col gap-2'>
@@ -81,5 +81,5 @@ export async function StoryList({ feedType, pageNumber }: StoryListProps) {
         </PaginationContent>
       </Pagination>
     </div>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/ui/button'
 
 export default function Error({
   error,
   reset,
 }: {
-  error: Error & { digest?: string };
-  reset: () => void;
+  error: Error & { digest?: string }
+  reset: () => void
 }) {
   return (
     <div className='flex flex-col items-center gap-4 py-12'>
@@ -24,5 +24,5 @@ export default function Error({
         Try again
       </Button>
     </div>
-  );
+  )
 }

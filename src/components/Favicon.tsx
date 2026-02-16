@@ -1,18 +1,18 @@
-'use client';
+'use client'
 
-import { Globe } from 'lucide-react';
-import Image from 'next/image';
-import { useState } from 'react';
+import { Globe } from 'lucide-react'
+import Image from 'next/image'
+import { useState } from 'react'
 
 interface FaviconProps {
-  hostname: string;
+  hostname: string
 }
 
 export function Favicon({ hostname }: FaviconProps) {
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(false)
 
   if (error) {
-    return <Globe className='size-3' />;
+    return <Globe className='size-3' />
   }
 
   // DuckDuckGo's favicon service has better transparency handling
@@ -26,5 +26,5 @@ export function Favicon({ hostname }: FaviconProps) {
       unoptimized
       onError={() => setError(true)}
     />
-  );
+  )
 }

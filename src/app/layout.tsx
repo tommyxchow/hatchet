@@ -1,36 +1,36 @@
-import { FeedTypeNavBar } from '@/components/FeedTypeNavBar';
-import { Footer } from '@/components/Footer';
-import { Header } from '@/components/Header';
-import { Providers } from '@/components/Providers';
-import { cn } from '@/lib/utils';
-import { Analytics } from '@vercel/analytics/next';
-import { SpeedInsights } from '@vercel/speed-insights/next';
-import type { Metadata } from 'next';
-import { Host_Grotesk, JetBrains_Mono } from 'next/font/google';
-import './globals.css';
+import { FeedTypeNavBar } from '@/components/FeedTypeNavBar'
+import { Footer } from '@/components/Footer'
+import { Header } from '@/components/Header'
+import { Providers } from '@/components/Providers'
+import { cn } from '@/lib/utils'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+import type { Metadata } from 'next'
+import { Host_Grotesk, JetBrains_Mono } from 'next/font/google'
+import './globals.css'
 
 const fontSans = Host_Grotesk({
   subsets: ['latin'],
   style: ['normal'],
   variable: '--font-sans',
-});
+})
 
 const fontMono = JetBrains_Mono({
   subsets: ['latin'],
   style: ['normal', 'italic'],
   variable: '--font-mono',
-});
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://hatchetnews.vercel.app/'),
   title: 'Hatchet News',
   description: 'A fast, modern, and simple web client for Hacker News.',
-};
+}
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
   return (
     <html lang='en' suppressHydrationWarning>
@@ -58,5 +58,5 @@ export default function RootLayout({
         <Analytics />
       </body>
     </html>
-  );
+  )
 }

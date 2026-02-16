@@ -1,7 +1,7 @@
-import { HNItem, HNUser, type HNFeedType } from './types';
+import { HNItem, HNUser, type HNFeedType } from './types'
 
 function createApiUrl(path: string) {
-  return `https://hacker-news.firebaseio.com/v0/${path}.json`;
+  return `https://hacker-news.firebaseio.com/v0/${path}.json`
 }
 
 async function get<T>(url: string): Promise<T> {
@@ -9,42 +9,42 @@ async function get<T>(url: string): Promise<T> {
     cache: 'force-cache',
     // Revalidate every 5 minutes to reduce CPU usage
     next: { revalidate: 300 },
-  });
+  })
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch ${url}`);
+    throw new Error(`Failed to fetch ${url}`)
   }
 
-  return (await response.json()) as T;
+  return (await response.json()) as T
 }
 
 async function fetchItemById(id: number): Promise<HNItem | null> {
   try {
-    const url = createApiUrl(`item/${id}`);
-    const itemDataResponse = await get(url);
-    const itemObject = HNItem.parse(itemDataResponse);
+    const url = createApiUrl(`item/${id}`)
+    const itemDataResponse = await get(url)
+    const itemObject = HNItem.parse(itemDataResponse)
 
-    return itemObject;
+    return itemObject
   } catch (error) {
-    console.error(error);
-    return null;
+    console.error(error)
+    return null
   }
 }
 
 async function fetchItemsByIds(ids: number[]): Promise<(HNItem | null)[]> {
-  return Promise.all(ids.map((id) => fetchItemById(id)));
+  return Promise.all(ids.map((id) => fetchItemById(id)))
 }
 
 async function fetchUserById(username: string): Promise<HNUser | null> {
   try {
-    const url = createApiUrl(`user/${username}`);
-    const userDataResponse = await get(url);
-    const userObject = HNUser.parse(userDataResponse);
+    const url = createApiUrl(`user/${username}`)
+    const userDataResponse = await get(url)
+    const userObject = HNUser.parse(userDataResponse)
 
-    return userObject;
+    return userObject
   } catch (error) {
-    console.error(error);
-    return null;
+    console.error(error)
+    return null
   }
 }
 
@@ -52,22 +52,22 @@ async function fetchStoriesByFeedType(
   type: HNFeedType,
   page: number,
 ): Promise<HNItem[]> {
-  const startIndex = (page - 1) * 30;
-  const endIndex = startIndex + 30;
+  const startIndex = (page - 1) * 30
+  const endIndex = startIndex + 30
 
-  const storyType = type === 'jobs' ? 'job' : type;
-  const url = createApiUrl(`${storyType}stories`);
+  const storyType = type === 'jobs' ? 'job' : type
+  const url = createApiUrl(`${storyType}stories`)
 
-  const storyIds = await get<number[]>(url);
+  const storyIds = await get<number[]>(url)
   const storyPromises = storyIds
     .slice(startIndex, endIndex)
-    .map((id) => fetchItemById(id));
+    .map((id) => fetchItemById(id))
 
   const storyObjects = (await Promise.all(storyPromises)).filter(
     (story): story is NonNullable<typeof story> => story !== null,
-  );
+  )
 
-  return storyObjects;
+  return storyObjects
 }
 
 export const HNClient = {
@@ -75,4 +75,4 @@ export const HNClient = {
   fetchItemsByIds,
   fetchUserById,
   fetchStoriesByFeedType,
-};
+}

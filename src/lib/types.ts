@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import { z } from 'zod'
 
 export const HNItem = z.object({
   id: z.number(),
@@ -16,8 +16,8 @@ export const HNItem = z.object({
   title: z.string().optional(),
   parts: z.array(z.number()).optional(),
   descendants: z.number().optional(),
-});
-export type HNItem = z.infer<typeof HNItem>;
+})
+export type HNItem = z.infer<typeof HNItem>
 
 export const HNUser = z.object({
   id: z.string(),
@@ -25,15 +25,15 @@ export const HNUser = z.object({
   karma: z.number(),
   about: z.string().optional(),
   submitted: z.array(z.number()).optional(),
-});
-export type HNUser = z.infer<typeof HNUser>;
+})
+export type HNUser = z.infer<typeof HNUser>
 
 export const HNComment = HNItem.extend({
   indent: z.number(),
   collapsed: z.boolean(),
   hidden: z.boolean(),
-});
-export type HNComment = z.infer<typeof HNComment>;
+})
+export type HNComment = z.infer<typeof HNComment>
 
 export const HNFeedTypes = [
   'top',
@@ -42,5 +42,5 @@ export const HNFeedTypes = [
   'ask',
   'show',
   'jobs',
-] as const;
-export type HNFeedType = (typeof HNFeedTypes)[number];
+] as const
+export type HNFeedType = (typeof HNFeedTypes)[number]

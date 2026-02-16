@@ -1,24 +1,24 @@
-'use client';
+'use client'
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
-import { useIntersectionObserver } from '@/hooks/useIntersectionObserver';
-import { HNClient } from '@/lib/hnClient';
-import type { HNItem } from '@/lib/types';
-import { cn, getTimeAgo } from '@/lib/utils';
-import { useQuery } from '@tanstack/react-query';
-import { ChevronDown, ChevronRight, Clock, User } from 'lucide-react';
-import { useRef, useState } from 'react';
-import { ItemText } from './ItemText';
-import { LinkWithHoverEffect } from './LinkWithHoverEffect';
-import { SimpleTooltip } from './SimpleTooltip';
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Skeleton } from '@/components/ui/skeleton'
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+import { HNClient } from '@/lib/hnClient'
+import type { HNItem } from '@/lib/types'
+import { cn, getTimeAgo } from '@/lib/utils'
+import { useQuery } from '@tanstack/react-query'
+import { ChevronDown, ChevronRight, Clock, User } from 'lucide-react'
+import { useRef, useState } from 'react'
+import { ItemText } from './ItemText'
+import { LinkWithHoverEffect } from './LinkWithHoverEffect'
+import { SimpleTooltip } from './SimpleTooltip'
 
 interface CommentProps {
-  postAuthorUsername: string;
-  id: number;
-  level: number;
-  initialData?: HNItem;
+  postAuthorUsername: string
+  id: number
+  level: number
+  initialData?: HNItem
 }
 
 export function CommentTile({
@@ -27,15 +27,15 @@ export function CommentTile({
   level,
   initialData,
 }: CommentProps) {
-  const [isCollapsed, setIsCollapsed] = useState(false);
-  const commentRef = useRef<HTMLDivElement>(null);
+  const [isCollapsed, setIsCollapsed] = useState(false)
+  const commentRef = useRef<HTMLDivElement>(null)
 
   // Use once: true so we don't refetch when scrolling back up
   // Use 500px margin for reasonable prefetching without excessive requests
   const isVisible = useIntersectionObserver(commentRef, {
     rootMargin: '0px 0px 500px 0px',
     once: true,
-  });
+  })
 
   const {
     isPending,
@@ -48,13 +48,14 @@ export function CommentTile({
     enabled: isVisible,
     initialData,
     staleTime: 5 * 60 * 1000,
-  });
+  })
 
   if (isPending)
     return (
       <div className='flex' ref={commentRef}>
         <div className='flex'>
           {Array.from({ length: level }).map((_, index) => (
+            // eslint-disable-next-line @eslint-react/no-array-index-key -- decorative indentation lines
             <div className='border-border w-4 border-l' key={index} />
           ))}
         </div>
@@ -70,19 +71,20 @@ export function CommentTile({
           </div>
         </div>
       </div>
-    );
-  if (error) return <p>Error: {error.message}</p>;
+    )
+  if (error) return <p>Error: {error.message}</p>
 
-  if (!comment || comment.dead) return null;
+  if (!comment || comment.dead) return null
 
   const commentDate =
-    comment.time !== undefined ? new Date(comment.time * 1000) : null;
+    comment.time !== undefined ? new Date(comment.time * 1000) : null
 
   return (
     <article className='animate-in fade-in flex flex-col duration-300'>
       <div className='flex'>
         <div className='flex'>
           {Array.from({ length: level }).map((_, index) => (
+            // eslint-disable-next-line @eslint-react/no-array-index-key -- decorative indentation lines
             <div className='border-border w-4 border-l' key={index} />
           ))}
         </div>
@@ -109,20 +111,23 @@ export function CommentTile({
                     <Badge
                       variant='outline'
                       className='border-orange-600 text-orange-700 dark:border-orange-500 dark:text-orange-500'
-                      asChild
+                      render={
+                        <LinkWithHoverEffect href={`/user?id=${comment.by}`} />
+                      }
                     >
-                      <LinkWithHoverEffect href={`/user?id=${comment.by}`}>
-                        <User className='size-3' />
-                        <span>{comment.by}</span>
-                      </LinkWithHoverEffect>
+                      <User className='size-3' />
+                      <span>{comment.by}</span>
                     </Badge>
                   </SimpleTooltip>
                 ) : (
-                  <Badge variant='outline' asChild>
-                    <LinkWithHoverEffect href={`/user?id=${comment.by}`}>
-                      <User className='size-3' />
-                      <span>{comment.by}</span>
-                    </LinkWithHoverEffect>
+                  <Badge
+                    variant='outline'
+                    render={
+                      <LinkWithHoverEffect href={`/user?id=${comment.by}`} />
+                    }
+                  >
+                    <User className='size-3' />
+                    <span>{comment.by}</span>
                   </Badge>
                 )}
                 <Badge variant='secondary'>
@@ -164,5 +169,5 @@ export function CommentTile({
         </div>
       )}
     </article>
-  );
+  )
 }

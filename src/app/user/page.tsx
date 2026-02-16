@@ -1,19 +1,19 @@
-import { ItemText } from '@/components/ItemText';
-import { HNClient } from '@/lib/hnClient';
-import { notFound } from 'next/navigation';
+import { ItemText } from '@/components/ItemText'
+import { HNClient } from '@/lib/hnClient'
+import { notFound } from 'next/navigation'
 
 export default async function User({ searchParams }: PageProps<'/user'>) {
-  const { id: userId } = await searchParams;
+  const { id: userId } = await searchParams
 
   if (typeof userId !== 'string' || !userId) {
-    throw Error('Invalid user id');
+    throw Error('Invalid user id')
   }
 
-  const user = await HNClient.fetchUserById(userId);
+  const user = await HNClient.fetchUserById(userId)
 
-  if (!user) notFound();
+  if (!user) notFound()
 
-  const joinDate = new Date(user.created * 1000);
+  const joinDate = new Date(user.created * 1000)
 
   return (
     <article className='flex flex-col gap-4'>
@@ -34,5 +34,5 @@ export default async function User({ searchParams }: PageProps<'/user'>) {
 
       {user.about && <ItemText text={user.about} />}
     </article>
-  );
+  )
 }

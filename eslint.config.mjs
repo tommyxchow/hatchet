@@ -1,12 +1,13 @@
-import eslintReact from '@eslint-react/eslint-plugin';
-import eslintJs from '@eslint/js';
-import nextVitals from 'eslint-config-next/core-web-vitals';
-import prettier from 'eslint-config-prettier/flat';
-import reactYouMightNotNeedAnEffect from 'eslint-plugin-react-you-might-not-need-an-effect';
-import { defineConfig } from 'eslint/config';
-import tseslint from 'typescript-eslint';
+import eslintReact from '@eslint-react/eslint-plugin'
+import eslintJs from '@eslint/js'
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import prettier from 'eslint-config-prettier/flat'
+import reactYouMightNotNeedAnEffect from 'eslint-plugin-react-you-might-not-need-an-effect'
+import { defineConfig } from 'eslint/config'
+import tseslint from 'typescript-eslint'
 
 export default defineConfig(
+  { ignores: ['src/components/ui/', 'src/hooks/use-mobile.ts'] },
   eslintJs.configs.recommended,
   nextVitals,
 
@@ -56,8 +57,12 @@ export default defineConfig(
         },
       ],
       '@typescript-eslint/no-unnecessary-condition': 'error',
+      '@typescript-eslint/no-misused-promises': [
+        'error',
+        { checksVoidReturn: { attributes: false } },
+      ],
       '@eslint-react/jsx-shorthand-boolean': 'error',
-      '@eslint-react/no-array-index-key': 'off',
+      '@eslint-react/no-array-index-key': 'warn',
 
       // Redundant with react-you-might-not-need-an-effect
       '@eslint-react/hooks-extra/no-direct-set-state-in-use-effect': 'off',
@@ -67,4 +72,4 @@ export default defineConfig(
   },
 
   prettier,
-);
+)

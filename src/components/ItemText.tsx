@@ -1,5 +1,5 @@
 interface ItemTextProps {
-  text: string;
+  text: string
 }
 
 export function ItemText({ text }: ItemTextProps) {
@@ -10,5 +10,5 @@ export function ItemText({ text }: ItemTextProps) {
         dangerouslySetInnerHTML={{ __html: text }} // eslint-disable-line @eslint-react/dom/no-dangerously-set-innerhtml
       />
     </div>
-  );
+  )
 }
